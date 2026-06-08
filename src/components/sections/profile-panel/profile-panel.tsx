@@ -1,10 +1,11 @@
 import { ProfilePanelShell } from "@/components/layout/profile-panel-shell";
+import { ProfilePhotoSlot } from "@/components/shared/media/profile-photo-slot";
 import { SectionNav } from "@/components/shared/navigation/section-nav";
 import { SectionLabel } from "@/components/shared/typography/section-label";
-import { siteConfig } from "@/config/site";
+import { facultyData } from "@/data/facultyData";
 
 export function ProfilePanel() {
-  const { professor } = siteConfig;
+  const { professor, lab } = facultyData;
 
   return (
     <ProfilePanelShell>
@@ -13,16 +14,27 @@ export function ProfilePanel() {
           data-transition-id="professor-identity"
           className="flex flex-col gap-4"
         >
-          <SectionLabel>{siteConfig.lab}</SectionLabel>
-          <h2
-            data-transition-source="professor-name"
-            className="text-balance text-3xl font-medium tracking-tight sm:text-4xl"
-          >
-            {professor.fullName}
-          </h2>
-          <p className="max-w-sm text-base text-muted-foreground">
-            {professor.role} · {professor.department}
-          </p>
+          <SectionLabel>{lab}</SectionLabel>
+
+          <div className="flex items-start gap-4 sm:gap-5">
+            <ProfilePhotoSlot
+              src={professor.profileImage}
+              alt={`Portrait of ${professor.fullName}`}
+              initials={professor.initials}
+            />
+
+            <div className="flex min-w-0 flex-col gap-3 pt-1">
+              <h2
+                data-transition-source="professor-name"
+                className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl"
+              >
+                {professor.fullName}
+              </h2>
+              <p className="text-sm text-muted-foreground sm:text-base">
+                {professor.role} · {professor.department}
+              </p>
+            </div>
+          </div>
         </div>
 
         <p className="max-w-md text-sm leading-relaxed text-muted-foreground">

@@ -20,7 +20,7 @@ alwaysApply: true
 1. **ui/** — shadcn primitives only; add via CLI, do not hand-roll equivalents
 2. **motion/** — reusable animation wrappers and variants
 3. **shared/** — cross-section composed primitives (typography, media, navigation)
-4. **layout/** — page shells and responsive split layouts (38/62 desktop, stacked mobile)
+4. **layout/** — page shells and responsive split layouts (30/70 desktop, stacked mobile)
 5. **sections/** — domain sections mapped to design spec
 
 ## Design Reference

@@ -1,28 +1,24 @@
 import { ContentPanel } from "@/components/layout/content-panel";
 import { MainLayout } from "@/components/layout/main-layout";
-import { PortfolioShell } from "@/components/layout/portfolio-shell";
+import { ScrollPhaseTracker } from "@/components/layout/scroll-phase-tracker";
+import { BentoSection } from "@/components/sections/bento-grid/bento-section";
 import { EditorialHero } from "@/components/sections/hero/editorial-hero";
 import { ProfilePanel } from "@/components/sections/profile-panel/profile-panel";
+import { PublicationExplorer } from "@/components/sections/publication-drawer/publication-explorer";
 import { PlaceholderBlock } from "@/components/shared/placeholder-block";
+import { facultyData } from "@/data/facultyData";
 
 export default function HomePage() {
   return (
-    <PortfolioShell>
+    <>
+      <ScrollPhaseTracker />
       <EditorialHero />
 
       <MainLayout profilePanel={<ProfilePanel />}>
         <ContentPanel>
-          <PlaceholderBlock
-            id="research"
-            label="Research"
-            title="Research graph"
-          />
+          <BentoSection />
 
-          <PlaceholderBlock
-            id="publications"
-            label="Publications"
-            title="Selected publications"
-          />
+          <PublicationExplorer publications={facultyData.publications} />
 
           <PlaceholderBlock
             id="timeline"
@@ -43,6 +39,6 @@ export default function HomePage() {
           />
         </ContentPanel>
       </MainLayout>
-    </PortfolioShell>
+    </>
   );
 }
