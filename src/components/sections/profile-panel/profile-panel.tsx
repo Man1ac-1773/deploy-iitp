@@ -9,35 +9,36 @@ export function ProfilePanel() {
 
   return (
     <ProfilePanelShell>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-12">
         <div
           data-transition-id="professor-identity"
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-6"
         >
-          <SectionLabel>{lab}</SectionLabel>
+          <SectionLabel className="text-accent font-semibold">// {lab}</SectionLabel>
 
-          <div className="flex items-start gap-4 sm:gap-5">
+          <div className="flex flex-col gap-5 sm:gap-6">
             <ProfilePhotoSlot
               src={professor.profileImage}
               alt={`Portrait of ${professor.fullName}`}
               initials={professor.initials}
+              className="border border-border/80 p-1 bg-surface"
             />
 
-            <div className="flex min-w-0 flex-col gap-3 pt-1">
+            <div className="flex min-w-0 flex-col gap-2 pt-1">
               <h2
                 data-transition-source="professor-name"
-                className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl"
+                className="text-balance text-3xl font-bold tracking-[-0.04em] text-foreground uppercase sm:text-4xl lg:text-3xl xl:text-4xl"
               >
                 {professor.fullName}
               </h2>
-              <p className="text-sm text-muted-foreground sm:text-base">
-                {professor.role} · {professor.department}
+              <p className="font-mono text-xs tracking-wider text-muted-foreground uppercase">
+                {professor.role} // CSE DEPT
               </p>
             </div>
           </div>
         </div>
 
-        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base font-light">
           {professor.bio}
         </p>
 

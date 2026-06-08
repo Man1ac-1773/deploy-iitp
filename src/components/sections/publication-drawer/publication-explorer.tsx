@@ -26,9 +26,12 @@ export function PublicationExplorer({
         aria-labelledby="publications-heading"
         className="flex flex-col gap-8 sm:gap-10"
       >
-        <div className="flex flex-col gap-3">
-          <SectionLabel>Publications</SectionLabel>
-          <SectionHeading as="h2" id="publications-heading">
+        <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
+          <div className="flex items-center justify-between">
+            <SectionLabel>Publications</SectionLabel>
+            <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">03 // ARCHIVE</span>
+          </div>
+          <SectionHeading as="h2" id="publications-heading" className="uppercase font-bold">
             Publication explorer
           </SectionHeading>
           <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">

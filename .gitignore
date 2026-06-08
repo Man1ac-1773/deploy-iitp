@@ -18,6 +18,12 @@
 # production
 /build
 
+## agents and ai
+/.cursor/
+
+## guidelines and docs
+/docs
+
 # misc
 .DS_Store
 *.pem

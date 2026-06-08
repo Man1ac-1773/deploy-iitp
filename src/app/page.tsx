@@ -4,9 +4,11 @@ import { ScrollPhaseTracker } from "@/components/layout/scroll-phase-tracker";
 import { BentoSection } from "@/components/sections/bento-grid/bento-section";
 import { EditorialHero } from "@/components/sections/hero/editorial-hero";
 import { ProfilePanel } from "@/components/sections/profile-panel/profile-panel";
-import { PublicationExplorer } from "@/components/sections/publication-drawer/publication-explorer";
-import { PlaceholderBlock } from "@/components/shared/placeholder-block";
-import { facultyData } from "@/data/facultyData";
+import { PublicationSection } from "@/components/sections/publication-drawer/publication-section";
+import { ResearchGraph } from "@/components/sections/research-graph/research-graph";
+import { TimelineSection } from "@/components/sections/timeline/timeline-section";
+import { StudentsSection } from "@/components/sections/students/students-section";
+import { ContactSection } from "@/components/sections/contact/contact-section";
 
 export default function HomePage() {
   return (
@@ -18,25 +20,15 @@ export default function HomePage() {
         <ContentPanel>
           <BentoSection />
 
-          <PublicationExplorer publications={facultyData.publications} />
+          <ResearchGraph />
 
-          <PlaceholderBlock
-            id="timeline"
-            label="Timeline"
-            title="Lab timeline"
-          />
+          <PublicationSection />
 
-          <PlaceholderBlock
-            id="students"
-            label="Students"
-            title="Current students"
-          />
+          <TimelineSection />
 
-          <PlaceholderBlock
-            id="contact"
-            label="Contact"
-            title="Get in touch"
-          />
+          <StudentsSection />
+
+          <ContactSection />
         </ContentPanel>
       </MainLayout>
     </>
