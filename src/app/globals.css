@@ -13,6 +13,12 @@
   --spacing-section-lg: 8rem;
 }
 
+:root {
+  --hero-name-size: clamp(3.75rem, 14vw, 12rem);
+  --hero-name-leading: 0.88;
+  --hero-progress: 0;
+}
+
 @layer base {
   *,
   *::before,
@@ -32,5 +38,17 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .hero-name {
+    font-size: var(--hero-name-size);
+    line-height: var(--hero-name-leading);
+  }
+
+  .portfolio-shell[data-scroll-phase="portfolio"] .hero-stage {
+    /* Instant phase switch — animate via --hero-progress in a later pass */
+    pointer-events: none;
   }
 }

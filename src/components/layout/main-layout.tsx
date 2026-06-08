@@ -13,7 +13,11 @@ export function MainLayout({
   className,
 }: MainLayoutProps) {
   return (
-    <div className={cn("min-h-dvh bg-background", className)}>
+    <div
+      id="portfolio"
+      data-transition-phase="portfolio"
+      className={cn("min-h-dvh scroll-mt-0 bg-background", className)}
+    >
       <div className="mx-auto flex w-full max-w-[1600px] flex-col lg:min-h-dvh lg:flex-row">
         <aside
           className={cn(
