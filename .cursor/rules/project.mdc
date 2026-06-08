@@ -1,0 +1,28 @@
+---
+description: Project architecture and conventions for Spatial Lab portfolio
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Spatial Lab — Project Structure
+
+## Stack
+
+- Next.js App Router (`src/app/`)
+- TypeScript
+- Tailwind CSS (`src/styles/`, `src/app/globals.css`)
+- shadcn/ui (`src/components/ui/`, `components.json`)
+- Framer Motion (`src/components/motion/`, `src/lib/motion/`)
+
+## Component Layers
+
+1. **ui/** — shadcn primitives only; add via CLI, do not hand-roll equivalents
+2. **motion/** — reusable animation wrappers and variants
+3. **shared/** — cross-section composed primitives (typography, media, navigation)
+4. **layout/** — page shells and responsive split layouts (38/62 desktop, stacked mobile)
+5. **sections/** — domain sections mapped to design spec
+
+## Design Reference
+
+See `docs/design-spec.md` for colors, typography, motion, and layout rules.
