@@ -22,7 +22,7 @@
 /.cursor/
 
 ## guidelines and docs
-/docs
+/docs/*
 
 # misc
 .DS_Store
