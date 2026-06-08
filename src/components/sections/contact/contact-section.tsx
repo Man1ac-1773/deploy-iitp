@@ -50,8 +50,8 @@ export function ContactSection({ className }: ContactSectionProps) {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
         {/* Office Details */}
         <div className="flex flex-col gap-6 md:col-span-5">
-          <div className="flex flex-col gap-4 border border-border bg-surface p-6 rounded-sm">
-            <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase">
+          <div className="flex flex-col gap-4 border border-border/40 bg-surface/20 p-6 rounded-sm">
+            <h3 className="font-mono text-[10px] tracking-widest text-accent/80 uppercase">
               // Lab Location & Office Hours
             </h3>
             
@@ -95,7 +95,7 @@ export function ContactSection({ className }: ContactSectionProps) {
                 disabled={status === "sending" || status === "success"}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-surface border border-border/80 focus:border-accent focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
                 placeholder="Your name"
               />
             </div>
@@ -111,7 +111,7 @@ export function ContactSection({ className }: ContactSectionProps) {
                 disabled={status === "sending" || status === "success"}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-surface border border-border/80 focus:border-accent focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
                 placeholder="your.email@address.com"
               />
             </div>
@@ -128,7 +128,7 @@ export function ContactSection({ className }: ContactSectionProps) {
               disabled={status === "sending" || status === "success"}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-surface border border-border/80 focus:border-accent focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 resize-none disabled:opacity-50"
+              className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 resize-none disabled:opacity-50"
               placeholder="Your inquiry details..."
             />
           </div>

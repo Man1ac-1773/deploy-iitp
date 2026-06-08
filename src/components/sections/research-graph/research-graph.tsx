@@ -16,6 +16,16 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
 
   const centerNode = nodes.find((n) => n.isCenter);
 
+  // Scientific parameter formulas for the research nodes
+  const NODE_PARAMS: Record<string, string> = {
+    center: "HUB // CSE.IITP",
+    wireless: "P_tx = 23dBm // LTE HetNets",
+    game: "NE: (U_i, U_j) game payoffs",
+    economics: "RSU pricing: p_i* = argmax U_i",
+    mechanism: "Auction: DSIC, budget-balanced",
+    ml: "Federated RL: ForkRL (γ=0.99)",
+  };
+
   // Helper to check if a node or edge should be highlighted
   const isNodeHighlighted = (nodeId: string) => {
     if (hoveredNode === null) return true;
@@ -234,6 +244,24 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                     >
                       {node.label}
                     </text>
+
+                    {/* Scientific parameter motif */}
+                    {!node.isCenter && (
+                      <text
+                        x={node.x}
+                        y={node.y + 7.2}
+                        textAnchor="middle"
+                        className={cn(
+                          "select-none font-mono text-[1.5px] tracking-wider transition-all duration-300 ease-out",
+                          isHovered
+                            ? "fill-accent opacity-100"
+                            : "fill-muted-foreground/25 opacity-60",
+                          dimmed && "opacity-15",
+                        )}
+                      >
+                        {NODE_PARAMS[node.id]}
+                      </text>
+                    )}
 
                     {/* Monospace coordinates details */}
                     <text

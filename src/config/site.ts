@@ -1,14 +1,14 @@
 export const siteConfig = {
-  lab: "Spatial Lab",
+  lab: "Network Systems & Economics Lab",
   professor: {
     honorific: "Dr.",
     name: "Satendra Kumar",
     fullName: "Dr. Satendra Kumar",
-    role: "Professor",
+    role: "Assistant Professor",
     department: "Department of Computer Science and Engineering",
     affiliation: "Indian Institute of Technology Patna",
-    location: "Patna, India",
+    location: "Patna, Bihar, India",
     email: "satendra@iitp.ac.in",
-    bio: "Research in spatial computing, geometric modeling, and scientific visualization. Building precise systems for understanding complex physical and urban environments.",
+    bio: "Researching resource management, storage pricing, and deep reinforcement learning in wireless caching networks, HetNets, and blockchain-enabled Internet of Things using game theory, mechanism design, and machine learning.",
   },
 } as const;

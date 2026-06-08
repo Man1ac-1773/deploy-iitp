@@ -40,13 +40,11 @@ export function PublicationDetailSheet({
         className="flex w-full flex-col gap-0 overflow-y-auto border-l border-border bg-popover p-0 sm:max-w-xl"
       >
         <SheetHeader className="gap-4 border-b border-border px-6 py-8">
-          <div className="flex flex-wrap items-center gap-2 pr-8">
-            <Badge variant="outline">{TYPE_LABELS[publication.type]}</Badge>
-            <Badge variant="secondary">{publication.year}</Badge>
+          <div className="flex flex-wrap items-center gap-4 pr-8 font-mono text-[10px] tracking-wider text-accent/80">
+            <span>[ {publication.year} ]</span>
+            <span>// {TYPE_LABELS[publication.type].toUpperCase()}</span>
             {publication.citationCount !== undefined ? (
-              <Badge variant="ghost">
-                {publication.citationCount} citations
-              </Badge>
+              <span>// {publication.citationCount} CITATIONS</span>
             ) : null}
           </div>
 
@@ -78,11 +76,11 @@ export function PublicationDetailSheet({
                 <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
                   Topics
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 font-mono text-[9px] text-foreground">
                   {publication.tags.map((tag) => (
-                    <Badge key={tag} variant="outline">
-                      {tag}
-                    </Badge>
+                    <span key={tag} className="border border-border/80 px-2 py-0.5 bg-surface/50 rounded-sm">
+                      {tag.toUpperCase()}
+                    </span>
                   ))}
                 </div>
               </div>

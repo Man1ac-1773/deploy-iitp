@@ -34,11 +34,9 @@ export function PublicationListItem({
         isSelected && "bg-card/40",
       )}
     >
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs tracking-[0.16em] text-muted-foreground tabular-nums">
-          {publication.year}
-        </span>
-        <Badge variant="outline">{TYPE_LABELS[publication.type]}</Badge>
+      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-accent/80 uppercase">
+        <span className="tabular-nums">[{publication.year}]</span>
+        <span>// {TYPE_LABELS[publication.type]}</span>
       </div>
 
       <span className="text-base leading-snug font-medium tracking-tight text-foreground sm:text-lg">

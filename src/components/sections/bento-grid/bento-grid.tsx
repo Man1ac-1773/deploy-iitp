@@ -14,7 +14,7 @@ export function BentoGrid({ cards, className, children }: BentoGridProps) {
     <div
       data-bento-grid
       className={cn(
-        "grid grid-cols-1 gap-px bg-muted-foreground/15 sm:gap-px lg:grid-cols-12 lg:auto-rows-[minmax(12rem,auto)]",
+        "grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:auto-rows-[minmax(12rem,auto)] bg-transparent",
         className,
       )}
     >
