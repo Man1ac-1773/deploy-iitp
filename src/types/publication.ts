@@ -12,6 +12,8 @@ export type Publication = {
   year: number;
   type: PublicationType;
   abstract: string;
+  gameSummary?: string;
+  impact?: string;
   doi?: string;
   url?: string;
   tags: readonly string[];

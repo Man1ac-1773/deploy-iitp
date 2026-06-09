@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 const NODES: ReadonlyArray<{ x: number; y: number }> = [
   { x: 8, y: 12 },
@@ -81,8 +84,24 @@ type NetworkBackgroundProps = {
 };
 
 export function NetworkBackground({ className }: NetworkBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const xOffset = (e.clientX / (window.innerWidth || 1) - 0.5) * 1.5;
+      const yOffset = (e.clientY / (window.innerHeight || 1) - 0.5) * 1.5;
+      containerRef.current.style.setProperty("--mouse-x-offset", `${xOffset.toFixed(3)}%`);
+      containerRef.current.style.setProperty("--mouse-y-offset", `${yOffset.toFixed(3)}%`);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       aria-hidden
       className={cn(
         "pointer-events-none absolute inset-0 overflow-hidden",
@@ -92,9 +111,12 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_0%,var(--color-background)_72%)]" />
 
       <svg
-        className="absolute inset-0 size-full text-foreground opacity-[0.07]"
+        className="absolute inset-0 size-full text-foreground opacity-[0.07] transition-transform duration-700 ease-out"
         preserveAspectRatio="xMidYMid slice"
         viewBox="0 0 100 100"
+        style={{
+          transform: "translate(var(--mouse-x-offset, 0%), var(--mouse-y-offset, 0%)) scale(1.03)",
+        }}
       >
         {EDGES.map(([from, to], index) => {
           const start = NODES[from];

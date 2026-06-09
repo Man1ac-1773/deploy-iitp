@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
-import { facultyData } from "@/data/facultyData";
+import { publications } from "@/data/publications";
 
 const PublicationExplorer = dynamic(
   () =>
@@ -37,6 +37,6 @@ function PublicationExplorerFallback() {
 
 export function PublicationSection() {
   return (
-    <PublicationExplorer publications={facultyData.publications} />
+    <PublicationExplorer publications={publications} />
   );
 }

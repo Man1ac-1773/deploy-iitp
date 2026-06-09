@@ -2,10 +2,10 @@ import { ProfilePanelShell } from "@/components/layout/profile-panel-shell";
 import { ProfilePhotoSlot } from "@/components/shared/media/profile-photo-slot";
 import { SectionNav } from "@/components/shared/navigation/section-nav";
 import { SectionLabel } from "@/components/shared/typography/section-label";
-import { facultyData } from "@/data/facultyData";
+import { siteConfig } from "@/config/site";
 
 export function ProfilePanel() {
-  const { professor, lab } = facultyData;
+  const { professor, lab } = siteConfig;
 
   return (
     <ProfilePanelShell>

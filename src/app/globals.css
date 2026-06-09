@@ -100,16 +100,52 @@
     line-height: var(--hero-name-leading);
   }
 
-  html[data-scroll-phase="portfolio"] .hero-stage {
-    /* Instant phase switch — animate via --hero-progress in a later pass */
-    pointer-events: none;
+  @media (min-width: 1024px) {
+    html[data-scroll-phase="portfolio"] .hero-stage {
+      pointer-events: none;
+      opacity: 0 !important;
+      transition: opacity 0.3s ease-out;
+    }
+
+    /* Morphing animations using --scroll-progress */
+    [data-transition-id="professor-identity"] {
+      --progress: var(--scroll-progress, 0);
+    }
+
+    /* In the Hero section, transition the identity container on scroll */
+    .hero-stage [data-transition-id="professor-identity"] {
+      transform: translateY(calc(var(--scroll-progress, 0) * -8vh)) scale(calc(1 - var(--scroll-progress, 0) * 0.12));
+      opacity: calc(1 - var(--scroll-progress, 0) * 2.5);
+      filter: blur(calc(var(--scroll-progress, 0) * 12px));
+      transition: filter 0.15s ease-out;
+    }
+
+    /* In the Profile sidebar panel, fade and translate in the name and avatar */
+    aside [data-transition-id="professor-identity"] {
+      opacity: clamp(0.0, (var(--scroll-progress, 0) - 0.4) * 2.5, 1.0);
+      transform: translateY(calc((1 - clamp(0.4, var(--scroll-progress, 0), 1.0)) * 1.666 * 20px));
+      filter: blur(calc((1 - clamp(0.4, var(--scroll-progress, 0), 1.0)) * 1.666 * 8px));
+      transition: filter 0.15s ease-out;
+    }
+
+    html[data-scroll-phase="portfolio"] aside [data-transition-id="professor-identity"] {
+      opacity: 1 !important;
+      transform: translateY(0px) !important;
+      filter: none !important;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    aside [data-transition-id="professor-identity"],
+    .hero-stage [data-transition-id="professor-identity"] {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
   }
 }
 
 @theme inline {
-  --font-heading: var(--font-heading);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -148,6 +184,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 .dark {
@@ -182,4 +220,118 @@
   --sidebar-accent-foreground: #f5f7fa;
   --sidebar-border: rgba(91, 141, 239, 0.12);
   --sidebar-ring: #5b8def;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #16181d;
+  border-left: 1px solid rgba(91, 141, 239, 0.08);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(91, 141, 239, 0.2);
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 141, 239, 0.45);
+}
+
+/* Custom 3D Blueprint Fold Sheet Transitions */
+@keyframes sheetUnfoldRight {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: perspective(1500px) rotateY(75deg) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1500px) rotateY(0deg) scale(1);
+  }
+}
+
+[data-slot="sheet-content"][data-side="right"] {
+  transform-style: preserve-3d;
+  perspective: 1500px;
+  transform-origin: right center;
+  animation: sheetUnfoldRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: 
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-slot="sheet-content"][data-side="right"][data-ending-style] {
+  animation: none !important;
+  opacity: 0 !important;
+  filter: blur(8px) !important;
+  transform: perspective(1500px) rotateY(75deg) scale(0.95) !important;
+}
+
+/* Neon laser scanning effect (Top-to-Bottom Sweep) */
+@keyframes laserScanVertical {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.laser-scan-line-vertical {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #5b8def;
+  box-shadow: 0 0 14px 2px #5b8def;
+  pointer-events: none;
+  z-index: 100;
+  animation: laserScanVertical 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
+}
+
+/* Content reveal wipe animation synced with the laser scan */
+@keyframes revealContentWipe {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+.animate-reveal-content {
+  animation: revealContentWipe 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
 }

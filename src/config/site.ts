@@ -10,5 +10,7 @@ export const siteConfig = {
     location: "Patna, Bihar, India",
     email: "satendra@iitp.ac.in",
     bio: "Researching resource management, storage pricing, and deep reinforcement learning in wireless caching networks, HetNets, and blockchain-enabled Internet of Things using game theory, mechanism design, and machine learning.",
+    profileImage: null as string | null,
+    initials: "SK",
   },
 } as const;
