@@ -19,7 +19,7 @@
 /build
 
 ## agents and ai
-/.cursor/
+/.cursor/*
 
 ## guidelines and docs
 /docs/*
