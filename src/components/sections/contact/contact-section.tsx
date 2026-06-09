@@ -95,7 +95,7 @@ export function ContactSection({ className }: ContactSectionProps) {
                 disabled={status === "sending" || status === "success"}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
                 placeholder="Your name"
               />
             </div>
@@ -111,7 +111,7 @@ export function ContactSection({ className }: ContactSectionProps) {
                 disabled={status === "sending" || status === "success"}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 disabled:opacity-50"
                 placeholder="your.email@address.com"
               />
             </div>
@@ -128,7 +128,7 @@ export function ContactSection({ className }: ContactSectionProps) {
               disabled={status === "sending" || status === "success"}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 resize-none disabled:opacity-50"
+              className="w-full bg-surface/10 border border-border/40 focus:border-accent/80 focus:bg-surface/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm text-sm px-4 py-2.5 text-foreground transition-all duration-300 resize-none disabled:opacity-50"
               placeholder="Your inquiry details..."
             />
           </div>
@@ -137,6 +137,7 @@ export function ContactSection({ className }: ContactSectionProps) {
             <button
               type="submit"
               disabled={status === "sending" || status === "success" || !formData.name || !formData.email || !formData.message}
+              aria-busy={status === "sending"}
               className="px-6 py-2.5 bg-accent hover:bg-accent/90 disabled:bg-muted disabled:text-muted-foreground text-primary-foreground font-medium text-sm rounded-sm transition-all duration-300 cursor-pointer disabled:cursor-not-allowed select-none"
             >
               {status === "sending" ? "Transmitting..." : status === "success" ? "Transmitted" : "Send Message"}
@@ -152,7 +153,7 @@ export function ContactSection({ className }: ContactSectionProps) {
           </div>
 
           {status === "success" && (
-            <p className="text-xs text-accent font-mono transition-all duration-300 animate-pulse mt-2">
+            <p className="text-xs text-accent font-mono transition-all duration-300 animate-pulse mt-2" aria-live="polite">
               &gt; Message received. We will respond within 48 academic hours.
             </p>
           )}

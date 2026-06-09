@@ -81,7 +81,7 @@ export function PublicationExplorer({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by title, keyword, abstract, or co-author..."
-              className="w-full bg-background/40 border border-border/40 focus:border-accent-warm focus:bg-surface/20 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground placeholder:text-muted-foreground/45 transition-all duration-300 focus:ring-1 focus:ring-accent-warm/30"
+              className="w-full bg-background/40 border border-border/40 focus:border-accent-warm focus:bg-surface/20 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground placeholder:text-muted-foreground/45 transition-colors duration-300 focus:ring-1 focus:ring-accent-warm/30"
             />
             {searchQuery && (
               <button
@@ -104,7 +104,7 @@ export function PublicationExplorer({
                   type="button"
                   onClick={() => setActiveFilter(filter)}
                   className={cn(
-                    "border px-3 py-1 font-mono text-[9px] tracking-wider uppercase rounded-sm transition-all duration-300 select-none cursor-pointer",
+                    "border px-3 py-1 font-mono text-[9px] tracking-wider uppercase rounded-sm transition-colors duration-300 select-none cursor-pointer",
                     isActive
                       ? "bg-accent-warm text-background border-accent-warm font-semibold shadow-[0_0_10px_rgba(229,169,59,0.15)]"
                       : "bg-background/20 text-muted-foreground/80 hover:text-foreground border-border/40 hover:bg-background/40",
@@ -146,7 +146,7 @@ export function PublicationExplorer({
                   setSearchQuery("");
                   setActiveFilter("ALL");
                 }}
-                className="mt-4 px-4 py-1.5 border border-accent/40 hover:border-accent hover:bg-accent/5 font-mono text-[9px] text-accent uppercase tracking-wider rounded-sm transition-all duration-300 cursor-pointer"
+                className="mt-4 px-4 py-1.5 border border-accent/40 hover:border-accent hover:bg-accent/5 font-mono text-[9px] text-accent uppercase tracking-wider rounded-sm transition-colors duration-300 cursor-pointer"
               >
                 Reset Search parameters
               </button>

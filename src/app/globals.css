@@ -23,8 +23,6 @@
 :root {
   --hero-name-size: clamp(4rem, 16vw, 16rem);
   --hero-name-leading: 0.88;
-  --hero-progress: 0;
-  --section-title-size: clamp(3rem, 8vw, 7rem);
   --background: #16181d;
   --foreground: #f5f7fa;
   --card: #1d2128;
@@ -187,8 +185,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 .dark {
@@ -299,7 +295,7 @@
 /* Neon laser scanning effect (Top-to-Bottom Sweep) */
 @keyframes laserScanVertical {
   0% {
-    top: 0%;
+    transform: translateY(0);
     opacity: 0;
   }
   10% {
@@ -309,7 +305,7 @@
     opacity: 1;
   }
   100% {
-    top: 100%;
+    transform: translateY(100vh);
     opacity: 0;
   }
 }
@@ -344,15 +340,24 @@
 .scroll-reveal {
   opacity: 0;
   transform: translateY(30px);
-  filter: blur(5px);
+  will-change: transform, opacity;
   transition: 
     opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.visible {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

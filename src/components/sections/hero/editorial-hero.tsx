@@ -25,20 +25,20 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">
         
         {/* Top Header - Strategic Balance */}
-        <div className="flex w-full items-start justify-between">
+        <div className="flex w-full items-start justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-[10px] font-bold tracking-[0.35em] text-foreground/80 uppercase">
+            <p className="font-mono text-[11px] font-bold tracking-[0.35em] text-foreground/80 uppercase">
               {siteConfig.lab}
             </p>
-            <p className="font-mono text-[9px] tracking-[0.2em] text-muted-foreground/60 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/60 uppercase">
               {professor.affiliation}
             </p>
           </div>
-          <div className="text-right">
-            <p className="font-mono text-[9px] font-semibold tracking-[0.25em] text-accent/80 uppercase">
+          <div className="text-right" aria-hidden="true">
+            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent/80 uppercase">
               [SYS.STATE: NOISE_SUPPRESSION_ACTIVE]
             </p>
-            <p className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground/40 mt-1">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/40 mt-1">
               EDGE_NODES_ACTIVE: 124 // UPTIME: 99.9%
             </p>
           </div>
@@ -48,6 +48,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         <div
           data-transition-id="professor-identity"
           className="flex flex-col gap-4 mt-auto mb-16 md:mb-24"
+          style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.2s forwards" }}
         >
           <span className="block font-mono text-xs sm:text-sm font-semibold tracking-[0.4em] text-accent/90 uppercase ml-1 sm:ml-2">
             {professor.honorific}
@@ -62,35 +63,36 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               marginLeft: "-0.04em" // optically align the massive text
             }}
           >
-            <span data-transition-target="professor-name" className="block text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/60">
+            <span data-transition-target="professor-name" className="block text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/80">
               {professor.name}
             </span>
           </h1>
 
           <div className="flex items-center gap-6 mt-8 sm:mt-12 ml-1 sm:ml-3">
-            <div className="h-[1px] w-12 sm:w-24 bg-accent/40" />
+            <div className="h-[1px] w-12 sm:w-24 bg-accent/40" aria-hidden="true" />
             <p className="text-lg sm:text-xl text-foreground/80 font-medium tracking-tight">
               {professor.role}
             </p>
-            <p className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block">
+            <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block" aria-hidden="true">
               // RESEARCH DOMAIN: FEDERATED LEARNING & FOG COMPUTING
             </p>
           </div>
         </div>
 
         {/* Bottom Scroll Anchor */}
-        <div className="flex w-full items-end justify-between">
-          <span className="font-mono text-[9px] tracking-widest text-muted-foreground/30 uppercase">
+        <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
+          <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30 uppercase" aria-hidden="true">
             SYS.PORTFOLIO.V2 // {new Date().getFullYear()}
           </span>
           <a
             href="#portfolio"
+            aria-label="Explore Research"
             className="group flex flex-col items-end gap-3 text-muted-foreground"
           >
-            <span className="font-mono text-[10px] font-bold tracking-[0.24em] uppercase text-foreground/60 group-hover:text-accent transition-colors duration-300">
+            <span className="font-mono text-[11px] font-bold tracking-[0.24em] uppercase text-foreground/60 group-hover:text-accent transition-colors duration-300">
               Explore Research
             </span>
-            <div className="relative h-12 w-[1px] overflow-hidden bg-border">
+            <div className="relative h-12 w-[1px] overflow-hidden bg-border" aria-hidden="true">
               <div className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-pulse" />
             </div>
           </a>

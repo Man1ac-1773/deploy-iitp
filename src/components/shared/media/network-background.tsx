@@ -146,7 +146,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
               x={node.x}
               y={node.y - 2.5}
               textAnchor="middle"
-              className="fill-accent/70 font-mono text-[0.8px] tracking-[0.2em] uppercase font-semibold select-none"
+              className="fill-accent/70 font-mono text-[1.5px] tracking-[0.2em] uppercase font-semibold select-none"
             >
               {node.label}
             </text>
@@ -162,7 +162,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
               x={server.x}
               y={server.y - 3.5}
               textAnchor="middle"
-              className="fill-foreground/90 font-mono text-[1.2px] tracking-[0.3em] uppercase font-bold select-none"
+              className="fill-foreground/90 font-mono text-[2.5px] tracking-[0.3em] uppercase font-bold select-none"
             >
               {server.label}
             </text>
@@ -190,7 +190,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         </defs>
 
         {/* Telemetry */}
-        <g className="fill-accent/40 font-mono text-[1px] tracking-widest uppercase select-none z-20">
+        <g className="fill-accent/40 font-mono text-[2px] tracking-widest uppercase select-none z-20">
           <text x="3" y="97">SYS.STATE: FEDERATED_LEARNING.ACTIVE</text>
           <text x="97" y="3" textAnchor="end">EPOCHS: 24,000 // LOSS: 0.0034</text>
           <text x="97" y="97" textAnchor="end">NOISE_RECTIFICATION: ENABLED // 89.2% ACC</text>

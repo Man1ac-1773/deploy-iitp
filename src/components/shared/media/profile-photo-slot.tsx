@@ -1,6 +1,7 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type ProfilePhotoSlotProps = {
@@ -24,10 +25,16 @@ export function ProfilePhotoSlot({
         className,
       )}
     >
-      {src ? <AvatarImage src={src} alt={alt} className="rounded-sm" /> : null}
-      <AvatarFallback className="rounded-sm border border-dashed border-muted-foreground/30 bg-surface text-xs font-medium tracking-wider text-muted-foreground uppercase sm:text-sm">
-        {initials}
-      </AvatarFallback>
+      {src ? (
+        <div className="relative z-10 size-full overflow-hidden rounded-sm">
+          <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 96px, (min-width: 640px) 80px, 64px" className="object-cover" />
+        </div>
+      ) : null}
+      {!src ? (
+        <AvatarFallback className="rounded-sm border border-dashed border-muted-foreground/30 bg-surface text-xs font-medium tracking-wider text-muted-foreground uppercase sm:text-sm">
+          {initials}
+        </AvatarFallback>
+      ) : null}
     </Avatar>
   );
 }

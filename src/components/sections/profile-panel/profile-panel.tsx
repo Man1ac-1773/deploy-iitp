@@ -25,12 +25,12 @@ export function ProfilePanel() {
             />
 
             <div className="flex min-w-0 flex-col gap-2 pt-1">
-              <h2
+              <p
                 data-transition-source="professor-name"
                 className="text-balance text-3xl font-bold tracking-[-0.04em] text-foreground uppercase sm:text-4xl lg:text-3xl xl:text-4xl"
               >
                 {professor.fullName}
-              </h2>
+              </p>
               <p className="font-mono text-xs tracking-wider text-muted-foreground uppercase">
                 {professor.role} // CSE DEPT
               </p>
@@ -46,7 +46,7 @@ export function ProfilePanel() {
       </div>
 
       <div className="flex flex-col gap-2 border-t border-muted-foreground/15 pt-8">
-        <SectionLabel>Contact</SectionLabel>
+        <h3 className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Contact</h3>
         <a
           href={`mailto:${professor.email}`}
           className="text-sm text-foreground hover:text-accent"
