@@ -4,34 +4,51 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import type { Publication } from "@/types/publication";
-import { cn } from "@/lib/utils";
 import { PublicationDetailSheet } from "./publication-detail-sheet";
 import { PublicationListItem } from "./publication-list-item";
+import { cn } from "@/lib/utils";
 
 type PublicationExplorerProps = {
   publications: readonly Publication[];
 };
+
+const FILTERS = ["ALL", "JOURNAL", "CONFERENCE", "GAME THEORY", "BLOCKCHAIN", "IOT"] as const;
 
 export function PublicationExplorer({
   publications,
 }: PublicationExplorerProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<"all" | "journal" | "conference" | "Blockchain" | "Game Theory">("all");
+  const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("ALL");
 
   const selectedPublication =
     publications.find((publication) => publication.id === selectedId) ?? null;
 
+  // Case-insensitive filtering logic
   const filteredPublications = publications.filter((pub) => {
-    const matchesSearch = 
-      pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      pub.authors.some(auth => auth.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      pub.venue.toLowerCase().includes(searchQuery.toLowerCase());
+    // 1. Search Query filter
+    const query = searchQuery.toLowerCase().trim();
+    const matchesSearch =
+      query === "" ||
+      pub.title.toLowerCase().includes(query) ||
+      pub.abstract.toLowerCase().includes(query) ||
+      pub.venue.toLowerCase().includes(query) ||
+      pub.authors.some((author) => author.toLowerCase().includes(query)) ||
+      pub.tags.some((tag) => tag.toLowerCase().includes(query));
 
-    if (activeFilter === "all") return matchesSearch;
-    if (activeFilter === "journal") return matchesSearch && pub.type === "journal";
-    if (activeFilter === "conference") return matchesSearch && pub.type === "conference";
-    return matchesSearch && pub.tags.includes(activeFilter);
+    // 2. Pill Category filter
+    let matchesFilter = true;
+    if (activeFilter !== "ALL") {
+      const filterLower = activeFilter.toLowerCase();
+      if (filterLower === "journal" || filterLower === "conference") {
+        matchesFilter = pub.type === filterLower;
+      } else {
+        // Tag matching (case-insensitive)
+        matchesFilter = pub.tags.some((tag) => tag.toLowerCase() === filterLower);
+      }
+    }
+
+    return matchesSearch && matchesFilter;
   });
 
   return (
@@ -55,51 +72,58 @@ export function PublicationExplorer({
           </p>
         </div>
 
-        {/* Filter controls row */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-border/40 pb-6">
-          <div className="relative flex-1 max-w-md">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-[9px] text-accent/80 tracking-widest uppercase select-none">
-              [ FIND // ]
-            </span>
+        {/* Search & Filter Controls Panel */}
+        <div className="flex flex-col gap-5 border border-border/40 bg-surface/10 p-5 rounded-sm">
+          {/* Search Input */}
+          <div className="relative w-full">
             <input
               type="text"
-              placeholder="Keywords, authors, venue..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-surface/20 border border-border/40 text-foreground placeholder-muted-foreground/45 rounded-sm py-2 pl-20 pr-4 text-xs font-mono tracking-wide focus:outline-none focus:border-accent/50 focus:bg-surface/30 transition-all duration-300"
+              placeholder="Search by title, keyword, abstract, or co-author..."
+              className="w-full bg-background/40 border border-border/40 focus:border-accent-warm focus:bg-surface/20 focus:outline-none rounded-sm text-sm px-4 py-2.5 text-foreground placeholder:text-muted-foreground/45 transition-all duration-300 focus:ring-1 focus:ring-accent-warm/30"
             />
-          </div>
-          
-          <div className="flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-wider">
-            {(["all", "journal", "conference", "Blockchain", "Game Theory"] as const).map((filter) => (
+            {searchQuery && (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={cn(
-                  "px-3 py-1.5 border rounded-sm transition-all duration-300 font-semibold cursor-pointer",
-                  activeFilter === filter
-                    ? "bg-accent border-accent text-primary-foreground"
-                    : "border-border/45 text-muted-foreground hover:text-foreground hover:border-accent/40 bg-surface/10"
-                )}
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[9px] text-muted-foreground/60 hover:text-foreground uppercase tracking-widest cursor-pointer select-none"
               >
-                {filter === "all" ? "All" : filter === "journal" ? "Journals" : filter === "conference" ? "Conferences" : filter}
+                [ Clear ]
               </button>
-            ))}
+            )}
+          </div>
+
+          {/* Filter Pills */}
+          <div className="flex flex-wrap gap-2">
+            {FILTERS.map((filter) => {
+              const isActive = activeFilter === filter;
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={cn(
+                    "border px-3 py-1 font-mono text-[9px] tracking-wider uppercase rounded-sm transition-all duration-300 select-none cursor-pointer",
+                    isActive
+                      ? "bg-accent-warm text-background border-accent-warm font-semibold shadow-[0_0_10px_rgba(229,169,59,0.15)]"
+                      : "bg-background/20 text-muted-foreground/80 hover:text-foreground border-border/40 hover:bg-background/40",
+                  )}
+                >
+                  {filter}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {filteredPublications.length === 0 ? (
-          <div className="py-12 text-center border border-dashed border-border/40 rounded-sm bg-surface/5">
-            <p className="font-mono text-xs text-muted-foreground/60 uppercase">
-              [ Zero results found for filter matching query ]
-            </p>
-          </div>
-        ) : (
-          <div
-            role="list"
-            className="flex flex-col border-t border-border"
-          >
-            {filteredPublications.map((publication) => (
+        {/* Publication Results Grid/List */}
+        <div
+          role="list"
+          className="flex flex-col border-t border-border/40"
+        >
+          {filteredPublications.length > 0 ? (
+            filteredPublications.map((publication) => (
               <div key={publication.id} role="listitem">
                 <PublicationListItem
                   publication={publication}
@@ -107,9 +131,28 @@ export function PublicationExplorer({
                   onSelect={setSelectedId}
                 />
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <div className="flex flex-col items-center justify-center py-16 px-4 border-b border-border/40 rounded-sm bg-surface/5">
+              <span className="font-mono text-[10px] text-accent-warm uppercase tracking-widest mb-2">
+                [ Exploration Failure ]
+              </span>
+              <p className="text-sm text-muted-foreground text-center max-w-md font-light">
+                No publications match your search query or selected topic filter parameters. Clear queries to restart.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setActiveFilter("ALL");
+                }}
+                className="mt-4 px-4 py-1.5 border border-accent/40 hover:border-accent hover:bg-accent/5 font-mono text-[9px] text-accent uppercase tracking-wider rounded-sm transition-all duration-300 cursor-pointer"
+              >
+                Reset Search parameters
+              </button>
+            </div>
+          )}
+        </div>
       </section>
 
       <PublicationDetailSheet

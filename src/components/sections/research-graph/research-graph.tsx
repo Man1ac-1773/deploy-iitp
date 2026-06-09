@@ -381,18 +381,18 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                   cx={getSvgX(pStar)}
                   cy={getSvgY(dStar)}
                   r="2.2"
-                  className="fill-transparent stroke-accent/15 stroke-[0.8] animate-pulse"
+                  className="fill-transparent stroke-accent-warm/15 stroke-[0.8] animate-pulse"
                 />
                 <circle
                   cx={getSvgX(pStar)}
                   cy={getSvgY(dStar)}
                   r="0.8"
-                  className="fill-accent stroke-background stroke-[0.2]"
+                  className="fill-accent-warm stroke-background stroke-[0.2]"
                 />
                 <text
                   x={getSvgX(pStar) + 2}
                   y={getSvgY(dStar) - 2}
-                  className="font-mono text-[2px] font-bold fill-accent tracking-wider"
+                  className="font-mono text-[2px] font-bold fill-accent-warm tracking-wider"
                 >
                   NASH EQUILIBRIUM (NE)
                 </text>
@@ -427,7 +427,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
               </h3>
               <span className={cn(
                 "font-mono text-[9px] tracking-wider uppercase font-semibold px-2 py-0.5 rounded-sm border",
-                isStable && "text-accent border-accent/40 bg-accent/5",
+                isStable && "text-accent-warm border-accent-warm/40 bg-accent-warm/5",
                 isExploitative && "text-destructive border-destructive/40 bg-destructive/5",
                 isSuboptimal && "text-amber-500 border-amber-500/40 bg-amber-500/5",
                 (!isStable && !isExploitative && !isSuboptimal) && "text-muted-foreground border-border/40 bg-transparent"

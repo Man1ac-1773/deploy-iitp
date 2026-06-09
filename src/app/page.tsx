@@ -18,17 +18,29 @@ export default function HomePage() {
 
       <MainLayout profilePanel={<ProfilePanel />}>
         <ContentPanel>
-          <BentoSection />
+          <div className="scroll-reveal">
+            <BentoSection />
+          </div>
 
-          <ResearchGraph />
+          <div className="scroll-reveal">
+            <ResearchGraph />
+          </div>
 
-          <PublicationSection />
+          <div className="scroll-reveal">
+            <PublicationSection />
+          </div>
 
-          <TimelineSection />
+          <div className="scroll-reveal">
+            <TimelineSection />
+          </div>
 
-          <StudentsSection />
+          <div className="scroll-reveal">
+            <StudentsSection />
+          </div>
 
-          <ContactSection />
+          <div className="scroll-reveal">
+            <ContactSection />
+          </div>
         </ContentPanel>
       </MainLayout>
     </>

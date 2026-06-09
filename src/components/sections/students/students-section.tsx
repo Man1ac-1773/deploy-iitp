@@ -30,27 +30,27 @@ export function StudentsSection({ className }: StudentsSectionProps) {
         </p>
       </div>
 
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-12">
         {/* Active Researchers */}
         <div className="flex flex-col gap-5">
           <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase">
             // Current Doctoral & Graduate Scholars ({activeStudents.length})
           </h3>
-          <div className="flex flex-col border-t border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {activeStudents.map((student) => (
               <div
                 key={student.id}
-                className="flex flex-col gap-1 border-b border-border py-5 transition-all duration-300 hover:bg-card/35 hover:pl-4 border-l-0 hover:border-l-2 hover:border-l-accent"
+                className="flex flex-col gap-2.5 bg-surface/20 border border-border/40 hover:border-accent/30 p-5 rounded-sm relative group overflow-hidden transition-all duration-300 hover:bg-card/25"
               >
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-base font-medium text-foreground sm:text-lg">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <span className="text-base font-semibold text-foreground sm:text-lg group-hover:text-accent transition-colors duration-300">
                     {student.name}
                   </span>
-                  <span className="font-mono text-[10px] tracking-wider text-accent uppercase">
+                  <span className="font-mono text-[9px] tracking-widest text-accent uppercase">
                     {student.role}
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground border-t border-border/10 pt-2">
                   Focus: <span className="text-foreground/80 italic">{student.thesis}</span>
                 </p>
               </div>
@@ -63,21 +63,21 @@ export function StudentsSection({ className }: StudentsSectionProps) {
           <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase">
             // Alumni ({alumniStudents.length})
           </h3>
-          <div className="flex flex-col border-t border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {alumniStudents.map((student) => (
               <div
                 key={student.id}
-                className="flex flex-col gap-1 border-b border-border py-4 transition-all duration-300 hover:bg-card/35 hover:pl-4 border-l-0 hover:border-l-2 hover:border-l-accent"
+                className="flex flex-col gap-2 bg-surface/10 border border-border/40 hover:border-accent/20 p-4 rounded-sm relative group overflow-hidden transition-all duration-300 hover:bg-card/15"
               >
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-sm font-medium text-foreground/90 sm:text-base">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <span className="text-sm font-medium text-foreground/90 sm:text-base group-hover:text-accent transition-colors duration-300">
                     {student.name}
                   </span>
                   <span className="font-mono text-[9px] tracking-wider text-muted-foreground/60 uppercase">
                     {student.role}
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground sm:text-sm">
+                <p className="text-xs text-muted-foreground border-t border-border/10 pt-1.5">
                   Thesis: <span className="text-foreground/70">{student.thesis}</span>
                 </p>
               </div>

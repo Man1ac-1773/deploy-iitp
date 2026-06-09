@@ -27,30 +27,31 @@ export function TimelineSection({ className }: TimelineSectionProps) {
         </p>
       </div>
 
-      <div className="relative border-l border-muted-foreground/15 ml-3 pl-6 sm:pl-8 flex flex-col gap-10 py-2">
+      <div className="flex flex-col border-t border-border">
         {timelineEvents.map((event) => (
-          <div key={event.id} className="relative flex flex-col gap-2 group">
-            {/* Geometric timeline node marker */}
-            <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 flex items-center justify-center">
-              <div className="size-2 rounded-full bg-accent ring-4 ring-background group-hover:scale-125 transition-transform duration-300" />
-            </div>
-
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="font-mono text-sm font-semibold tracking-wider text-accent tabular-nums">
+          <div
+            key={event.id}
+            className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 py-8 border-b border-border/40 group hover:bg-card/10 transition-colors duration-300 px-2 rounded-sm"
+          >
+            {/* Left Column: Chronological Telemetry (25% width) */}
+            <div className="md:col-span-1 flex flex-col items-baseline md:items-end justify-start gap-1">
+              <span className="font-mono text-xl font-bold tracking-wider text-accent-warm tabular-nums group-hover:scale-105 transition-transform duration-300 origin-left md:origin-right">
                 {event.year}
               </span>
-              <span className="font-mono text-[9px] tracking-widest text-muted-foreground/60 uppercase">
+              <span className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground/60 uppercase">
                 // {event.type}
               </span>
             </div>
 
-            <h3 className="text-lg font-medium tracking-tight text-foreground sm:text-xl">
-              {event.title}
-            </h3>
-
-            <p className="max-w-prose text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {event.description}
-            </p>
+            {/* Right Column: Milestone Details (75% width) */}
+            <div className="md:col-span-3 flex flex-col gap-2">
+              <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl group-hover:text-accent transition-colors duration-300">
+                {event.title}
+              </h3>
+              <p className="max-w-prose text-sm leading-relaxed text-muted-foreground sm:text-base font-light">
+                {event.description}
+              </p>
+            </div>
           </div>
         ))}
       </div>
