@@ -12,7 +12,7 @@ type PublicationExplorerProps = {
   publications: readonly Publication[];
 };
 
-const FILTERS = ["ALL", "JOURNAL", "CONFERENCE", "GAME THEORY", "BLOCKCHAIN", "IOT"] as const;
+const FILTERS = ["ALL", "JOURNAL", "CONFERENCE", "FEDERATED LEARNING", "EDGE AI", "IOT"] as const;
 
 export function PublicationExplorer({
   publications,

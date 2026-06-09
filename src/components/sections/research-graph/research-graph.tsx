@@ -322,7 +322,12 @@ export function ResearchGraph({ className }: { className?: string }) {
             <canvas 
               ref={canvasRef} 
               className="absolute inset-0 w-full h-full bg-[#0A0C10] rounded-sm cursor-crosshair"
-            />
+              aria-label="Interactive Federated Learning particle simulation"
+            >
+              <p className="sr-only">
+                Your browser does not support the canvas element. This section contains an interactive visualization of edge nodes sending data to a global server.
+              </p>
+            </canvas>
             
             {/* Controls Overlay */}
             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 z-10">
