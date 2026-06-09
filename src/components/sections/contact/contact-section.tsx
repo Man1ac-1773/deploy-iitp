@@ -64,7 +64,7 @@ export function ContactSection({ className }: ContactSectionProps) {
 
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Hours</p>
-                <p className="text-sm text-foreground">Tuesday & Thursday: 14:00 - 16:00</p>
+                <p className="text-sm text-foreground">Tuesday & Thursday: 14:00–16:00</p>
                 <p className="text-sm text-muted-foreground">Or by appointment</p>
               </div>
 

@@ -413,8 +413,8 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
           </div>
 
           <div className="flex justify-between font-mono text-[9px] text-muted-foreground/50 px-1">
-            <span>[BR_1] // RSU pricing best-response</span>
-            <span>[BR_2] // User demand best-response</span>
+            <span>[BR<sub>RSU</sub>] // RSU pricing best-response</span>
+            <span>[BR<sub>user</sub>] // User demand best-response</span>
           </div>
         </div>
 
@@ -448,11 +448,11 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                 <span className="font-bold">({p.toFixed(1)}, {d.toFixed(1)})</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">RSU Payoff (U_rsu):</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">RSU Payoff (U<sub>RSU</sub>):</span>
                 <span className="font-bold text-accent">{uRsu.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">User Payoff (U_user):</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">User Payoff (U<sub>user</sub>):</span>
                 <span className="font-bold text-accent">{uUser.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">

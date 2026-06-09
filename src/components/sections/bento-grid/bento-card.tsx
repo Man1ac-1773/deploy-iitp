@@ -70,6 +70,52 @@ export function BentoCard({ card, className }: BentoCardProps) {
         }}
       />
 
+      {/* Domain-specific SVG Metaphor Overlays */}
+      {card.id === "research-areas" && (
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/5 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/12" viewBox="0 0 100 100">
+          <path d="M 10,10 L 90,10 M 10,50 L 90,50 M 10,90 L 90,90 M 10,10 L 10,90 M 50,10 L 50,90 M 90,10 L 90,90" stroke="currentColor" strokeWidth="0.8" strokeDasharray="1.5 1.5" />
+          <text x="30" y="32" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">U<tspan fontSize="4" dy="2">RSU</tspan></text>
+          <text x="70" y="30" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">U<tspan fontSize="4" dy="2">user</tspan></text>
+          <text x="30" y="70" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">u<tspan fontSize="4" dy="2">RSU</tspan></text>
+          <text x="70" y="70" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">u<tspan fontSize="4" dy="2">user</tspan></text>
+        </svg>
+      )}
+
+      {card.id === "awards" && (
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/5 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/12" viewBox="0 0 100 100">
+          <path d="M 10,15 L 90,15 M 10,50 L 90,50 M 10,85 L 90,85" stroke="currentColor" strokeWidth="0.6" />
+          <path d="M 50,15 L 50,85" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" />
+          <text x="30" y="28" textAnchor="middle" fontSize="5.5" fill="currentColor" className="font-mono">ASK: p<tspan fontSize="3.5" dy="1.5">i</tspan></text>
+          <text x="70" y="26.5" textAnchor="middle" fontSize="5.5" fill="currentColor" className="font-mono">BID: v<tspan fontSize="3.5" dy="1.5">j</tspan></text>
+          <path d="M 20,40 L 40,40 M 60,40 L 80,40" stroke="currentColor" strokeWidth="1" />
+          <path d="M 30,65 L 70,65" stroke="currentColor" strokeWidth="0.8" strokeDasharray="1 1" />
+          <circle cx="50" cy="65" r="1.5" fill="currentColor" className="text-accent-warm" />
+          <text x="50" y="77" textAnchor="middle" fontSize="5" fill="currentColor" className="font-mono">Equilibrium p*</text>
+        </svg>
+      )}
+
+      {card.id === "teaching" && (
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/5 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/12" viewBox="0 0 100 100">
+          <path d="M 5,90 L 95,90" stroke="currentColor" strokeWidth="0.6" />
+          <path d="M 10,90 Q 35,90 50,15 T 90,90" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="50" y1="15" x2="50" y2="90" stroke="currentColor" strokeWidth="0.6" strokeDasharray="1.5 1.5" />
+          <text x="50" y="8" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono">f(x | μ, σ²)</text>
+        </svg>
+      )}
+
+      {card.id === "projects" && (
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/5 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/12" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+          <path d="M 46,22 L 54,22 M 50,22 L 50,28" stroke="currentColor" strokeWidth="0.8" />
+          <path d="M 46,78 L 54,78 M 50,78 L 50,72" stroke="currentColor" strokeWidth="0.8" />
+          <text x="50" y="18" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">STATE (s<tspan fontSize="4" dy="1.5">t</tspan>)</text>
+          <text x="50" y="86.5" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">ACTION (a<tspan fontSize="4" dy="1.5">t</tspan>)</text>
+          <text x="84" y="52" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">AGENT</text>
+          <text x="16" y="52" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">ENV</text>
+          <path d="M 68,32 A 28,28 0 0,1 78,50" stroke="currentColor" strokeWidth="0.8" fill="none" />
+        </svg>
+      )}
+
       <span className="font-mono text-[9px] tracking-wider text-muted-foreground/30 absolute top-4 right-4 group-hover:text-accent/60 transition-colors duration-300">
         [ {CARD_INDEXES[card.id] || "00"} ]
       </span>
