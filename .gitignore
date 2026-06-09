@@ -23,7 +23,7 @@
 
 ## guidelines and docs
 /docs/*
-
+/docs/.cursor/*
 # misc
 .DS_Store
 *.pem
