@@ -1,6 +1,9 @@
+"use client";
+
 import { siteConfig } from "@/config/site";
 import { NetworkBackground } from "@/components/shared/media/network-background";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 type EditorialHeroProps = {
   className?: string;
@@ -8,6 +11,31 @@ type EditorialHeroProps = {
 
 export function EditorialHero({ className }: EditorialHeroProps) {
   const { professor } = siteConfig;
+  const nameRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!nameRef.current) return;
+      const scrollY = window.scrollY;
+      const maxScroll = Math.min(window.innerHeight * 0.8, 600); // 80% of screen height
+      const ratio = Math.min(scrollY / maxScroll, 1);
+      
+      // As scroll ratio goes 0 -> 1
+      // Fill opacity goes 1 -> 0
+      // Stroke width goes 0 -> 1.5px
+      const fillOpacity = Math.max(0, 1 - ratio * 1.5); // fades out a bit faster
+      const strokeWidth = ratio * 1.5;
+      
+      nameRef.current.style.webkitTextFillColor = `rgba(255, 255, 255, ${fillOpacity})`;
+      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(255, 255, 255, ${ratio * 0.8})`;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initialize once
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section
@@ -63,7 +91,15 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               marginLeft: "-0.04em" // optically align the massive text
             }}
           >
-            <span data-transition-target="professor-name" className="block text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/80">
+            <span 
+              ref={nameRef}
+              data-transition-target="professor-name" 
+              className="block transition-colors duration-100 ease-out"
+              style={{
+                WebkitTextFillColor: "rgba(255, 255, 255, 1)",
+                WebkitTextStroke: "0px rgba(255, 255, 255, 0)"
+              }}
+            >
               {professor.name}
             </span>
           </h1>

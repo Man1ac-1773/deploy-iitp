@@ -3,199 +3,199 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
-// Federated Learning Nodes Definition
-const GLOBAL_SERVERS = [
-  { id: "g-01", x: 50, y: 50, label: "[ FED_SERVER_01 // AGGREGATION ]" },
-];
-
-const EDGE_NODES = [
-  { id: "e-01", x: 20, y: 25, label: "[ EDGE_NODE_01 // FOG ]" },
-  { id: "e-02", x: 80, y: 25, label: "[ EDGE_NODE_02 // FOG ]" },
-  { id: "e-03", x: 20, y: 75, label: "[ EDGE_NODE_03 // FOG ]" },
-  { id: "e-04", x: 80, y: 75, label: "[ EDGE_NODE_04 // FOG ]" },
-  { id: "e-05", x: 50, y: 15, label: "[ EDGE_NODE_05 // FOG ]" },
-];
-
-// Noisy Datasets clustered around edge nodes
-const LOCAL_DATASETS = [
-  // Cluster 1
-  { x: 12, y: 18, noise: true }, { x: 25, y: 15, noise: false }, { x: 18, y: 32, noise: true }, { x: 28, y: 28, noise: false },
-  // Cluster 2
-  { x: 75, y: 15, noise: true }, { x: 88, y: 18, noise: false }, { x: 72, y: 30, noise: false }, { x: 85, y: 32, noise: true },
-  // Cluster 3
-  { x: 15, y: 70, noise: false }, { x: 28, y: 68, noise: true }, { x: 12, y: 82, noise: false }, { x: 25, y: 85, noise: true },
-  // Cluster 4
-  { x: 72, y: 68, noise: true }, { x: 85, y: 70, noise: false }, { x: 75, y: 85, noise: true }, { x: 88, y: 82, noise: false },
-  // Cluster 5
-  { x: 42, y: 10, noise: true }, { x: 58, y: 10, noise: false }, { x: 45, y: 8, noise: true }, { x: 55, y: 8, noise: false },
-];
-
-// Epoc Synchronisation Links (Edge to Global)
-const AGGREGATION_LINKS = [
-  [0, 0], [0, 1], [0, 2], [0, 3], [0, 4]
-];
-
 type NetworkBackgroundProps = {
   className?: string;
 };
 
 export function NetworkBackground({ className }: NetworkBackgroundProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+    window.addEventListener("resize", handleResize);
+
+    const mouse = { x: width / 2, y: height / 2, radius: 250 };
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const xOffset = (e.clientX / (window.innerWidth || 1) - 0.5) * 2.5;
-      const yOffset = (e.clientY / (window.innerHeight || 1) - 0.5) * 2.5;
-      containerRef.current.style.setProperty("--mouse-x-offset", `${xOffset.toFixed(3)}%`);
-      containerRef.current.style.setProperty("--mouse-y-offset", `${yOffset.toFixed(3)}%`);
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    class UAV {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      isStraggler: boolean;
+
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.0;
+        this.vy = (Math.random() - 0.5) * 1.0;
+        this.size = Math.random() * 1.5 + 0.8;
+        this.isStraggler = Math.random() > 0.9; // 10% chance to be a straggler
+      }
+
+      update() {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Swarm Intelligence: Follow the cursor (Global Model)
+        if (distance < mouse.radius) {
+          const forceDirectionX = dx / distance;
+          const forceDirectionY = dy / distance;
+          const force = (mouse.radius - distance) / mouse.radius;
+          const speedFactor = this.isStraggler ? 0.01 : 0.03; 
+          this.vx += forceDirectionX * force * speedFactor;
+          this.vy += forceDirectionY * force * speedFactor;
+        }
+
+        // Friction
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+
+        // Base wander (Exploration phase)
+        this.vx += (Math.random() - 0.5) * 0.15;
+        this.vy += (Math.random() - 0.5) * 0.15;
+
+        // Max speed
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const maxSpeed = this.isStraggler ? 1.0 : 2.5;
+        if (speed > maxSpeed) {
+          this.vx = (this.vx / speed) * maxSpeed;
+          this.vy = (this.vy / speed) * maxSpeed;
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap around edges
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(91, 141, 239, 0.9)";
+        ctx.fill();
+        
+        // Active glow
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    const uavs = Array.from({ length: 90 }, () => new UAV());
+    let animationFrameId: number;
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Connections (Mesh Network)
+      for (let i = 0; i < uavs.length; i++) {
+        for (let j = i + 1; j < uavs.length; j++) {
+          const dx = uavs[i].x - uavs[j].x;
+          const dy = uavs[i].y - uavs[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(91, 141, 239, ${0.15 * (1 - distance / 100)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(uavs[i].x, uavs[i].y);
+            ctx.lineTo(uavs[j].x, uavs[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw Data Link to Mouse (Active Polling)
+      for (let i = 0; i < uavs.length; i++) {
+        const dx = uavs[i].x - mouse.x;
+        const dy = uavs[i].y - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < mouse.radius * 0.6) {
+          ctx.beginPath();
+          const opacity = 0.25 * (1 - distance / (mouse.radius * 0.6));
+          ctx.strokeStyle = uavs[i].isStraggler 
+            ? `rgba(245, 158, 11, ${opacity})` 
+            : `rgba(229, 169, 59, ${opacity})`;
+          ctx.lineWidth = uavs[i].isStraggler ? 0.5 : 1.2;
+          
+          if (uavs[i].isStraggler) {
+             ctx.setLineDash([2, 4]); // Packet loss simulation
+          } else {
+             ctx.setLineDash([]);
+          }
+
+          ctx.moveTo(uavs[i].x, uavs[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      }
+
+      uavs.forEach((uav) => {
+        uav.update();
+        uav.draw();
+      });
+
+      animationFrameId = requestAnimationFrame(render);
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    render();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
     <div
-      ref={containerRef}
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden bg-[#0A0C10]",
+        "pointer-events-none absolute inset-0 overflow-hidden bg-[#0A0C10] z-0",
         className,
       )}
     >
-      {/* Volumetric Fog Layers */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_50%_50%,transparent_0%,#0A0C10_100%)] z-10" />
-      <div className="absolute inset-0 opacity-40 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
-      <div className="absolute inset-0 opacity-40 mix-blend-screen blur-[100px] bg-[radial-gradient(circle_at_80%_70%,rgba(80,105,140,0.15)_0%,transparent_50%)]" />
-      
-      <svg
-        className="absolute inset-0 size-full text-accent opacity-[0.25] transition-transform duration-1000 ease-out z-0"
-        preserveAspectRatio="xMidYMid slice"
-        viewBox="0 0 100 100"
-        style={{
-          transform: "translate(var(--mouse-x-offset, 0%), var(--mouse-y-offset, 0%)) scale(1.05)",
-        }}
-      >
-        {/* Aggregation Rings around Global Server */}
-        {GLOBAL_SERVERS.map((cell) => (
-          <g key={`rf-${cell.id}`} className="stroke-accent/20 stroke-[0.08] fill-none" strokeDasharray="1 2">
-            <circle cx={cell.x} cy={cell.y} r="15" className="animate-[spin_60s_linear_infinite]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
-            <circle cx={cell.x} cy={cell.y} r="30" className="animate-[spin_90s_linear_infinite_reverse]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
-            <circle cx={cell.x} cy={cell.y} r="45" className="animate-[spin_120s_linear_infinite]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
-          </g>
-        ))}
-
-        {/* Global to Edge Links (Model Updates) */}
-        {AGGREGATION_LINKS.map(([globalIdx, edgeIdx], i) => {
-          const start = GLOBAL_SERVERS[globalIdx];
-          const end = EDGE_NODES[edgeIdx];
-          return (
-            <line
-              key={`agg-${i}`}
-              x1={start.x}
-              y1={start.y}
-              x2={end.x}
-              y2={end.y}
-              stroke="url(#gradient-flow)"
-              strokeWidth="0.15"
-              className="text-accent/40"
-            />
-          );
-        })}
-
-        {/* Edge to Data Links (Noise suppression represented by dashed lines) */}
-        {LOCAL_DATASETS.map((data, i) => {
-          let closestEdge = EDGE_NODES[0];
-          let minDist = Infinity;
-          EDGE_NODES.forEach((edge) => {
-            const dist = Math.sqrt(Math.pow(data.x - edge.x, 2) + Math.pow(data.y - edge.y, 2));
-            if (dist < minDist) {
-              minDist = dist;
-              closestEdge = edge;
-            }
-          });
-
-          return (
-            <line
-              key={`data-link-${i}`}
-              x1={data.x}
-              y1={data.y}
-              x2={closestEdge.x}
-              y2={closestEdge.y}
-              stroke="currentColor"
-              strokeWidth={data.noise ? "0.05" : "0.1"}
-              strokeDasharray={data.noise ? "0.5 1" : "none"}
-              className={data.noise ? "text-red-400/30" : "text-accent/30"}
-            />
-          );
-        })}
-
-        {/* Edge Nodes (Fog Computing) */}
-        {EDGE_NODES.map((node) => (
-          <g key={node.id}>
-            <polygon 
-              points={`${node.x},${node.y-1.5} ${node.x+1.5},${node.y+0.5} ${node.x-1.5},${node.y+0.5}`} 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="0.15" 
-              className="text-accent/60" 
-            />
-            <circle cx={node.x} cy={node.y} r="0.4" fill="currentColor" className="text-accent-warm" />
-            <text
-              x={node.x}
-              y={node.y - 2.5}
-              textAnchor="middle"
-              className="fill-accent/70 font-mono text-[1.5px] tracking-[0.2em] uppercase font-semibold select-none"
-            >
-              {node.label}
-            </text>
-          </g>
-        ))}
-
-        {/* Global Servers (Consensus) */}
-        {GLOBAL_SERVERS.map((server) => (
-          <g key={server.id}>
-            <rect x={server.x - 2} y={server.y - 2} width="4" height="4" fill="none" stroke="currentColor" strokeWidth="0.2" className="text-accent/80 transform rotate-45" style={{ transformOrigin: `${server.x}px ${server.y}px` }} />
-            <circle cx={server.x} cy={server.y} r="0.8" fill="currentColor" className="text-foreground animate-pulse" />
-            <text
-              x={server.x}
-              y={server.y - 3.5}
-              textAnchor="middle"
-              className="fill-foreground/90 font-mono text-[2.5px] tracking-[0.3em] uppercase font-bold select-none"
-            >
-              {server.label}
-            </text>
-          </g>
-        ))}
-
-        {/* Datasets (Noisy vs Clean) */}
-        {LOCAL_DATASETS.map((data, i) => (
-          <circle 
-            key={`dataset-${i}`} 
-            cx={data.x} 
-            cy={data.y} 
-            r={data.noise ? "0.2" : "0.3"} 
-            fill="currentColor" 
-            className={data.noise ? "text-red-400/40" : "text-foreground/80"} 
-          />
-        ))}
-
-        {/* Defs for Flow Gradient */}
-        <defs>
-          <linearGradient id="gradient-flow" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-
-        {/* Telemetry */}
-        <g className="fill-accent/40 font-mono text-[2px] tracking-widest uppercase select-none z-20">
-          <text x="3" y="97">SYS.STATE: FEDERATED_LEARNING.ACTIVE</text>
-          <text x="97" y="3" textAnchor="end">EPOCHS: 24,000 // LOSS: 0.0034</text>
-          <text x="97" y="97" textAnchor="end">NOISE_RECTIFICATION: ENABLED // 89.2% ACC</text>
-        </g>
-      </svg>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,#0A0C10_100%)] z-10" />
+      <div className="absolute inset-0 opacity-30 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 size-full opacity-70 mix-blend-screen"
+      />
+      {/* Telemetry overlay to anchor the simulation context */}
+      <div className="absolute top-8 left-8 flex flex-col gap-1 z-20">
+        <span className="font-mono text-[9px] tracking-widest text-accent/50 uppercase">SYS.STATE: UAV_SWARM.ACTIVE</span>
+        <span className="font-mono text-[9px] tracking-widest text-muted-foreground/30 uppercase">FLOCKING_NODES: 90 // PROTOCOL: FED_AVG</span>
+      </div>
     </div>
   );
 }
