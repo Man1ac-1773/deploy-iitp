@@ -22,7 +22,7 @@
 
 :root {
   --hero-name-size: clamp(4rem, 16vw, 16rem);
-  --hero-name-leading: 0.82;
+  --hero-name-leading: 0.88;
   --hero-progress: 0;
   --section-title-size: clamp(3rem, 8vw, 7rem);
   --background: #16181d;

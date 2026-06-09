@@ -37,7 +37,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         >
           <h1
             id="hero-heading"
-            className="hero-name text-balance font-bold tracking-[-0.06em] text-foreground uppercase leading-[var(--hero-name-leading)]"
+            className="hero-name text-balance font-bold tracking-[-0.04em] text-foreground uppercase leading-[var(--hero-name-leading)]"
           >
             <span className="mb-3 block font-mono text-[0.09em] font-medium tracking-[0.3em] text-accent uppercase sm:mb-4">
               {professor.honorific}

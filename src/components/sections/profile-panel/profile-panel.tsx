@@ -38,7 +38,7 @@ export function ProfilePanel() {
           </div>
         </div>
 
-        <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base font-light">
+        <p className="max-w-md text-sm leading-relaxed text-foreground/85 sm:text-base font-normal">
           {professor.bio}
         </p>
 
