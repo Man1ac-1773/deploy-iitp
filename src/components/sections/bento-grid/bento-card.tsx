@@ -8,10 +8,10 @@ import { useRef, type MouseEvent } from "react";
 const SPAN_CLASSES = {
   "feature-tall":
     "lg:col-span-8 lg:row-span-2 lg:row-start-1 lg:col-start-1",
-  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 z-10",
+  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 z-10 lg:translate-y-8",
   "sidebar-bottom":
-    "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20",
-  wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1",
+    "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20 lg:-translate-y-8",
+  wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1 lg:translate-y-12",
 } as const;
 
 type BentoCardProps = {
@@ -47,8 +47,9 @@ export function BentoCard({ card, className }: BentoCardProps) {
       id={card.id}
       aria-labelledby={`${card.id}-title`}
       data-bento-span={card.span}
+      data-repel-swarm="true"
       className={cn(
-        "flex min-h-44 flex-col bg-surface/30 backdrop-blur-md border border-border/40 hover:border-accent/40 shadow-xl shadow-black/20 transition-colors duration-300 p-6 sm:min-h-48 sm:p-8 lg:min-h-0 lg:p-10 rounded-sm relative group overflow-hidden",
+        "flex min-h-44 flex-col bg-background/5 backdrop-blur-[2px] border border-white/5 hover:border-accent/40 shadow-xl shadow-black/20 transition-colors duration-300 p-6 sm:min-h-48 sm:p-8 lg:min-h-0 lg:p-10 rounded-sm relative group overflow-hidden",
         SPAN_CLASSES[card.span],
         className,
       )}

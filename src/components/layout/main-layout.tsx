@@ -16,12 +16,13 @@ export function MainLayout({
     <div
       id="portfolio"
       data-transition-phase="portfolio"
-      className={cn("min-h-dvh scroll-mt-0 bg-background", className)}
+      className={cn("min-h-dvh scroll-mt-0 relative z-10", className)}
     >
       <div className="mx-auto flex w-full max-w-[1600px] flex-col lg:min-h-dvh lg:flex-row">
         <aside
+          data-repel-swarm="true"
           className={cn(
-            "w-full shrink-0 border-b border-muted-foreground/15 lg:sticky lg:top-0 lg:h-dvh lg:w-[25%] lg:border-r lg:border-b-0",
+            "w-full shrink-0 border-b border-white/10 bg-background/5 backdrop-blur-[2px] lg:sticky lg:top-0 lg:h-dvh lg:w-[25%] lg:border-r lg:border-b-0",
           )}
         >
           {profilePanel}

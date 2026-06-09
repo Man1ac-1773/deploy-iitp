@@ -1,7 +1,6 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
-import { NetworkBackground } from "@/components/shared/media/network-background";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
@@ -43,11 +42,10 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       data-transition-phase="hero"
       aria-labelledby="hero-heading"
       className={cn(
-        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col bg-background overflow-hidden",
+        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col overflow-hidden",
         className,
       )}
     >
-      <NetworkBackground />
 
       {/* Massive Typography Hero Container */}
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">

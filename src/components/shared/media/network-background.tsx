@@ -21,20 +21,30 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     canvas.width = width;
     canvas.height = height;
 
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    };
-    window.addEventListener("resize", handleResize);
-
     const mouse = { x: width / 2, y: height / 2, radius: 250 };
     const handleMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    // Track repulsive DOM rects
+    let repelRects: DOMRect[] = [];
+    const updateRects = () => {
+      const els = document.querySelectorAll('[data-repel-swarm="true"]');
+      repelRects = Array.from(els).map((el) => el.getBoundingClientRect());
+    };
+    window.addEventListener("scroll", updateRects, { passive: true });
+    setTimeout(updateRects, 100); // initial load
+    
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      updateRects();
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
 
     class UAV {
       x: number;
@@ -71,6 +81,30 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         // Friction
         this.vx *= 0.98;
         this.vy *= 0.98;
+
+        // Collision / Repulsion from DOM Elements
+        for (const rect of repelRects) {
+          const nearestX = Math.max(rect.left, Math.min(this.x, rect.right));
+          const nearestY = Math.max(rect.top, Math.min(this.y, rect.bottom));
+          
+          const distX = this.x - nearestX;
+          const distY = this.y - nearestY;
+          const distance = Math.sqrt(distX * distX + distY * distY);
+          
+          const repelRadius = 60; // Field of repulsion
+          
+          if (distance < repelRadius) {
+            if (distance === 0) {
+              // Inside the box
+              this.vx += (Math.random() - 0.5) * 8;
+              this.vy += (Math.random() - 0.5) * 8;
+            } else {
+              const force = Math.pow((repelRadius - distance) / repelRadius, 2);
+              this.vx += (distX / distance) * force * 1.5;
+              this.vy += (distY / distance) * force * 1.5;
+            }
+          }
+        }
 
         // Base wander (Exploration phase)
         this.vx += (Math.random() - 0.5) * 0.15;
@@ -172,6 +206,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", updateRects);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };

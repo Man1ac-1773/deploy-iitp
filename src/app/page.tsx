@@ -9,10 +9,14 @@ import { ResearchGraph } from "@/components/sections/research-graph/research-gra
 import { TimelineSection } from "@/components/sections/timeline/timeline-section";
 import { StudentsSection } from "@/components/sections/students/students-section";
 import { ContactSection } from "@/components/sections/contact/contact-section";
+import { NetworkBackground } from "@/components/shared/media/network-background";
 
 export default function HomePage() {
   return (
     <>
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <NetworkBackground />
+      </div>
       <ScrollPhaseTracker />
       <EditorialHero />
 
