@@ -18,8 +18,10 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    let dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
 
     const mouse = { x: width / 2, y: height / 2, radius: 250 };
     const handleMouseMove = (e: MouseEvent) => {
@@ -28,20 +30,30 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     };
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
-    // Track repulsive DOM rects
-    let repelRects: DOMRect[] = [];
+    // Track repulsive DOM rects (absolute coordinates to prevent layout thrashing on scroll)
+    let repelRects: { left: number; right: number; top: number; bottom: number }[] = [];
     const updateRects = () => {
       const els = document.querySelectorAll('[data-repel-swarm="true"]');
-      repelRects = Array.from(els).map((el) => el.getBoundingClientRect());
+      repelRects = Array.from(els).map((el) => {
+        const rect = el.getBoundingClientRect();
+        return {
+          left: rect.left,
+          right: rect.right,
+          top: rect.top + window.scrollY,
+          bottom: rect.bottom + window.scrollY,
+        };
+      });
     };
-    window.addEventListener("scroll", updateRects, { passive: true });
-    setTimeout(updateRects, 100); // initial load
+    // Only update on load and resize, completely detaching from the scroll event
+    setTimeout(updateRects, 100); 
     
     const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
       updateRects();
     };
     window.addEventListener("resize", handleResize, { passive: true });
@@ -83,17 +95,23 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         this.vy *= 0.98;
 
         // Collision / Repulsion from DOM Elements
+        const currentScrollY = window.scrollY;
         for (const rect of repelRects) {
+          const adjustedTop = rect.top - currentScrollY;
+          const adjustedBottom = rect.bottom - currentScrollY;
+
           const nearestX = Math.max(rect.left, Math.min(this.x, rect.right));
-          const nearestY = Math.max(rect.top, Math.min(this.y, rect.bottom));
+          const nearestY = Math.max(adjustedTop, Math.min(this.y, adjustedBottom));
           
           const distX = this.x - nearestX;
           const distY = this.y - nearestY;
-          const distance = Math.sqrt(distX * distX + distY * distY);
+          const distSq = distX * distX + distY * distY;
           
           const repelRadius = 60; // Field of repulsion
+          const repelRadiusSq = 3600;
           
-          if (distance < repelRadius) {
+          if (distSq < repelRadiusSq) {
+            const distance = Math.sqrt(distSq);
             if (distance === 0) {
               // Inside the box
               this.vx += (Math.random() - 0.5) * 8;
@@ -131,7 +149,14 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       draw() {
         if (!ctx) return;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        const s = this.size * 1.5;
+        // Draw Telemetry Diamond
+        ctx.moveTo(this.x, this.y - s);
+        ctx.lineTo(this.x + s, this.y);
+        ctx.lineTo(this.x, this.y + s);
+        ctx.lineTo(this.x - s, this.y);
+        ctx.closePath();
+        
         ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(6, 182, 212, 0.9)";
         ctx.fill();
         
@@ -154,9 +179,10 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         for (let j = i + 1; j < uavs.length; j++) {
           const dx = uavs[i].x - uavs[j].x;
           const dy = uavs[i].y - uavs[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < 100) {
+          if (distSq < 10000) { // 100^2 optimization
+            const distance = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.5;
@@ -171,9 +197,11 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       for (let i = 0; i < uavs.length; i++) {
         const dx = uavs[i].x - mouse.x;
         const dy = uavs[i].y - mouse.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
+        const radiusSq = mouse.radius * mouse.radius * 0.36; // (radius * 0.6)^2
         
-        if (distance < mouse.radius * 0.6) {
+        if (distSq < radiusSq) {
+          const distance = Math.sqrt(distSq);
           ctx.beginPath();
           const opacity = 0.25 * (1 - distance / (mouse.radius * 0.6));
           ctx.strokeStyle = uavs[i].isStraggler 
@@ -206,7 +234,6 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", updateRects);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };

@@ -18,6 +18,9 @@
 
   --spacing-section: clamp(6rem, 12vw, 14rem);
   --spacing-section-lg: clamp(8rem, 14vw, 16rem);
+
+  /* Elite cubic-bezier easing for premium snap */
+  --ease-elite: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 :root {
@@ -90,7 +93,22 @@
     @apply bg-background text-foreground;
   }
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+
+  /* Elite Global Focus State */
+  *:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    border-radius: 2px;
+    transition: outline-offset 0.2s var(--ease-elite), box-shadow 0.2s var(--ease-elite);
+  }
+
+  /* Global Elite Transition Override for interactive elements */
+  a, button, [role="button"], [role="tab"], input, select, textarea {
+    transition-timing-function: var(--ease-elite) !important;
+    transition-duration: 450ms !important;
   }
 }
 
