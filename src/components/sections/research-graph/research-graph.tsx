@@ -12,10 +12,10 @@ type ResearchGraphProps = {
 
 // Map strategy quadrants to publication database IDs
 const QUADRANT_MAP: Record<string, string> = {
-  equilibrium: "pub-002",
-  d2d: "pub-004",
+  equilibrium: "pub-001",
+  d2d: "pub-002",
   auction: "pub-003",
-  hetnet: "pub-005",
+  hetnet: "pub-004",
 };
 
 export function ResearchGraph({ className }: ResearchGraphProps) {
@@ -161,7 +161,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
           Equilibrium Grid
         </SectionHeading>
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base font-light leading-relaxed">
-          Interactive simulation of a <span className="font-semibold text-foreground">Stackelberg Caching Pricing Game</span> representing Dr. Satendra Kumar's research. The Road-Side Unit (RSU) acts as the leader setting the storage price (<span className="italic font-mono text-accent">p</span>), while consumers choose their caching demand (<span className="italic font-mono text-accent">d</span>). Move your cursor across the strategic space to explore corresponding research publications.
+          Interactive simulation of <span className="font-semibold text-foreground">Federated Learning Node Dynamics</span> representing Dr. Rahul Mishra's research. The Edge Server sets the personalization threshold (<span className="italic font-mono text-accent">p</span>), while client devices allocate local training epochs (<span className="italic font-mono text-accent">d</span>). Move your cursor across the strategic space to explore corresponding research publications.
         </p>
       </div>
 
@@ -287,7 +287,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                     activeRegionKey === "d2d" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
                   )}
                 >
-                  [I] Cooperative D2D
+                  [I] Local FL Training
                 </text>
                 <text
                   x="45"
@@ -297,7 +297,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                     activeRegionKey === "hetnet" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
                   )}
                 >
-                  [II] HetNet User Association
+                  [II] Edge Personalization
                 </text>
                 <text
                   x="17"
@@ -307,7 +307,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                     activeRegionKey === "equilibrium" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
                   )}
                 >
-                  [III] Social Optimum Caching
+                  [III] Global Consensus
                 </text>
                 <text
                   x="45"
@@ -317,7 +317,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                     activeRegionKey === "auction" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
                   )}
                 >
-                  [IV] Multi-Source Auctions
+                  [IV] Heterogeneous Clusters
                 </text>
               </g>
 
@@ -342,10 +342,10 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
 
               {/* Axis Titles */}
               <text x="50" y="94.5" textAnchor="middle" className="font-mono text-[2.5px] fill-accent uppercase tracking-widest font-semibold">
-                RSU Storage Price (p) &rarr;
+                Personalization Threshold (p) &rarr;
               </text>
               <text x="5" y="50" textAnchor="middle" transform="rotate(-90, 5, 50)" className="font-mono text-[2.5px] fill-accent uppercase tracking-widest font-semibold">
-                Consumer Cache Demand (d) &rarr;
+                Local Training Epochs (d) &rarr;
               </text>
 
               {/* Best Response Curve 1 (Consumer Demand Response) */}
@@ -413,8 +413,8 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
           </div>
 
           <div className="flex justify-between font-mono text-[9px] text-muted-foreground/50 px-1">
-            <span>[BR<sub>RSU</sub>] // RSU pricing best-response</span>
-            <span>[BR<sub>user</sub>] // User demand best-response</span>
+            <span>[BR<sub>edge</sub>] // Edge constraint response</span>
+            <span>[BR<sub>node</sub>] // Client epoch response</span>
           </div>
         </div>
 
@@ -448,11 +448,11 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                 <span className="font-bold">({p.toFixed(1)}, {d.toFixed(1)})</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">RSU Payoff (U<sub>RSU</sub>):</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Server Utilization (U<sub>edge</sub>):</span>
                 <span className="font-bold text-accent">{uRsu.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">User Payoff (U<sub>user</sub>):</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Node Accuracy (U<sub>node</sub>):</span>
                 <span className="font-bold text-accent">{uUser.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
