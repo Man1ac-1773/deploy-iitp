@@ -55,18 +55,18 @@ export function BentoCard({ card, className }: BentoCardProps) {
     >
       {/* Radial Background Hover Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700"
         style={{
-          background: "radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(91, 141, 239, 0.08), transparent 80%)",
+          background: "radial-gradient(500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(91, 141, 239, 0.05), transparent 80%)",
         }}
       />
       
       {/* Radial Glowing Border Mask Overlay */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-accent/30"
+        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 border border-accent/15"
         style={{
-          maskImage: "radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 20%, transparent 80%)",
-          WebkitMaskImage: "radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 20%, transparent 80%)",
+          maskImage: "radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 30%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 30%, transparent 70%)",
         }}
       />
 

@@ -24,7 +24,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       {/* Massive Typography Hero Container */}
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">
         
-        {/* Top Header - Extreme asymmetrical tension */}
+        {/* Top Header - Strategic Balance */}
         <div className="flex w-full items-start justify-between">
           <div className="flex flex-col gap-1">
             <p className="font-mono text-[10px] font-bold tracking-[0.35em] text-foreground/80 uppercase">
@@ -39,7 +39,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               [SYS.STATE: NOISE_SUPPRESSION_ACTIVE]
             </p>
             <p className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground/40 mt-1">
-              LAT: 25.602 // LON: 85.126
+              EDGE_NODES_ACTIVE: 124 // UPTIME: 99.9%
             </p>
           </div>
         </div>
@@ -88,7 +88,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             className="group flex flex-col items-end gap-3 text-muted-foreground"
           >
             <span className="font-mono text-[10px] font-bold tracking-[0.24em] uppercase text-foreground/60 group-hover:text-accent transition-colors duration-300">
-              Commence Uplink
+              Explore Research
             </span>
             <div className="relative h-12 w-[1px] overflow-hidden bg-border">
               <div className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-pulse" />
