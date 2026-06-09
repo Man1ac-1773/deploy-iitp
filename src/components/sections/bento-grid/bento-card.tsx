@@ -8,9 +8,9 @@ import { useRef, type MouseEvent } from "react";
 const SPAN_CLASSES = {
   "feature-tall":
     "lg:col-span-8 lg:row-span-2 lg:row-start-1 lg:col-start-1",
-  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 z-10 lg:translate-y-8",
+  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 z-10",
   "sidebar-bottom":
-    "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20 lg:-translate-y-8",
+    "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20",
   wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1 lg:translate-y-12",
 } as const;
 
