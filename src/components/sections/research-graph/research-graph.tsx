@@ -21,20 +21,20 @@ const QUADRANT_MAP: Record<string, string> = {
 export function ResearchGraph({ className }: ResearchGraphProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   
-  // Hover state pricing (p) and demand (d)
-  const [strategy, setStrategy] = useState<{ p: number; d: number } | null>(null);
+  // Hover state personalization (p) and local epochs (e)
+  const [strategy, setStrategy] = useState<{ p: number; e: number } | null>(null);
   
-  // Stable Nash Equilibrium constants
+  // Optimal Convergence Point
   const pStar = 4.0;
-  const dStar = 6.0;
+  const eStar = 6.0;
 
   // Track cursor position and map to strategy space [0, 10] x [0, 10]
-  const handleMouseMove = (e: MouseEvent<SVGSVGElement>) => {
+  const handleMouseMove = (event: MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current) return;
     
     const rect = svgRef.current.getBoundingClientRect();
-    const xRaw = e.clientX - rect.left;
-    const yRaw = e.clientY - rect.top;
+    const xRaw = event.clientX - rect.left;
+    const yRaw = event.clientY - rect.top;
     
     // Convert pixels to relative percentages (0 to 100) inside our 70x70 active area (from 15 to 85)
     const activeWidth = rect.width * 0.7;
@@ -43,78 +43,78 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
     const startY = rect.height * 0.15;
     
     const pVal = Math.max(0, Math.min(10, ((xRaw - startX) / activeWidth) * 10));
-    const dVal = Math.max(0, Math.min(10, (1 - (yRaw - startY) / activeHeight) * 10));
+    const eVal = Math.max(0, Math.min(10, (1 - (yRaw - startY) / activeHeight) * 10));
     
-    setStrategy({ p: pVal, d: dVal });
+    setStrategy({ p: pVal, e: eVal });
   };
 
   const handleMouseLeave = () => {
     setStrategy(null);
   };
 
-  const handleKeyDown = (e: KeyboardEvent<SVGSVGElement>) => {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-      e.preventDefault();
+  const handleKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+      event.preventDefault();
       const currentP = strategy ? strategy.p : pStar;
-      const currentD = strategy ? strategy.d : dStar;
+      const currentE = strategy ? strategy.e : eStar;
       let nextP = currentP;
-      let nextD = currentD;
+      let nextE = currentE;
       
-      if (e.key === "ArrowLeft") nextP = Math.max(0, currentP - 1.0);
-      if (e.key === "ArrowRight") nextP = Math.min(10, currentP + 1.0);
-      if (e.key === "ArrowDown") nextD = Math.max(0, currentD - 1.0);
-      if (e.key === "ArrowUp") nextD = Math.min(10, currentD + 1.0);
+      if (event.key === "ArrowLeft") nextP = Math.max(0, currentP - 1.0);
+      if (event.key === "ArrowRight") nextP = Math.min(10, currentP + 1.0);
+      if (event.key === "ArrowDown") nextE = Math.max(0, currentE - 1.0);
+      if (event.key === "ArrowUp") nextE = Math.min(10, currentE + 1.0);
       
-      setStrategy({ p: nextP, d: nextD });
-    } else if (e.key === "Escape" || e.key === "Backspace") {
+      setStrategy({ p: nextP, e: nextE });
+    } else if (event.key === "Escape" || event.key === "Backspace") {
       setStrategy(null);
     }
   };
 
   // Determine current active strategies
   const p = strategy ? strategy.p : pStar;
-  const d = strategy ? strategy.d : dStar;
+  const e = strategy ? strategy.e : eStar;
 
-  // Calculate Utilities based on real game-theoretic pricing models:
-  // 1. RSU Caching Utility: U_rsu = p * d - 0.4 * p^2  (revenue minus hosting costs)
-  const uRsu = p * d - 0.4 * Math.pow(p, 2);
+  // Calculate Metrics based on Federated Learning Models:
+  // 1. Edge Server Aggregation Efficiency (peaks when personalization is balanced)
+  const aggEfficiency = p * e - 0.4 * Math.pow(p, 2);
   
-  // 2. Consumer Follower Utility: U_user = 14 * ln(1 + d) - p * d
-  const uUser = 14 * Math.log(1 + d) - p * d;
+  // 2. Local Node Accuracy (diminishing returns on epochs)
+  const localAccuracy = 14 * Math.log(1 + e) - p * e;
 
-  // Social Welfare: SW = U_rsu + U_user
-  const sw = uRsu + uUser;
+  // Global Model Convergence
+  const convergence = aggEfficiency + localAccuracy;
   
-  // Social Optimum Welfare (cooperative peak)
-  const swOpt = 28.5;
+  // Optimal Convergence
+  const optConvergence = 28.5;
   
-  // Price of Anarchy (PoA) ratio
-  const poa = Math.max(0.65, Math.min(1.0, sw / swOpt));
+  // Noise Rectification Ratio (Simulating performance under noisy labels)
+  const noiseRatio = Math.max(0.65, Math.min(1.0, convergence / optConvergence));
 
   // Determine system stability parameters
-  const distanceToEq = Math.sqrt(Math.pow(p - pStar, 2) + Math.pow(d - dStar, 2));
+  const distanceToEq = Math.sqrt(Math.pow(p - pStar, 2) + Math.pow(e - eStar, 2));
   const isStable = distanceToEq < 1.2;
-  const isExploitative = p > 7.0;
-  const isSuboptimal = p < 2.0;
+  const isOverfitting = p > 7.0;
+  const isUnderfitting = p < 2.0;
 
   // Map strategy coordinates to active research publication quadrant
-  const getActiveRegion = (price: number, demand: number): string => {
+  const getActiveRegion = (personalization: number, epochs: number): string => {
     if (distanceToEq < 1.2) {
       return "equilibrium";
     }
     
-    if (price <= pStar && demand > dStar) {
+    if (personalization <= pStar && epochs > eStar) {
       return "d2d";
-    } else if (price > pStar && demand <= dStar) {
+    } else if (personalization > pStar && epochs <= eStar) {
       return "auction";
-    } else if (price > pStar && demand > dStar) {
+    } else if (personalization > pStar && epochs > eStar) {
       return "hetnet";
     }
     
     return "equilibrium";
   };
 
-  const activeRegionKey = getActiveRegion(p, d);
+  const activeRegionKey = getActiveRegion(p, e);
   const activePubId = QUADRANT_MAP[activeRegionKey] || "pub-002";
   const activePub = publications.find((pub) => pub.id === activePubId) || publications.find(p => p.id === "pub-002")!;
 
@@ -181,7 +181,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
               onKeyDown={handleKeyDown}
               tabIndex={0}
               role="application"
-              aria-label="Interactive Stackelberg Caching Pricing Game grid. Use Left and Right arrow keys to adjust pricing, and Up and Down arrow keys to adjust cache demand. Press Escape or Backspace to reset to Nash Equilibrium."
+              aria-label="Interactive Federated Learning Node Dynamics grid. Use Left and Right arrow keys to adjust personalization threshold, and Up and Down arrow keys to adjust local training epochs. Press Escape or Backspace to reset to optimal convergence."
               className="w-full aspect-square bg-background/20 cursor-crosshair select-none focus:outline-none focus:ring-1 focus:ring-accent/40 rounded-sm"
               viewBox="0 0 100 100"
             >
@@ -345,7 +345,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                 Personalization Threshold (p) &rarr;
               </text>
               <text x="5" y="50" textAnchor="middle" transform="rotate(-90, 5, 50)" className="font-mono text-[2.5px] fill-accent uppercase tracking-widest font-semibold">
-                Local Training Epochs (d) &rarr;
+                Local Training Epochs (e) &rarr;
               </text>
 
               {/* Best Response Curve 1 (Consumer Demand Response) */}
@@ -370,31 +370,31 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
               {/* Dotted lines tracing cursor position */}
               {strategy && (
                 <g className="stroke-accent/20 stroke-[0.2]" strokeDasharray="1 1">
-                  <line x1={getSvgX(p)} y1="85" x2={getSvgX(p)} y2={getSvgY(d)} />
-                  <line x1="15" y1={getSvgY(d)} x2={getSvgX(p)} y2={getSvgY(d)} />
+                  <line x1={getSvgX(p)} y1="85" x2={getSvgX(p)} y2={getSvgY(e)} />
+                  <line x1="15" y1={getSvgY(e)} x2={getSvgX(p)} y2={getSvgY(e)} />
                 </g>
               )}
 
-              {/* Nash Equilibrium (NE) Point */}
+              {/* Optimal Convergence Point */}
               <g>
                 <circle
                   cx={getSvgX(pStar)}
-                  cy={getSvgY(dStar)}
+                  cy={getSvgY(eStar)}
                   r="2.2"
                   className="fill-transparent stroke-accent-warm/15 stroke-[0.8] animate-pulse"
                 />
                 <circle
                   cx={getSvgX(pStar)}
-                  cy={getSvgY(dStar)}
+                  cy={getSvgY(eStar)}
                   r="0.8"
                   className="fill-accent-warm stroke-background stroke-[0.2]"
                 />
                 <text
                   x={getSvgX(pStar) + 2}
-                  y={getSvgY(dStar) - 2}
+                  y={getSvgY(eStar) - 2}
                   className="font-mono text-[2px] font-bold fill-accent-warm tracking-wider"
                 >
-                  NASH EQUILIBRIUM (NE)
+                  OPTIMAL CONVERGENCE
                 </text>
               </g>
 
@@ -403,7 +403,7 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
                 <g>
                   <circle
                     cx={getSvgX(p)}
-                    cy={getSvgY(d)}
+                    cy={getSvgY(e)}
                     r="1.2"
                     className="fill-foreground stroke-background stroke-[0.2]"
                   />
@@ -428,36 +428,36 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
               <span className={cn(
                 "font-mono text-[9px] tracking-wider uppercase font-semibold px-2 py-0.5 rounded-sm border",
                 isStable && "text-accent-warm border-accent-warm/40 bg-accent-warm/5",
-                isExploitative && "text-destructive border-destructive/40 bg-destructive/5",
-                isSuboptimal && "text-amber-500 border-amber-500/40 bg-amber-500/5",
-                (!isStable && !isExploitative && !isSuboptimal) && "text-muted-foreground border-border/40 bg-transparent"
+                isOverfitting && "text-destructive border-destructive/40 bg-destructive/5",
+                isUnderfitting && "text-amber-500 border-amber-500/40 bg-amber-500/5",
+                (!isStable && !isOverfitting && !isUnderfitting) && "text-muted-foreground border-border/40 bg-transparent"
               )}>
                 {isStable 
-                  ? "NE.STABLE" 
-                  : isExploitative 
-                    ? "EXPLOITATIVE" 
-                    : isSuboptimal 
-                      ? "SUB-OPTIMAL" 
+                  ? "CONVERGED" 
+                  : isOverfitting 
+                    ? "OVERFITTING" 
+                    : isUnderfitting 
+                      ? "UNDERFITTING" 
                       : "DIVERGENT"}
               </span>
             </div>
 
             <div className="flex flex-col gap-3 font-mono text-xs text-foreground/90 bg-background/40 p-3 rounded-sm border border-border/30">
               <div className="flex justify-between">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Coordinates (p, d):</span>
-                <span className="font-bold">({p.toFixed(1)}, {d.toFixed(1)})</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">State (p, e):</span>
+                <span className="font-bold">({p.toFixed(1)}, {e.toFixed(1)})</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Server Utilization (U<sub>edge</sub>):</span>
-                <span className="font-bold text-accent">{uRsu.toFixed(1)}</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Agg. Efficiency (E<sub>agg</sub>):</span>
+                <span className="font-bold text-accent">{aggEfficiency.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Node Accuracy (U<sub>node</sub>):</span>
-                <span className="font-bold text-accent">{uUser.toFixed(1)}</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Local Accuracy (A<sub>loc</sub>):</span>
+                <span className="font-bold text-accent">{localAccuracy.toFixed(1)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Price of Anarchy (PoA):</span>
-                <span className="font-bold">{poa.toFixed(3)}</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Noise Rectification (R<sub>n</sub>):</span>
+                <span className="font-bold">{noiseRatio.toFixed(3)}</span>
               </div>
             </div>
 

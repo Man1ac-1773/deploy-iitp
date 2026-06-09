@@ -1,239 +1,199 @@
 "use client";
- 
+
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
- 
-// HetNet Architecture Nodes Definition
-const MACRO_CELLS = [
-  { id: "m-01", x: 28, y: 42, label: "[ M-BS_01 // 3.5GHz ]" },
-  { id: "m-02", x: 72, y: 58, label: "[ M-BS_02 // 3.5GHz ]" },
+
+// Federated Learning Nodes Definition
+const GLOBAL_SERVERS = [
+  { id: "g-01", x: 50, y: 50, label: "[ FED_SERVER_01 // AGGREGATION ]" },
 ];
- 
-const PICO_CELLS = [
-  { id: "p-01", x: 15, y: 20, label: "[ P-BS_01 // 28GHz ]" },
-  { id: "p-02", x: 45, y: 75, label: "[ P-BS_02 // 28GHz ]" },
-  { id: "p-03", x: 55, y: 25, label: "[ P-BS_03 // 28GHz ]" },
-  { id: "p-04", x: 85, y: 80, label: "[ P-BS_04 // 28GHz ]" },
+
+const EDGE_NODES = [
+  { id: "e-01", x: 20, y: 25, label: "[ EDGE_NODE_01 // FOG ]" },
+  { id: "e-02", x: 80, y: 25, label: "[ EDGE_NODE_02 // FOG ]" },
+  { id: "e-03", x: 20, y: 75, label: "[ EDGE_NODE_03 // FOG ]" },
+  { id: "e-04", x: 80, y: 75, label: "[ EDGE_NODE_04 // FOG ]" },
+  { id: "e-05", x: 50, y: 15, label: "[ EDGE_NODE_05 // FOG ]" },
 ];
- 
-// User Equipment (UE) clustered around cells
-const USER_DEVICES = [
-  // Clustered near Pico 1
-  { x: 9, y: 14 },
-  { x: 18, y: 11 },
-  { x: 20, y: 25 },
-  // Clustered near Pico 2
-  { x: 38, y: 72 },
-  { x: 49, y: 81 },
-  { x: 39, y: 82 },
-  // Clustered near Pico 3
-  { x: 51, y: 19 },
-  { x: 61, y: 17 },
-  { x: 59, y: 31 },
-  // Clustered near Pico 4
-  { x: 81, y: 84 },
-  { x: 91, y: 74 },
-  { x: 87, y: 89 },
-  // Clustered near Macro 1
-  { x: 22, y: 48 },
-  { x: 34, y: 36 },
-  { x: 32, y: 49 },
-  // Clustered near Macro 2
-  { x: 66, y: 54 },
-  { x: 78, y: 61 },
-  { x: 69, y: 67 },
+
+// Noisy Datasets clustered around edge nodes
+const LOCAL_DATASETS = [
+  // Cluster 1
+  { x: 12, y: 18, noise: true }, { x: 25, y: 15, noise: false }, { x: 18, y: 32, noise: true }, { x: 28, y: 28, noise: false },
+  // Cluster 2
+  { x: 75, y: 15, noise: true }, { x: 88, y: 18, noise: false }, { x: 72, y: 30, noise: false }, { x: 85, y: 32, noise: true },
+  // Cluster 3
+  { x: 15, y: 70, noise: false }, { x: 28, y: 68, noise: true }, { x: 12, y: 82, noise: false }, { x: 25, y: 85, noise: true },
+  // Cluster 4
+  { x: 72, y: 68, noise: true }, { x: 85, y: 70, noise: false }, { x: 75, y: 85, noise: true }, { x: 88, y: 82, noise: false },
+  // Cluster 5
+  { x: 42, y: 10, noise: true }, { x: 58, y: 10, noise: false }, { x: 45, y: 8, noise: true }, { x: 55, y: 8, noise: false },
 ];
- 
-// Backhaul control connections (Macro to Pico)
-const BACKHAUL_LINKS: ReadonlyArray<[number, number]> = [
-  [0, 0], // Macro 1 to Pico 1
-  [0, 1], // Macro 1 to Pico 2
-  [1, 2], // Macro 2 to Pico 3
-  [1, 3], // Macro 2 to Pico 4
-  [0, 1], // Inter-macro link
+
+// Epoc Synchronisation Links (Edge to Global)
+const AGGREGATION_LINKS = [
+  [0, 0], [0, 1], [0, 2], [0, 3], [0, 4]
 ];
- 
-// Local device links (UE connections or D2D mesh)
-const D2D_LINKS: ReadonlyArray<[number, number]> = [
-  [0, 1], // Pico 1 cluster D2D
-  [1, 2],
-  [3, 4], // Pico 2 cluster D2D
-  [4, 5],
-  [6, 7], // Pico 3 cluster D2D
-  [7, 8],
-  [9, 10], // Pico 4 cluster D2D
-  [10, 11],
-  [12, 14], // Macro 1 cluster D2D
-  [15, 17], // Macro 2 cluster D2D
-];
- 
+
 type NetworkBackgroundProps = {
   className?: string;
 };
- 
+
 export function NetworkBackground({ className }: NetworkBackgroundProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
- 
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-      const xOffset = (e.clientX / (window.innerWidth || 1) - 0.5) * 1.8;
-      const yOffset = (e.clientY / (window.innerHeight || 1) - 0.5) * 1.8;
+      const xOffset = (e.clientX / (window.innerWidth || 1) - 0.5) * 2.5;
+      const yOffset = (e.clientY / (window.innerHeight || 1) - 0.5) * 2.5;
       containerRef.current.style.setProperty("--mouse-x-offset", `${xOffset.toFixed(3)}%`);
       containerRef.current.style.setProperty("--mouse-y-offset", `${yOffset.toFixed(3)}%`);
     };
- 
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
- 
+
   return (
     <div
       ref={containerRef}
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden",
+        "pointer-events-none absolute inset-0 overflow-hidden bg-[#0A0C10]",
         className,
       )}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_0%,var(--color-background)_78%)]" />
- 
+      {/* Volumetric Fog Layers */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_50%_50%,transparent_0%,#0A0C10_100%)] z-10" />
+      <div className="absolute inset-0 opacity-40 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
+      <div className="absolute inset-0 opacity-40 mix-blend-screen blur-[100px] bg-[radial-gradient(circle_at_80%_70%,rgba(80,105,140,0.15)_0%,transparent_50%)]" />
+      
       <svg
-        className="absolute inset-0 size-full text-accent opacity-[0.18] transition-transform duration-700 ease-out"
+        className="absolute inset-0 size-full text-accent opacity-[0.25] transition-transform duration-1000 ease-out z-0"
         preserveAspectRatio="xMidYMid slice"
         viewBox="0 0 100 100"
         style={{
-          transform: "translate(var(--mouse-x-offset, 0%), var(--mouse-y-offset, 0%)) scale(1.03)",
+          transform: "translate(var(--mouse-x-offset, 0%), var(--mouse-y-offset, 0%)) scale(1.05)",
         }}
       >
-        {/* Concentric RF wave propagation rings around Macro cells */}
-        {MACRO_CELLS.map((cell) => (
-          <g key={`rf-${cell.id}`} className="stroke-accent/15 stroke-[0.08] fill-none" strokeDasharray="1.5 1.5">
-            <circle cx={cell.x} cy={cell.y} r="12" />
-            <circle cx={cell.x} cy={cell.y} r="24" />
-            <circle cx={cell.x} cy={cell.y} r="36" />
+        {/* Aggregation Rings around Global Server */}
+        {GLOBAL_SERVERS.map((cell) => (
+          <g key={`rf-${cell.id}`} className="stroke-accent/20 stroke-[0.08] fill-none" strokeDasharray="1 2">
+            <circle cx={cell.x} cy={cell.y} r="15" className="animate-[spin_60s_linear_infinite]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
+            <circle cx={cell.x} cy={cell.y} r="30" className="animate-[spin_90s_linear_infinite_reverse]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
+            <circle cx={cell.x} cy={cell.y} r="45" className="animate-[spin_120s_linear_infinite]" style={{ transformOrigin: `${cell.x}px ${cell.y}px` }} />
           </g>
         ))}
- 
-        {/* Backhaul Links (solid lines) */}
-        {BACKHAUL_LINKS.map(([from, to], i) => {
-          const start = MACRO_CELLS[from];
-          const end = PICO_CELLS[to];
+
+        {/* Global to Edge Links (Model Updates) */}
+        {AGGREGATION_LINKS.map(([globalIdx, edgeIdx], i) => {
+          const start = GLOBAL_SERVERS[globalIdx];
+          const end = EDGE_NODES[edgeIdx];
           return (
             <line
-              key={`backhaul-${i}`}
+              key={`agg-${i}`}
               x1={start.x}
               y1={start.y}
               x2={end.x}
               y2={end.y}
-              stroke="currentColor"
-              strokeWidth="0.16"
-              className="text-accent/35"
+              stroke="url(#gradient-flow)"
+              strokeWidth="0.15"
+              className="text-accent/40"
             />
           );
         })}
- 
-        {/* Device-to-Device (D2D) mesh links (dashed, fine lines) */}
-        {D2D_LINKS.map(([from, to], i) => {
-          const start = USER_DEVICES[from];
-          const end = USER_DEVICES[to];
-          return (
-            <line
-              key={`d2d-${i}`}
-              x1={start.x}
-              y1={start.y}
-              x2={end.x}
-              y2={end.y}
-              stroke="currentColor"
-              strokeWidth="0.08"
-              strokeDasharray="1 0.6"
-              className="text-accent-warm/40"
-            />
-          );
-        })}
- 
-        {/* Association links connecting UEs to base stations */}
-        {USER_DEVICES.map((ue, i) => {
-          // Associate user to closest Pico cell
-          let closestPico = PICO_CELLS[0];
+
+        {/* Edge to Data Links (Noise suppression represented by dashed lines) */}
+        {LOCAL_DATASETS.map((data, i) => {
+          let closestEdge = EDGE_NODES[0];
           let minDist = Infinity;
-          PICO_CELLS.forEach((pico) => {
-            const dist = Math.sqrt(Math.pow(ue.x - pico.x, 2) + Math.pow(ue.y - pico.y, 2));
+          EDGE_NODES.forEach((edge) => {
+            const dist = Math.sqrt(Math.pow(data.x - edge.x, 2) + Math.pow(data.y - edge.y, 2));
             if (dist < minDist) {
               minDist = dist;
-              closestPico = pico;
+              closestEdge = edge;
             }
           });
- 
+
           return (
             <line
-              key={`ue-link-${i}`}
-              x1={ue.x}
-              y1={ue.y}
-              x2={closestPico.x}
-              y2={closestPico.y}
+              key={`data-link-${i}`}
+              x1={data.x}
+              y1={data.y}
+              x2={closestEdge.x}
+              y2={closestEdge.y}
               stroke="currentColor"
-              strokeWidth="0.06"
-              strokeDasharray="0.5 0.5"
-              className="text-accent/20"
+              strokeWidth={data.noise ? "0.05" : "0.1"}
+              strokeDasharray={data.noise ? "0.5 1" : "none"}
+              className={data.noise ? "text-red-400/30" : "text-accent/30"}
             />
           );
         })}
- 
-        {/* Macro Cell structures */}
-        {MACRO_CELLS.map((cell) => (
-          <g key={cell.id}>
-            {/* Base anchor tower structure */}
-            <path
-              d={`M ${cell.x} ${cell.y} L ${cell.x - 1.5} ${cell.y + 4.5} M ${cell.x} ${cell.y} L ${cell.x + 1.5} ${cell.y + 4.5} M ${cell.x - 1} ${cell.y + 3} L ${cell.x + 1} ${cell.y + 3}`}
-              stroke="currentColor"
-              strokeWidth="0.2"
-              fill="none"
-              className="text-accent/50"
+
+        {/* Edge Nodes (Fog Computing) */}
+        {EDGE_NODES.map((node) => (
+          <g key={node.id}>
+            <polygon 
+              points={`${node.x},${node.y-1.5} ${node.x+1.5},${node.y+0.5} ${node.x-1.5},${node.y+0.5}`} 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="0.15" 
+              className="text-accent/60" 
             />
-            {/* Central Macro antenna node */}
-            <circle cx={cell.x} cy={cell.y} r="0.6" fill="currentColor" />
-            <circle cx={cell.x} cy={cell.y} r="1.4" className="stroke-accent/30 stroke-[0.1] fill-none animate-pulse" />
-            {/* Labels */}
+            <circle cx={node.x} cy={node.y} r="0.4" fill="currentColor" className="text-accent-warm" />
             <text
-              x={cell.x}
-              y={cell.y - 1.8}
+              x={node.x}
+              y={node.y - 2.5}
               textAnchor="middle"
-              className="fill-accent-warm font-mono text-[1px] tracking-widest uppercase font-bold select-none"
+              className="fill-accent/70 font-mono text-[0.8px] tracking-[0.2em] uppercase font-semibold select-none"
             >
-              {cell.label}
+              {node.label}
             </text>
           </g>
         ))}
- 
-        {/* Pico Cell structures */}
-        {PICO_CELLS.map((cell) => (
-          <g key={cell.id}>
-            {/* Small mast representation */}
-            <line x1={cell.x} y1={cell.y} x2={cell.x} y2={cell.y + 2.5} stroke="currentColor" strokeWidth="0.15" className="text-accent/40" />
-            <circle cx={cell.x} cy={cell.y} r="0.45" fill="currentColor" className="text-accent-warm/70" />
-            {/* Labels */}
+
+        {/* Global Servers (Consensus) */}
+        {GLOBAL_SERVERS.map((server) => (
+          <g key={server.id}>
+            <rect x={server.x - 2} y={server.y - 2} width="4" height="4" fill="none" stroke="currentColor" strokeWidth="0.2" className="text-accent/80 transform rotate-45" style={{ transformOrigin: `${server.x}px ${server.y}px` }} />
+            <circle cx={server.x} cy={server.y} r="0.8" fill="currentColor" className="text-foreground animate-pulse" />
             <text
-              x={cell.x}
-              y={cell.y - 1.4}
+              x={server.x}
+              y={server.y - 3.5}
               textAnchor="middle"
-              className="fill-accent/85 font-mono text-[0.8px] tracking-widest uppercase font-semibold select-none"
+              className="fill-foreground/90 font-mono text-[1.2px] tracking-[0.3em] uppercase font-bold select-none"
             >
-              {cell.label}
+              {server.label}
             </text>
           </g>
         ))}
- 
-        {/* User Devices (UE) */}
-        {USER_DEVICES.map((ue, i) => (
-          <circle key={`ue-${i}`} cx={ue.x} cy={ue.y} r="0.25" fill="currentColor" className="text-foreground/60" />
+
+        {/* Datasets (Noisy vs Clean) */}
+        {LOCAL_DATASETS.map((data, i) => (
+          <circle 
+            key={`dataset-${i}`} 
+            cx={data.x} 
+            cy={data.y} 
+            r={data.noise ? "0.2" : "0.3"} 
+            fill="currentColor" 
+            className={data.noise ? "text-red-400/40" : "text-foreground/80"} 
+          />
         ))}
- 
-        {/* Technical Blueprint Border Telemetry */}
-        <g className="fill-accent/55 font-mono text-[0.9px] tracking-widest uppercase select-none">
-          <text x="3" y="97">SYS.STATE: HETNET.TOPOLOGY.ACTIVE</text>
-          <text x="97" y="3" textAnchor="end">LATITUDE: 25.602 // LONGITUDE: 85.126</text>
-          <text x="97" y="97" textAnchor="end">BW: 400MHz // MODULATION: mmWave.QAM</text>
+
+        {/* Defs for Flow Gradient */}
+        <defs>
+          <linearGradient id="gradient-flow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+
+        {/* Telemetry */}
+        <g className="fill-accent/40 font-mono text-[1px] tracking-widest uppercase select-none z-20">
+          <text x="3" y="97">SYS.STATE: FEDERATED_LEARNING.ACTIVE</text>
+          <text x="97" y="3" textAnchor="end">EPOCHS: 24,000 // LOSS: 0.0034</text>
+          <text x="97" y="97" textAnchor="end">NOISE_RECTIFICATION: ENABLED // 89.2% ACC</text>
         </g>
       </svg>
     </div>

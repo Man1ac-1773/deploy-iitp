@@ -7,11 +7,11 @@ import { useRef, type MouseEvent } from "react";
 
 const SPAN_CLASSES = {
   "feature-tall":
-    "lg:col-span-7 lg:row-span-2 lg:row-start-1 lg:col-start-1",
-  "sidebar-top": "lg:col-span-5 lg:row-span-1 lg:row-start-1 lg:col-start-8",
+    "lg:col-span-8 lg:row-span-2 lg:row-start-1 lg:col-start-1",
+  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 lg:ml-[-2rem] lg:mt-[3rem] z-10",
   "sidebar-bottom":
-    "lg:col-span-5 lg:row-span-1 lg:row-start-2 lg:col-start-8",
-  wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1",
+    "lg:col-span-5 lg:row-span-1 lg:row-start-2 lg:col-start-6 lg:mt-[-3rem] z-20",
+  wide: "lg:col-span-10 lg:row-span-1 lg:row-start-3 lg:col-start-2 lg:mt-[2rem]",
 } as const;
 
 type BentoCardProps = {
@@ -48,7 +48,7 @@ export function BentoCard({ card, className }: BentoCardProps) {
       aria-labelledby={`${card.id}-title`}
       data-bento-span={card.span}
       className={cn(
-        "flex min-h-44 flex-col bg-surface/20 border border-border/40 hover:border-accent/30 transition-all duration-300 p-6 sm:min-h-48 sm:p-8 lg:min-h-0 lg:p-10 rounded-sm relative group overflow-hidden",
+        "flex min-h-44 flex-col bg-surface/30 backdrop-blur-md border border-border/40 hover:border-accent/40 shadow-xl shadow-black/20 transition-all duration-300 p-6 sm:min-h-48 sm:p-8 lg:min-h-0 lg:p-10 rounded-sm relative group overflow-hidden",
         SPAN_CLASSES[card.span],
         className,
       )}
@@ -57,68 +57,57 @@ export function BentoCard({ card, className }: BentoCardProps) {
       <div
         className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          background: "radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(91, 141, 239, 0.05), transparent 80%)",
+          background: "radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(91, 141, 239, 0.08), transparent 80%)",
         }}
       />
       
       {/* Radial Glowing Border Mask Overlay */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-accent/25"
+        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-accent/30"
         style={{
           maskImage: "radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 20%, transparent 80%)",
           WebkitMaskImage: "radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 20%, transparent 80%)",
         }}
       />
 
-      {/* Domain-specific SVG Metaphor Overlays */}
+      {/* Domain-specific SVG Metaphor Overlays (Federated Learning & Fog) */}
       {card.id === "research-areas" && (
-        <svg className="absolute bottom-2 right-2 size-28 text-accent/14 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/35" viewBox="0 0 100 100">
-          <path d="M 10,10 L 90,10 M 10,50 L 90,50 M 10,90 L 90,90 M 10,10 L 10,90 M 50,10 L 50,90 M 90,10 L 90,90" stroke="currentColor" strokeWidth="0.8" strokeDasharray="1.5 1.5" />
-          <text x="30" y="32" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">U<tspan fontSize="4" dy="2">RSU</tspan></text>
-          <text x="70" y="30" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">U<tspan fontSize="4" dy="2">user</tspan></text>
-          {/* Highlight Nash Equilibrium quadrant in warm accent */}
-          <rect x="15" y="55" width="30" height="30" className="fill-accent-warm/10 stroke-accent-warm/30 stroke-[0.5] pointer-events-none" />
-          <text x="30" y="70" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold text-accent-warm/85">u<tspan fontSize="4" dy="2">RSU</tspan></text>
-          <text x="70" y="70" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold">u<tspan fontSize="4" dy="2">user</tspan></text>
+        <svg className="absolute bottom-2 right-2 size-32 text-accent/10 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/25" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="30" className="fill-none stroke-currentColor stroke-[0.8] stroke-dasharray-[2_2]" />
+          <circle cx="50" cy="50" r="15" className="fill-none stroke-currentColor stroke-[0.8]" />
+          <circle cx="50" cy="50" r="3" className="fill-accent-warm/70" />
+          <path d="M 50,20 L 50,35 M 50,65 L 50,80 M 20,50 L 35,50 M 65,50 L 80,50" stroke="currentColor" strokeWidth="1" />
+          <text x="50" y="8" textAnchor="middle" fontSize="5" fill="currentColor" className="font-mono font-bold tracking-widest">GLOBAL.MODEL</text>
         </svg>
       )}
  
       {card.id === "awards" && (
-        <svg className="absolute bottom-2 right-2 size-28 text-accent/14 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/35" viewBox="0 0 100 100">
-          <path d="M 10,15 L 90,15 M 10,50 L 90,50 M 10,85 L 90,85" stroke="currentColor" strokeWidth="0.6" />
-          <path d="M 50,15 L 50,85" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" />
-          <text x="30" y="28" textAnchor="middle" fontSize="5.5" fill="currentColor" className="font-mono">ASK: p<tspan fontSize="3.5" dy="1.5">i</tspan></text>
-          <text x="70" y="26.5" textAnchor="middle" fontSize="5.5" fill="currentColor" className="font-mono">BID: v<tspan fontSize="3.5" dy="1.5">j</tspan></text>
-          <path d="M 20,40 L 40,40 M 60,40 L 80,40" stroke="currentColor" strokeWidth="1" />
-          <path d="M 30,65 L 70,65" stroke="currentColor" strokeWidth="0.8" strokeDasharray="1 1" />
-          {/* Highlight market clearing equilibrium point */}
-          <circle cx="50" cy="65" r="1.8" fill="currentColor" className="text-accent-warm animate-pulse" />
-          <text x="50" y="77" textAnchor="middle" fontSize="5.5" fill="currentColor" className="font-mono text-accent-warm/90 font-semibold">Equilibrium p*</text>
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/10 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/25" viewBox="0 0 100 100">
+          <path d="M 10,80 Q 30,80 50,50 T 90,20" fill="none" stroke="currentColor" strokeWidth="1" />
+          <path d="M 10,80 Q 30,60 50,30 T 90,10" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1.5 1.5" className="text-accent-warm/50" />
+          <circle cx="90" cy="20" r="2" fill="currentColor" className="text-accent-warm" />
+          <text x="70" y="25" textAnchor="middle" fontSize="5" fill="currentColor" className="font-mono">ACCURACY_PEAK</text>
         </svg>
       )}
  
       {card.id === "teaching" && (
-        <svg className="absolute bottom-2 right-2 size-28 text-accent/14 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/35" viewBox="0 0 100 100">
-          <path d="M 5,90 L 95,90" stroke="currentColor" strokeWidth="0.6" />
-          <path d="M 10,90 Q 35,90 50,15 T 90,90" fill="none" stroke="currentColor" strokeWidth="1.2" />
-          <line x1="50" y1="15" x2="50" y2="90" stroke="currentColor" strokeWidth="0.6" strokeDasharray="1.5 1.5" />
-          <text x="50" y="8" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono">f(x | μ, σ²)</text>
-          <path d="M 35,60 Q 50,60 50,60 Q 50,60 65,60" fill="none" stroke="currentColor" strokeWidth="0.6" strokeDasharray="1 1" className="text-accent-warm/80" />
-          <text x="68" y="58" fontSize="5.5" fill="currentColor" className="font-mono text-accent-warm/90 font-semibold">σ</text>
+        <svg className="absolute bottom-2 right-2 size-28 text-accent/10 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/25" viewBox="0 0 100 100">
+          {/* Drone/UAV Topology Grid */}
+          <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+          <line x1="20" y1="50" x2="80" y2="50" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+          <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+          <path d="M 40,40 L 60,60 M 60,40 L 40,60" stroke="currentColor" strokeWidth="1" className="text-accent-warm/80" />
+          <circle cx="50" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="0.8" />
+          <text x="50" y="15" textAnchor="middle" fontSize="5" fill="currentColor" className="font-mono">UAV.GRID.COORD</text>
         </svg>
       )}
  
       {card.id === "projects" && (
-        <svg className="absolute bottom-2 right-2 size-28 text-accent/14 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/35" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
-          <path d="M 46,22 L 54,22 M 50,22 L 50,28" stroke="currentColor" strokeWidth="0.8" />
-          <path d="M 46,78 L 54,78 M 50,78 L 50,72" stroke="currentColor" strokeWidth="0.8" />
-          <text x="50" y="18" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">STATE (s<tspan fontSize="4" dy="1.5">t</tspan>)</text>
-          <text x="50" y="86.5" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">ACTION (a<tspan fontSize="4" dy="1.5">t</tspan>)</text>
-          {/* Highlight reinforcement agent module */}
-          <text x="84" y="52" textAnchor="middle" fontSize="6.5" fill="currentColor" className="font-mono font-bold text-accent-warm/95">AGENT</text>
-          <text x="16" y="52" textAnchor="middle" fontSize="6" fill="currentColor" className="font-mono font-bold">ENV</text>
-          <path d="M 68,32 A 28,28 0 0,1 78,50" stroke="currentColor" strokeWidth="0.8" fill="none" className="text-accent-warm/70" />
+        <svg className="absolute bottom-2 right-2 size-32 text-accent/10 pointer-events-none select-none transition-all duration-500 group-hover:text-accent/25" viewBox="0 0 100 100">
+          {/* Signal vs Noise Rectification */}
+          <path d="M 10,50 L 20,20 L 30,80 L 40,10 L 50,90 L 60,30 L 70,70 L 80,40 L 90,50" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-destructive/40" />
+          <path d="M 10,50 Q 25,45 50,50 T 90,50" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-accent-warm" />
+          <text x="50" y="90" textAnchor="middle" fontSize="5" fill="currentColor" className="font-mono font-bold">NOISE_RECTIFICATION</text>
         </svg>
       )}
 
