@@ -132,7 +132,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(91, 141, 239, 0.9)";
+        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(6, 182, 212, 0.9)";
         ctx.fill();
         
         // Active glow
@@ -158,7 +158,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
 
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(91, 141, 239, ${0.15 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(uavs[i].x, uavs[i].y);
             ctx.lineTo(uavs[j].x, uavs[j].y);

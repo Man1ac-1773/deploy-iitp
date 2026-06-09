@@ -146,7 +146,7 @@ export function ResearchGraph({ className }: { className?: string }) {
         if (simParams.current.personalization && !this.isNoisy) {
           ctx.fillStyle = "rgba(167, 139, 250, 0.8)"; // Purple for personalized weights
         } else {
-          ctx.fillStyle = this.isNoisy ? "rgba(248, 113, 113, 0.8)" : "rgba(91, 141, 239, 0.8)";
+          ctx.fillStyle = this.isNoisy ? "rgba(248, 113, 113, 0.8)" : "rgba(6, 182, 212, 0.8)";
         }
         ctx.fill();
       }
@@ -199,7 +199,7 @@ export function ResearchGraph({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.moveTo(node.x, node.y);
         ctx.lineTo(globalServer.x, globalServer.y);
-        ctx.strokeStyle = node.isStraggler ? "rgba(255, 255, 255, 0.05)" : "rgba(91, 141, 239, 0.15)";
+        ctx.strokeStyle = node.isStraggler ? "rgba(255, 255, 255, 0.05)" : "rgba(6, 182, 212, 0.15)";
         ctx.lineWidth = 1;
         if (simParams.current.personalization) {
           ctx.setLineDash([5, 5]);
@@ -233,7 +233,7 @@ export function ResearchGraph({ className }: { className?: string }) {
       ctx.arc(globalServer.x, globalServer.y, globalServer.radius, 0, Math.PI * 2);
       ctx.fillStyle = "#1e293b";
       ctx.fill();
-      ctx.strokeStyle = "rgba(91, 141, 239, 0.8)";
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.8)";
       ctx.lineWidth = 2;
       ctx.stroke();
       
@@ -241,7 +241,7 @@ export function ResearchGraph({ className }: { className?: string }) {
       const pulse = Math.sin(time / 500) * 4;
       ctx.beginPath();
       ctx.arc(globalServer.x, globalServer.y, globalServer.radius + 4 + pulse, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(91, 141, 239, 0.3)";
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.3)";
       ctx.stroke();
 
       // Draw Edge Nodes
