@@ -81,11 +81,11 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           </span>
           <h1
             id="hero-heading"
-            className="hero-name w-full max-w-full font-black tracking-tighter text-foreground uppercase mix-blend-difference"
+            className="hero-name w-full max-w-full font-semibold text-foreground uppercase mix-blend-difference"
             style={{ 
               fontSize: "clamp(5rem, 18vw, 22rem)", 
-              lineHeight: "0.85", 
-              letterSpacing: "-0.06em",
+              lineHeight: "0.82", 
+              letterSpacing: "-0.04em",
               marginLeft: "-0.04em" // optically align the massive text
             }}
           >

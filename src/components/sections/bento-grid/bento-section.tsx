@@ -15,7 +15,7 @@ export function BentoSection() {
           <SectionLabel>Overview</SectionLabel>
           <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">01 // OVERVIEW</span>
         </div>
-        <SectionHeading as="h2" id="bento-section-heading" className="uppercase font-bold">
+        <SectionHeading as="h2" id="bento-section-heading" className="uppercase font-medium tracking-wide">
           Lab at a glance
         </SectionHeading>
       </div>

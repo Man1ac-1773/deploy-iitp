@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
 import { SmoothScrollProvider } from "@/components/layout/smooth-scroll-provider";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-cormorant-garamond",
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -47,8 +47,8 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "dark font-sans",
-        plusJakartaSans.variable,
-        spaceGrotesk.variable,
+        inter.variable,
+        cormorantGaramond.variable,
         GeistMono.variable,
       )}
     >

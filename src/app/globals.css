@@ -12,8 +12,8 @@
   --color-foreground: #f5f7fa;
   --color-muted-foreground: #9aa4b2;
 
-  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-cormorant-garamond), ui-serif, Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --spacing-section: clamp(6rem, 12vw, 14rem);
@@ -22,7 +22,7 @@
 
 :root {
   --hero-name-size: clamp(4rem, 16vw, 16rem);
-  --hero-name-leading: 0.88;
+  --hero-name-leading: 0.82;
   --background: #16181d;
   --foreground: #f5f7fa;
   --card: #1d2128;
