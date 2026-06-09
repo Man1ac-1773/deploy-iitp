@@ -1,122 +1,36 @@
 "use client";
 
-import { useState, useRef, useEffect, type MouseEvent, type KeyboardEvent } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import { cn } from "@/lib/utils";
 import { publications } from "@/data/publications";
 
-type ResearchGraphProps = {
-  className?: string;
-};
+type SystemStateKey = "baseline" | "noisy" | "heterogeneous" | "personalization";
 
-// Map simulation quadrants to publication database IDs
-const QUADRANT_MAP: Record<string, string> = {
-  global_model: "pub-001",
-  local_training: "pub-002",
-  edge_cluster: "pub-003",
+const STATE_TO_PUB: Record<SystemStateKey, string> = {
+  baseline: "pub-001",
+  noisy: "pub-002",
+  heterogeneous: "pub-003",
   personalization: "pub-004",
 };
 
-export function ResearchGraph({ className }: ResearchGraphProps) {
-  const svgRef = useRef<SVGSVGElement | null>(null);
+export function ResearchGraph({ className }: { className?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [activeState, setActiveState] = useState<SystemStateKey>("baseline");
+  const [metrics, setMetrics] = useState({ accuracy: 92.4, rounds: 120, noise: 0.05 });
   
-  // Hover state for communication rounds (k) and local epochs (e)
-  const [strategy, setStrategy] = useState<{ k: number; e: number } | null>(null);
-  
-  // Optimal Convergence Point
-  const kStar = 4.0;
-  const eStar = 6.0;
+  // Simulation interaction refs
+  const simParams = useRef({
+    noiseLevel: 0.05,
+    heterogeneity: 0.1,
+    personalization: false,
+    particles: [] as any[],
+    lastTime: 0,
+  });
 
-  // Track cursor position and map to strategy space [0, 10] x [0, 10]
-  const handleMouseMove = (event: MouseEvent<SVGSVGElement>) => {
-    if (!svgRef.current) return;
-    
-    const rect = svgRef.current.getBoundingClientRect();
-    const xRaw = event.clientX - rect.left;
-    const yRaw = event.clientY - rect.top;
-    
-    // Convert pixels to relative percentages (0 to 100) inside our 70x70 active area (from 15 to 85)
-    const activeWidth = rect.width * 0.7;
-    const activeHeight = rect.height * 0.7;
-    const startX = rect.width * 0.15;
-    const startY = rect.height * 0.15;
-    
-    const kVal = Math.max(0, Math.min(10, ((xRaw - startX) / activeWidth) * 10));
-    const eVal = Math.max(0, Math.min(10, (1 - (yRaw - startY) / activeHeight) * 10));
-    
-    setStrategy({ k: kVal, e: eVal });
-  };
-
-  const handleMouseLeave = () => {
-    setStrategy(null);
-  };
-
-  const handleKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
-      event.preventDefault();
-      const currentK = strategy ? strategy.k : kStar;
-      const currentE = strategy ? strategy.e : eStar;
-      let nextK = currentK;
-      let nextE = currentE;
-      
-      if (event.key === "ArrowLeft") nextK = Math.max(0, currentK - 1.0);
-      if (event.key === "ArrowRight") nextK = Math.min(10, currentK + 1.0);
-      if (event.key === "ArrowDown") nextE = Math.max(0, currentE - 1.0);
-      if (event.key === "ArrowUp") nextE = Math.min(10, currentE + 1.0);
-      
-      setStrategy({ k: nextK, e: nextE });
-    } else if (event.key === "Escape" || event.key === "Backspace") {
-      setStrategy(null);
-    }
-  };
-
-  // Determine current active simulation parameters
-  const k = strategy ? strategy.k : kStar;
-  const e = strategy ? strategy.e : eStar;
-
-  // Calculate Metrics based on Federated Learning Models:
-  // 1. Edge Server Aggregation Efficiency (peaks when communication is balanced)
-  const aggEfficiency = k * e - 0.4 * Math.pow(k, 2);
-  
-  // 2. Local Node Accuracy (diminishing returns on epochs)
-  const localAccuracy = 14 * Math.log(1 + e) - k * e;
-
-  // Global Model Convergence
-  const convergence = aggEfficiency + localAccuracy;
-  
-  // Optimal Convergence
-  const optConvergence = 28.5;
-  
-  // Noise Rectification Ratio (Simulating performance under noisy labels)
-  const noiseRatio = Math.max(0.65, Math.min(1.0, convergence / optConvergence));
-
-  // Determine system stability parameters
-  const distanceToEq = Math.sqrt(Math.pow(k - kStar, 2) + Math.pow(e - eStar, 2));
-  const isStable = distanceToEq < 1.2;
-  const isOverfitting = k > 7.0;
-  const isUnderfitting = k < 2.0;
-
-  // Map strategy coordinates to active research publication quadrant
-  const getActiveRegion = (rounds: number, epochs: number): string => {
-    if (distanceToEq < 1.2) {
-      return "global_model";
-    }
-    
-    if (rounds <= kStar && epochs > eStar) {
-      return "local_training";
-    } else if (rounds > kStar && epochs <= eStar) {
-      return "edge_cluster";
-    } else if (rounds > kStar && epochs > eStar) {
-      return "personalization";
-    }
-    
-    return "global_model";
-  };
-
-  const activeRegionKey = getActiveRegion(k, e);
-  const activePubId = QUADRANT_MAP[activeRegionKey] || "pub-002";
-  const activePub = publications.find((pub) => pub.id === activePubId) || publications.find(p => p.id === "pub-002")!;
+  const activePubId = STATE_TO_PUB[activeState];
+  const activePub = publications.find((pub) => pub.id === activePubId) || publications[0];
 
   const [displayPub, setDisplayPub] = useState(activePub);
   const [isFading, setIsFading] = useState(false);
@@ -132,18 +46,249 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
     }
   }, [activePub, displayPub]);
 
-  // Convert simulation values back to SVG coordinates (for drawing circles/lines)
-  const getSvgX = (rounds: number) => 15 + rounds * 7;
-  const getSvgY = (epochs: number) => 85 - epochs * 7;
+  // Main simulation loop
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-  // Generate Convergence curve path
-  const getConvergencePath = () => {
-    let path = `M ${getSvgX(0)} ${getSvgY(10)}`;
-    for (let r = 0.1; r <= 10; r += 0.2) {
-      const epochVal = Math.max(0, Math.min(10, 10 / (r + 0.6) - 1.5));
-      path += ` L ${getSvgX(r)} ${getSvgY(epochVal)}`;
+    let animationFrameId: number;
+    
+    // Resize handling
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.clientWidth;
+        canvas.height = parent.clientHeight;
+      }
+    };
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    // Node definitions
+    const globalServer = { x: canvas.width / 2, y: canvas.height / 2, radius: 12 };
+    let edgeNodes: any[] = [];
+    
+    const initNodes = () => {
+      edgeNodes = [];
+      const numNodes = 6;
+      const radius = Math.min(canvas.width, canvas.height) * 0.35;
+      for (let i = 0; i < numNodes; i++) {
+        const angle = (i / numNodes) * Math.PI * 2;
+        edgeNodes.push({
+          id: i,
+          x: canvas.width / 2 + Math.cos(angle) * radius,
+          y: canvas.height / 2 + Math.sin(angle) * radius,
+          baseRadius: 6,
+          isStraggler: false,
+        });
+      }
+    };
+    initNodes();
+
+    // Particle class
+    class Particle {
+      x: number;
+      y: number;
+      targetX: number;
+      targetY: number;
+      speed: number;
+      isNoisy: boolean;
+      life: number;
+      maxLife: number;
+      
+      constructor(source: any, target: any, isNoisy: boolean, speedMultiplier: number) {
+        this.x = source.x;
+        this.y = source.y;
+        this.targetX = target.x;
+        this.targetY = target.y;
+        this.isNoisy = isNoisy;
+        this.speed = (2 + Math.random() * 2) * speedMultiplier;
+        this.life = 0;
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+        this.maxLife = Math.sqrt(dx * dx + dy * dy) / this.speed;
+      }
+
+      update() {
+        this.life++;
+        const progress = this.life / this.maxLife;
+        if (progress >= 1) return false;
+        
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        this.x += (dx / dist) * this.speed;
+        this.y += (dy / dist) * this.speed;
+        
+        // Jitter for noisy particles
+        if (this.isNoisy) {
+          this.x += (Math.random() - 0.5) * 4;
+          this.y += (Math.random() - 0.5) * 4;
+        }
+        return true;
+      }
+
+      draw(ctx: CanvasRenderingContext2D) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+        if (simParams.current.personalization && !this.isNoisy) {
+          ctx.fillStyle = "rgba(167, 139, 250, 0.8)"; // Purple for personalized weights
+        } else {
+          ctx.fillStyle = this.isNoisy ? "rgba(248, 113, 113, 0.8)" : "rgba(91, 141, 239, 0.8)";
+        }
+        ctx.fill();
+        // Glow
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
     }
-    return path;
+
+    const render = (time: number) => {
+      // Update canvas center if resized
+      globalServer.x = canvas.width / 2;
+      globalServer.y = canvas.height / 2;
+      if (edgeNodes.length === 0 || Math.abs(edgeNodes[0].x - (canvas.width / 2 + Math.cos(0) * Math.min(canvas.width, canvas.height) * 0.35)) > 5) {
+        initNodes();
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw grid background
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < canvas.width; i += 30) {
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+      }
+      for (let i = 0; i < canvas.height; i += 30) {
+        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
+      }
+
+      // Draw connection lines
+      edgeNodes.forEach((node) => {
+        ctx.beginPath();
+        ctx.moveTo(node.x, node.y);
+        ctx.lineTo(globalServer.x, globalServer.y);
+        ctx.strokeStyle = node.isStraggler ? "rgba(255, 255, 255, 0.05)" : "rgba(91, 141, 239, 0.15)";
+        ctx.lineWidth = 1;
+        if (simParams.current.personalization) {
+          ctx.setLineDash([5, 5]);
+        } else {
+          ctx.setLineDash([]);
+        }
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+
+      // Spawn particles
+      if (Math.random() < 0.2) {
+        const node = edgeNodes[Math.floor(Math.random() * edgeNodes.length)];
+        // Determine if noisy
+        const isNoisy = Math.random() < simParams.current.noiseLevel;
+        // Speed multiplier (stragglers are slow)
+        const speedMult = node.isStraggler ? 0.3 : 1.0;
+        
+        simParams.current.particles.push(new Particle(node, globalServer, isNoisy, speedMult));
+      }
+
+      // Update and draw particles
+      simParams.current.particles = simParams.current.particles.filter(p => {
+        const alive = p.update();
+        if (alive) p.draw(ctx);
+        return alive;
+      });
+
+      // Draw Global Server
+      ctx.beginPath();
+      ctx.arc(globalServer.x, globalServer.y, globalServer.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#1e293b";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(91, 141, 239, 0.8)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Pulse global server
+      const pulse = Math.sin(time / 500) * 4;
+      ctx.beginPath();
+      ctx.arc(globalServer.x, globalServer.y, globalServer.radius + 4 + pulse, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(91, 141, 239, 0.3)";
+      ctx.stroke();
+
+      // Draw Edge Nodes
+      edgeNodes.forEach((node) => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.baseRadius, 0, Math.PI * 2);
+        ctx.fillStyle = node.isStraggler ? "#f59e0b" : "#475569";
+        ctx.fill();
+        ctx.strokeStyle = node.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(255, 255, 255, 0.5)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      });
+
+      // Update metrics smoothly based on params
+      setMetrics(prev => {
+        let targetAcc = 92.4;
+        if (simParams.current.noiseLevel > 0.3) targetAcc -= (simParams.current.noiseLevel * 20);
+        if (simParams.current.heterogeneity > 0.3) targetAcc -= 5;
+        if (simParams.current.personalization) targetAcc += 4;
+        
+        return {
+          accuracy: prev.accuracy + (targetAcc - prev.accuracy) * 0.05,
+          rounds: prev.rounds + (simParams.current.particles.length > 0 ? 0.05 : 0),
+          noise: prev.noise + (simParams.current.noiseLevel - prev.noise) * 0.1,
+        };
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render(0);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // Handlers for interactive controls
+  const handleInjectNoise = () => {
+    simParams.current.noiseLevel = Math.min(1.0, simParams.current.noiseLevel + 0.3);
+    simParams.current.heterogeneity = 0.1;
+    simParams.current.personalization = false;
+    setActiveState("noisy");
+    
+    // Auto-recover after 4 seconds
+    setTimeout(() => {
+      simParams.current.noiseLevel = 0.05;
+      if (simParams.current.heterogeneity < 0.2 && !simParams.current.personalization) {
+        setActiveState("baseline");
+      }
+    }, 4000);
+  };
+
+  const handleSimulateStragglers = () => {
+    simParams.current.heterogeneity = 0.8;
+    simParams.current.noiseLevel = 0.05;
+    simParams.current.personalization = false;
+    setActiveState("heterogeneous");
+  };
+
+  const handlePersonalizeModels = () => {
+    simParams.current.personalization = true;
+    simParams.current.noiseLevel = 0.1;
+    simParams.current.heterogeneity = 0.5; // Personalization handles heterogeneity
+    setActiveState("personalization");
+  };
+
+  const handleReset = () => {
+    simParams.current.noiseLevel = 0.05;
+    simParams.current.heterogeneity = 0.1;
+    simParams.current.personalization = false;
+    setActiveState("baseline");
   };
 
   return (
@@ -158,263 +303,59 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
           <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">02 // TAXONOMY</span>
         </div>
         <SectionHeading as="h2" id="graph-heading" className="uppercase font-bold">
-          Convergence Dynamics
+          Federated Intelligence Simulation
         </SectionHeading>
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base font-light leading-relaxed">
-          Interactive simulation of <span className="font-semibold text-foreground">Federated Learning Node Dynamics</span> representing Dr. Rahul Mishra's research. The Edge Server sets the communication rounds (<span className="italic font-mono text-accent">k</span>), while client devices allocate local training epochs (<span className="italic font-mono text-accent">e</span>). Move your cursor across the simulation space to explore corresponding research publications.
+          Real-time simulation of <span className="font-semibold text-foreground">Distributed Edge AI Networks</span> representing Dr. Rahul Mishra's core research. Interact with the system below to introduce noise or resource constraints, and observe how advanced FL algorithms rectify network stability.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-        {/* Left Column: Interactive Coordinate Grid */}
+        {/* Left Column: Interactive Simulation Canvas */}
         <div className="lg:col-span-7 flex flex-col gap-3">
-          <div className="relative overflow-hidden rounded-sm border border-border/40 bg-surface/20 p-2 sm:p-4">
-            {/* Grid coordinates */}
-            <div className="absolute top-3 left-4 select-none font-mono text-[8px] tracking-widest text-muted-foreground/35 uppercase">
-              SIMULATION.SPACE [k x e]
+          <div className="relative overflow-hidden rounded-sm border border-border/40 bg-surface/20 p-1 min-h-[400px] flex items-center justify-center">
+            {/* Overlay Grid UI */}
+            <div className="absolute top-4 left-5 select-none font-mono text-[9px] tracking-widest text-muted-foreground/50 uppercase pointer-events-none z-10">
+              SIMULATION.CANVAS // EDGE_NODES: ACTIVE
             </div>
             
-            <svg
-              ref={svgRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              onKeyDown={handleKeyDown}
-              tabIndex={0}
-              role="application"
-              aria-label="Interactive Federated Learning Node Dynamics grid. Use Left and Right arrow keys to adjust communication rounds, and Up and Down arrow keys to adjust local training epochs. Press Escape or Backspace to reset to optimal convergence."
-              className="w-full aspect-square bg-background/20 cursor-crosshair select-none focus:outline-none focus:ring-1 focus:ring-accent/40 rounded-sm"
-              viewBox="0 0 100 100"
-            >
-              {/* Background Grid Lines */}
-              <defs>
-                <pattern
-                  id="fl-grid"
-                  width="7"
-                  height="7"
-                  patternUnits="userSpaceOnUse"
-                  x="15"
-                  y="15"
-                >
-                  <rect width="7" height="7" fill="none" />
-                  <path
-                    d="M 7 0 L 0 0 0 7"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="0.06"
-                    className="text-accent/10"
-                  />
-                </pattern>
-              </defs>
-              <rect x="15" y="15" width="70" height="70" fill="url(#fl-grid)" stroke="currentColor" strokeWidth="0.15" className="text-border/60" />
-
-              {/* Quadrant Highlights (underlay) */}
-              <g className="transition-all duration-300">
-                {/* Local Training (Top-Left) */}
-                <rect
-                  x="15"
-                  y="15"
-                  width="28"
-                  height="28"
-                  className={cn(
-                    "transition-colors duration-300 pointer-events-none",
-                    activeRegionKey === "local_training" ? "fill-accent/[0.03] stroke-accent/20 stroke-[0.3]" : "fill-transparent stroke-transparent"
-                  )}
-                />
-                {/* Personalization (Top-Right) */}
-                <rect
-                  x="43"
-                  y="15"
-                  width="42"
-                  height="28"
-                  className={cn(
-                    "transition-colors duration-300 pointer-events-none",
-                    activeRegionKey === "personalization" ? "fill-accent/[0.03] stroke-accent/20 stroke-[0.3]" : "fill-transparent stroke-transparent"
-                  )}
-                />
-                {/* Global Consensus (Bottom-Left) */}
-                <rect
-                  x="15"
-                  y="43"
-                  width="28"
-                  height="42"
-                  className={cn(
-                    "transition-colors duration-300 pointer-events-none",
-                    activeRegionKey === "global_model" ? "fill-accent/[0.03] stroke-accent/20 stroke-[0.3]" : "fill-transparent stroke-transparent"
-                  )}
-                />
-                {/* Heterogeneous Clusters (Bottom-Right) */}
-                <rect
-                  x="43"
-                  y="43"
-                  width="42"
-                  height="42"
-                  className={cn(
-                    "transition-colors duration-300 pointer-events-none",
-                    activeRegionKey === "edge_cluster" ? "fill-accent/[0.03] stroke-accent/20 stroke-[0.3]" : "fill-transparent stroke-transparent"
-                  )}
-                />
-              </g>
-
-              {/* Quadrant Divider Axes */}
-              <line
-                x1="43"
-                y1="15"
-                x2="43"
-                y2="85"
-                stroke="currentColor"
-                strokeWidth="0.15"
-                strokeDasharray="1 1"
-                className="text-border/40"
-              />
-              <line
-                x1="15"
-                y1="43"
-                x2="85"
-                y2="43"
-                stroke="currentColor"
-                strokeWidth="0.15"
-                strokeDasharray="1 1"
-                className="text-border/40"
-              />
-
-              {/* Quadrant Labels */}
-              <g className="font-mono text-[1.6px] pointer-events-none select-none">
-                <text
-                  x="17"
-                  y="18.5"
-                  className={cn(
-                    "transition-colors duration-300 uppercase tracking-widest",
-                    activeRegionKey === "local_training" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
-                  )}
-                >
-                  [I] Local FL Training
-                </text>
-                <text
-                  x="45"
-                  y="18.5"
-                  className={cn(
-                    "transition-colors duration-300 uppercase tracking-widest",
-                    activeRegionKey === "personalization" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
-                  )}
-                >
-                  [II] Edge Personalization
-                </text>
-                <text
-                  x="17"
-                  y="83.5"
-                  className={cn(
-                    "transition-colors duration-300 uppercase tracking-widest",
-                    activeRegionKey === "global_model" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
-                  )}
-                >
-                  [III] Global Consensus
-                </text>
-                <text
-                  x="45"
-                  y="83.5"
-                  className={cn(
-                    "transition-colors duration-300 uppercase tracking-widest",
-                    activeRegionKey === "edge_cluster" ? "fill-accent font-bold text-[1.8px]" : "fill-muted-foreground/30"
-                  )}
-                >
-                  [IV] Heterogeneous Clusters
-                </text>
-              </g>
-
-              {/* Axis Ticks */}
-              {Array.from({ length: 11 }).map((_, i) => {
-                const tickLabel = i.toString();
-                const xPos = getSvgX(i);
-                const yPos = getSvgY(i);
-
-                return (
-                  <g key={`ticks-${i}`} className="font-mono text-[2px] fill-muted-foreground/45">
-                    {/* X-axis tick labels (Communication Rounds) */}
-                    <text x={xPos} y="88.5" textAnchor="middle">{tickLabel}.0</text>
-                    <line x1={xPos} y1="85" x2={xPos} y2="86" stroke="currentColor" strokeWidth="0.1" className="text-muted-foreground/30" />
-                    
-                    {/* Y-axis tick labels (Local Epochs) */}
-                    <text x="11.5" y={yPos + 0.7} textAnchor="end">{tickLabel}.0</text>
-                    <line x1={15} y1={yPos} x2={14} y2={yPos} stroke="currentColor" strokeWidth="0.1" className="text-muted-foreground/30" />
-                  </g>
-                );
-              })}
-
-              {/* Axis Titles */}
-              <text x="50" y="94.5" textAnchor="middle" className="font-mono text-[2.5px] fill-accent uppercase tracking-widest font-semibold">
-                Communication Rounds (k) &rarr;
-              </text>
-              <text x="5" y="50" textAnchor="middle" transform="rotate(-90, 5, 50)" className="font-mono text-[2.5px] fill-accent uppercase tracking-widest font-semibold">
-                Local Training Epochs (e) &rarr;
-              </text>
-
-              {/* Convergence Curve 1 (Epoch constraint curve) */}
-              <path
-                d={getConvergencePath()}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.35"
-                className="text-accent/40"
-              />
-              {/* Convergence Curve 2 (Communication cost curve) */}
-              <line
-                x1={getSvgX(0)}
-                y1={getSvgY(0)}
-                x2={getSvgX(6.67)}
-                y2={getSvgY(10.0)}
-                stroke="currentColor"
-                strokeWidth="0.35"
-                className="text-foreground/30"
-              />
-
-              {/* Dotted lines tracing cursor position */}
-              {strategy && (
-                <g className="stroke-accent/20 stroke-[0.2]" strokeDasharray="1 1">
-                  <line x1={getSvgX(k)} y1="85" x2={getSvgX(k)} y2={getSvgY(e)} />
-                  <line x1="15" y1={getSvgY(e)} x2={getSvgX(k)} y2={getSvgY(e)} />
-                </g>
-              )}
-
-              {/* Optimal Convergence Point */}
-              <g>
-                <circle
-                  cx={getSvgX(kStar)}
-                  cy={getSvgY(eStar)}
-                  r="2.2"
-                  className="fill-transparent stroke-accent-warm/15 stroke-[0.8] animate-pulse"
-                />
-                <circle
-                  cx={getSvgX(kStar)}
-                  cy={getSvgY(eStar)}
-                  r="0.8"
-                  className="fill-accent-warm stroke-background stroke-[0.2]"
-                />
-                <text
-                  x={getSvgX(kStar) + 2}
-                  y={getSvgY(eStar) - 2}
-                  className="font-mono text-[2px] font-bold fill-accent-warm tracking-wider"
-                >
-                  OPTIMAL CONVERGENCE
-                </text>
-              </g>
-
-              {/* Current Cursor Node */}
-              {strategy && (
-                <g>
-                  <circle
-                    cx={getSvgX(k)}
-                    cy={getSvgY(e)}
-                    r="1.2"
-                    className="fill-foreground stroke-background stroke-[0.2]"
-                  />
-                </g>
-              )}
-            </svg>
+            <canvas 
+              ref={canvasRef} 
+              className="absolute inset-0 w-full h-full bg-[#0A0C10] rounded-sm cursor-crosshair"
+            />
+            
+            {/* Controls Overlay */}
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 z-10">
+              <button 
+                onClick={handleInjectNoise}
+                className="px-3 py-1.5 bg-background/80 hover:bg-red-500/20 border border-border/50 hover:border-red-500/50 rounded-sm font-mono text-[9px] uppercase tracking-wider text-foreground transition-all backdrop-blur-sm"
+              >
+                Inject Data Noise
+              </button>
+              <button 
+                onClick={handleSimulateStragglers}
+                className="px-3 py-1.5 bg-background/80 hover:bg-amber-500/20 border border-border/50 hover:border-amber-500/50 rounded-sm font-mono text-[9px] uppercase tracking-wider text-foreground transition-all backdrop-blur-sm"
+              >
+                Trigger Stragglers
+              </button>
+              <button 
+                onClick={handlePersonalizeModels}
+                className="px-3 py-1.5 bg-background/80 hover:bg-purple-500/20 border border-border/50 hover:border-purple-500/50 rounded-sm font-mono text-[9px] uppercase tracking-wider text-foreground transition-all backdrop-blur-sm"
+              >
+                Personalize Models
+              </button>
+              <button 
+                onClick={handleReset}
+                className="px-3 py-1.5 bg-background/80 hover:bg-accent/20 border border-border/50 hover:border-accent/50 rounded-sm font-mono text-[9px] uppercase tracking-wider text-foreground transition-all backdrop-blur-sm ml-auto"
+              >
+                Reset
+              </button>
+            </div>
           </div>
 
           <div className="flex justify-between font-mono text-[9px] text-muted-foreground/50 px-1">
-            <span>[FL_SERVER.ROUNDS] // Global aggregation frequency</span>
-            <span>[EDGE_NODE.EPOCHS] // Local training allocation</span>
+            <span>[GL_SERVER] // Aggregating model weights</span>
+            <span>[EDGE_NODE] // Local data processing</span>
           </div>
         </div>
 
@@ -423,48 +364,45 @@ export function ResearchGraph({ className }: ResearchGraphProps) {
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between border-b border-border/40 pb-3">
               <h3 className="font-mono text-[10px] tracking-widest text-accent font-semibold uppercase">
-                // System State
+                // Network State
               </h3>
               <span className={cn(
                 "font-mono text-[9px] tracking-wider uppercase font-semibold px-2 py-0.5 rounded-sm border",
-                isStable && "text-accent-warm border-accent-warm/40 bg-accent-warm/5",
-                isOverfitting && "text-destructive border-destructive/40 bg-destructive/5",
-                isUnderfitting && "text-amber-500 border-amber-500/40 bg-amber-500/5",
-                (!isStable && !isOverfitting && !isUnderfitting) && "text-muted-foreground border-border/40 bg-transparent"
+                activeState === "baseline" && "text-accent border-accent/40 bg-accent/5",
+                activeState === "noisy" && "text-destructive border-destructive/40 bg-destructive/5",
+                activeState === "heterogeneous" && "text-amber-500 border-amber-500/40 bg-amber-500/5",
+                activeState === "personalization" && "text-purple-400 border-purple-400/40 bg-purple-400/5"
               )}>
-                {isStable 
-                  ? "CONVERGED" 
-                  : isOverfitting 
-                    ? "OVERFITTING" 
-                    : isUnderfitting 
-                      ? "UNDERFITTING" 
-                      : "DIVERGENT"}
+                {activeState === "baseline" ? "OPTIMAL" 
+                 : activeState === "noisy" ? "NOISE DETECTED" 
+                 : activeState === "heterogeneous" ? "HETEROGENEOUS" 
+                 : "PERSONALIZED"}
               </span>
             </div>
 
             <div className="flex flex-col gap-3 font-mono text-xs text-foreground/90 bg-background/40 p-3 rounded-sm border border-border/30">
               <div className="flex justify-between">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">State (k, e):</span>
-                <span className="font-bold">({k.toFixed(1)}, {e.toFixed(1)})</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Global Accuracy:</span>
+                <span className={cn("font-bold", metrics.accuracy < 85 ? "text-destructive" : "text-accent")}>
+                  {metrics.accuracy.toFixed(2)}%
+                </span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Agg. Efficiency (E<sub>agg</sub>):</span>
-                <span className="font-bold text-accent">{aggEfficiency.toFixed(1)}</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Comm. Rounds:</span>
+                <span className="font-bold">{Math.floor(metrics.rounds)}</span>
               </div>
               <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Local Accuracy (A<sub>loc</sub>):</span>
-                <span className="font-bold text-accent">{localAccuracy.toFixed(1)}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Noise Rectification (R<sub>n</sub>):</span>
-                <span className="font-bold">{noiseRatio.toFixed(3)}</span>
+                <span className="text-muted-foreground/60 uppercase text-[9px]">Data Corruption Rate:</span>
+                <span className={cn("font-bold", metrics.noise > 0.15 ? "text-destructive" : "text-muted-foreground")}>
+                  {(metrics.noise * 100).toFixed(1)}%
+                </span>
               </div>
             </div>
 
             {/* Dynamic Publication Card */}
             <div className="flex flex-col gap-2.5 border border-border/30 bg-surface/20 p-4 rounded-sm transition-all duration-300 min-h-[240px]">
               <span className="font-mono text-[9px] tracking-wider text-accent uppercase block mb-1">
-                [ Mapped Publication Context ]
+                [ Proposed Research Solution ]
               </span>
               <div
                 className={cn(

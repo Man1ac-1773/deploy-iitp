@@ -8,10 +8,10 @@ import { useRef, type MouseEvent } from "react";
 const SPAN_CLASSES = {
   "feature-tall":
     "lg:col-span-8 lg:row-span-2 lg:row-start-1 lg:col-start-1",
-  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 lg:ml-[-2rem] lg:mt-[3rem] z-10",
+  "sidebar-top": "lg:col-span-4 lg:row-span-1 lg:row-start-1 lg:col-start-9 z-10",
   "sidebar-bottom":
-    "lg:col-span-5 lg:row-span-1 lg:row-start-2 lg:col-start-6 lg:mt-[-3rem] z-20",
-  wide: "lg:col-span-10 lg:row-span-1 lg:row-start-3 lg:col-start-2 lg:mt-[2rem]",
+    "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20",
+  wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1",
 } as const;
 
 type BentoCardProps = {
