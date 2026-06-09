@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type NetworkBackgroundProps = {
   className?: string;
@@ -9,12 +9,18 @@ type NetworkBackgroundProps = {
 
 export function NetworkBackground({ className }: NetworkBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [nodeCount, setNodeCount] = useState(90);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const isMobile = window.innerWidth < 768;
+    const NUM_PARTICLES = isMobile ? 35 : 90;
+    const CONNECTION_DIST_SQ = isMobile ? 4900 : 10000; // 70px vs 100px radius
+    setNodeCount(NUM_PARTICLES);
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -23,12 +29,19 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     canvas.height = height * dpr;
     ctx.scale(dpr, dpr);
 
-    const mouse = { x: width / 2, y: height / 2, radius: 250 };
+    const mouse = { x: width / 2, y: height / 2, radius: isMobile ? 150 : 250 };
+    let isMouseInWindow = true;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
+    const handleMouseLeave = () => { isMouseInWindow = false; };
+    const handleMouseEnter = () => { isMouseInWindow = true; };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     // Track repulsive DOM rects (absolute coordinates to prevent layout thrashing on scroll)
     let repelRects: { left: number; right: number; top: number; bottom: number }[] = [];
@@ -58,6 +71,15 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     };
     window.addEventListener("resize", handleResize, { passive: true });
 
+    let isVisible = !document.hidden;
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+      if (isVisible && !animationFrameId) {
+        render();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
     class UAV {
       x: number;
       y: number;
@@ -80,8 +102,8 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Swarm Intelligence: Follow the cursor (Global Model)
-        if (distance < mouse.radius) {
+        // Swarm Intelligence: Follow the cursor (Global Model) only if active
+        if (isMouseInWindow && distance < mouse.radius) {
           const forceDirectionX = dx / distance;
           const forceDirectionY = dy / distance;
           const force = (mouse.radius - distance) / mouse.radius;
@@ -103,23 +125,34 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
           const nearestX = Math.max(rect.left, Math.min(this.x, rect.right));
           const nearestY = Math.max(adjustedTop, Math.min(this.y, adjustedBottom));
           
-          const distX = this.x - nearestX;
-          const distY = this.y - nearestY;
-          const distSq = distX * distX + distY * distY;
+          const distToEdgeX = this.x - nearestX;
+          const distToEdgeY = this.y - nearestY;
+          const distSq = distToEdgeX * distToEdgeX + distToEdgeY * distToEdgeY;
           
-          const repelRadius = 60; // Field of repulsion
-          const repelRadiusSq = 3600;
+          const repelRadius = 80; // Field of repulsion
+          const repelRadiusSq = repelRadius * repelRadius;
           
           if (distSq < repelRadiusSq) {
-            const distance = Math.sqrt(distSq);
-            if (distance === 0) {
-              // Inside the box
-              this.vx += (Math.random() - 0.5) * 8;
-              this.vy += (Math.random() - 0.5) * 8;
+            const edgeDistance = Math.sqrt(distSq);
+            if (edgeDistance === 0) {
+              // We are INSIDE the box. Find the absolute nearest edge to slide out elegantly
+              const distLeft = this.x - rect.left;
+              const distRight = rect.right - this.x;
+              const distTop = this.y - adjustedTop;
+              const distBottom = adjustedBottom - this.y;
+              const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+              
+              // Apply a smooth but firm force to push it out the shortest path
+              const escapeForce = 1.2;
+              if (minDist === distLeft) this.vx -= escapeForce;
+              else if (minDist === distRight) this.vx += escapeForce;
+              else if (minDist === distTop) this.vy -= escapeForce;
+              else if (minDist === distBottom) this.vy += escapeForce;
             } else {
-              const force = Math.pow((repelRadius - distance) / repelRadius, 2);
-              this.vx += (distX / distance) * force * 1.5;
-              this.vy += (distY / distance) * force * 1.5;
+              // We are OUTSIDE but near the box. Steer away smoothly like water.
+              const forceMag = Math.pow((repelRadius - edgeDistance) / repelRadius, 2) * 0.8;
+              this.vx += (distToEdgeX / edgeDistance) * forceMag;
+              this.vy += (distToEdgeY / edgeDistance) * forceMag;
             }
           }
         }
@@ -168,10 +201,15 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       }
     }
 
-    const uavs = Array.from({ length: 90 }, () => new UAV());
-    let animationFrameId: number;
+    const uavs = Array.from({ length: NUM_PARTICLES }, () => new UAV());
+    let animationFrameId: number | null = null;
 
     const render = () => {
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       // Draw Connections (Mesh Network)
@@ -181,10 +219,10 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
           const dy = uavs[i].y - uavs[j].y;
           const distSq = dx * dx + dy * dy;
 
-          if (distSq < 10000) { // 100^2 optimization
+          if (distSq < CONNECTION_DIST_SQ) {
             const distance = Math.sqrt(distSq);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / Math.sqrt(CONNECTION_DIST_SQ))})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(uavs[i].x, uavs[i].y);
             ctx.lineTo(uavs[j].x, uavs[j].y);
@@ -194,31 +232,33 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       }
 
       // Draw Data Link to Mouse (Active Polling)
-      for (let i = 0; i < uavs.length; i++) {
-        const dx = uavs[i].x - mouse.x;
-        const dy = uavs[i].y - mouse.y;
-        const distSq = dx * dx + dy * dy;
-        const radiusSq = mouse.radius * mouse.radius * 0.36; // (radius * 0.6)^2
-        
-        if (distSq < radiusSq) {
-          const distance = Math.sqrt(distSq);
-          ctx.beginPath();
-          const opacity = 0.25 * (1 - distance / (mouse.radius * 0.6));
-          ctx.strokeStyle = uavs[i].isStraggler 
-            ? `rgba(245, 158, 11, ${opacity})` 
-            : `rgba(229, 169, 59, ${opacity})`;
-          ctx.lineWidth = uavs[i].isStraggler ? 0.5 : 1.2;
+      if (isMouseInWindow) {
+        for (let i = 0; i < uavs.length; i++) {
+          const dx = uavs[i].x - mouse.x;
+          const dy = uavs[i].y - mouse.y;
+          const distSq = dx * dx + dy * dy;
+          const radiusSq = mouse.radius * mouse.radius * 0.36; // (radius * 0.6)^2
           
-          if (uavs[i].isStraggler) {
-             ctx.setLineDash([2, 4]); // Packet loss simulation
-          } else {
-             ctx.setLineDash([]);
-          }
+          if (distSq < radiusSq) {
+            const distance = Math.sqrt(distSq);
+            ctx.beginPath();
+            const opacity = 0.25 * (1 - distance / (mouse.radius * 0.6));
+            ctx.strokeStyle = uavs[i].isStraggler 
+              ? `rgba(245, 158, 11, ${opacity})` 
+              : `rgba(229, 169, 59, ${opacity})`;
+            ctx.lineWidth = uavs[i].isStraggler ? 0.5 : 1.2;
+            
+            if (uavs[i].isStraggler) {
+               ctx.setLineDash([2, 4]); // Packet loss simulation
+            } else {
+               ctx.setLineDash([]);
+            }
 
-          ctx.moveTo(uavs[i].x, uavs[i].y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.stroke();
-          ctx.setLineDash([]);
+            ctx.moveTo(uavs[i].x, uavs[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
         }
       }
 
@@ -235,7 +275,10 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -256,7 +299,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       {/* Telemetry overlay to anchor the simulation context */}
       <div className="absolute top-8 left-8 flex flex-col gap-1 z-20">
         <span className="font-mono text-[9px] tracking-widest text-accent/50 uppercase">SYS.STATE: UAV_SWARM.ACTIVE</span>
-        <span className="font-mono text-[9px] tracking-widest text-muted-foreground/30 uppercase">FLOCKING_NODES: 90 // PROTOCOL: FED_AVG</span>
+        <span className="font-mono text-[9px] tracking-widest text-muted-foreground/30 uppercase">FLOCKING_NODES: {nodeCount} // PROTOCOL: FED_AVG</span>
       </div>
     </div>
   );
