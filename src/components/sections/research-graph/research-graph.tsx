@@ -458,7 +458,7 @@ export function ResearchGraph({ className }: { className?: string }) {
                   isFading ? "opacity-0 scale-[0.98] blur-[2px]" : "opacity-100 scale-100 blur-0"
                 )}
               >
-                <h4 className="text-sm font-bold tracking-tight text-foreground leading-snug">
+                <h4 className="text-[1.1rem] sm:text-[1.15rem] font-medium text-foreground leading-snug">
                   {displayPub.title}
                 </h4>
                 <p className="font-mono text-[9px] text-muted-foreground/70 uppercase">
