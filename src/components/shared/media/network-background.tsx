@@ -99,7 +99,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_0%,var(--color-background)_78%)]" />
  
       <svg
-        className="absolute inset-0 size-full text-accent opacity-[0.09] transition-transform duration-700 ease-out"
+        className="absolute inset-0 size-full text-accent opacity-[0.18] transition-transform duration-700 ease-out"
         preserveAspectRatio="xMidYMid slice"
         viewBox="0 0 100 100"
         style={{
@@ -199,7 +199,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
               x={cell.x}
               y={cell.y - 1.8}
               textAnchor="middle"
-              className="fill-accent/60 font-mono text-[1px] tracking-widest uppercase font-semibold select-none"
+              className="fill-accent-warm font-mono text-[1px] tracking-widest uppercase font-bold select-none"
             >
               {cell.label}
             </text>
@@ -217,7 +217,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
               x={cell.x}
               y={cell.y - 1.4}
               textAnchor="middle"
-              className="fill-accent/50 font-mono text-[0.8px] tracking-widest uppercase font-semibold select-none"
+              className="fill-accent/85 font-mono text-[0.8px] tracking-widest uppercase font-semibold select-none"
             >
               {cell.label}
             </text>
@@ -230,7 +230,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         ))}
  
         {/* Technical Blueprint Border Telemetry */}
-        <g className="fill-accent/30 font-mono text-[0.9px] tracking-widest uppercase select-none">
+        <g className="fill-accent/55 font-mono text-[0.9px] tracking-widest uppercase select-none">
           <text x="3" y="97">SYS.STATE: HETNET.TOPOLOGY.ACTIVE</text>
           <text x="97" y="3" textAnchor="end">LATITUDE: 25.602 // LONGITUDE: 85.126</text>
           <text x="97" y="97" textAnchor="end">BW: 400MHz // MODULATION: mmWave.QAM</text>
