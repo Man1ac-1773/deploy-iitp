@@ -15,9 +15,14 @@ export const bentoCards: readonly BentoCardData[] = [
       "Wireless Sensors Network (WSN)",
       "Smart Sensing",
     ],
-    backTitle: "Core Philosophies",
-    backDescription: "Driving edge intelligence toward sustainable and decentralized AI systems.",
-    backItems: [
+    modalTitle: "Core Philosophies & Research Areas",
+    modalDescription: "Driving edge intelligence toward sustainable and decentralized AI systems.",
+    modalList: [
+      "Deep Learning",
+      "Fog Computing",
+      "Internet of Things (IoT)",
+      "Wireless Sensors Network (WSN)",
+      "Smart Sensing",
       "Federated Learning optimization",
       "Noisy label rectification in datasets",
       "AIoT lifetime enhancement",
@@ -30,54 +35,80 @@ export const bentoCards: readonly BentoCardData[] = [
     description: "Selected honors from the global academic community.",
     span: "sidebar-top",
     items: [
+      "IEEE INFOCOM Student Grants",
+      "M.Tech Gold Medalist",
+      "GATE Fellowship",
+    ],
+    modalTitle: "Distinctions & Fellowships",
+    modalDescription: "Recognitions and intellectual property achievements.",
+    modalList: [
       "IEEE INFOCOM 2021 Student Grant",
       "IEEE INFOCOM 2022 Student Grant",
-    ],
-    backTitle: "Patents & IP",
-    backDescription: "Registered intellectual property and inventions.",
-    backItems: [
-      "Racket Sports Activities Monitoring (202411014828)",
-      "Grip Embedded Sensors & Smartphone integration",
+      "M.Tech Gold Medalist (MMMUT) - 2017",
+      "GATE Postgraduate Fellowship - 2015",
+      "Patent: Racket Sports Activities Monitoring (202411014828)",
     ],
   },
   {
     id: "teaching",
     label: "Teaching",
-    title: "IIT Patna Courses",
-    description: "Instruction in data science, algorithms, and drone processing.",
+    title: "Academic Instruction",
+    description: "Extensive teaching across multiple premier institutions.",
     span: "sidebar-bottom",
     items: [
-      "Intro to Data Science (CS244)",
-      "Algorithms (CS2101)",
-      "Drone Data Processing (CS6109)",
+      "Data Science",
+      "Algorithms",
+      "Drone Data Processing",
     ],
-    backTitle: "Additional Curriculum",
-    backDescription: "Further workshops and teaching responsibilities.",
-    backItems: [
-      "Data Analysis & Visualization (CS2206)",
-      "IT Workshop (CS2204)",
-      "AICTE Textbook on Design & Analysis of Algorithm",
-    ],
+    modalTitle: "Academic Curriculum",
+    modalDescription: "Courses taught at IIT Patna and DA-IICT.",
+    modalTabs: [
+      {
+        id: "iitp",
+        label: "IIT Patna",
+        items: [
+          "Intro to Data Science (CS244)",
+          "Algorithms (CS2101)",
+          "Drone Data Processing (CS6109)",
+          "Data Analysis & Visualization (CS2206)",
+          "IT Workshop (CS2204)"
+        ]
+      },
+      {
+        id: "daiict",
+        label: "DA-IICT",
+        items: [
+          "Cyber-Physical System & Internet of Things",
+          "Data Structures and Algorithms",
+          "Algorithms",
+          "Introduction to Programming"
+        ]
+      }
+    ]
   },
   {
-    id: "projects",
-    label: "Funded Projects",
-    title: "Active Grants & Investigations",
+    id: "academic-service",
+    label: "Academic Hub",
+    title: "Service & External Profiles",
     description:
-      "Leading AI/ML deployment in industrial sectors and drone networks.",
+      "Central access to all specialized academic portfolios, books, and service.",
     span: "wide",
     items: [
-      "IoT & AI Systems for Reliance Sasan Power Plant",
-      "Smart-AgriBots for Agricultural Monitoring",
-      "UAV-Net: Lifetime Enhancement in Aerial Networks",
+      "AICTE Textbook Co-Author",
+      "IEEE Member",
+      "Specialized External Portfolios",
     ],
-    backTitle: "Open Datasets",
-    backDescription: "Publicly available research data published on IEEE Dataport.",
-    backItems: [
-      "Mobile Sink for Precision Agriculture",
-      "IMU Sensors for Handwritten Digits",
-      "Signal Quality Measurement (SQM)",
-      "IMU for Handwritten English Alphabets",
+    modalTitle: "Academic Portfolios",
+    modalDescription: "Explore specialized Google sites and major external contributions.",
+    modalList: [
+      "AICTE Textbook on Design and Analysis of Algorithm",
+      "IEEE Membership"
     ],
+    modalLinks: [
+      { label: "Research Portfolio", url: "https://sites.google.com/view/rahulmishracse/research" },
+      { label: "Teaching Portfolio", url: "https://sites.google.com/view/rahulmishracse/teaching" },
+      { label: "Projects Portfolio", url: "https://sites.google.com/view/rahulmishracse/projects" },
+      { label: "Invited Speaker", url: "https://sites.google.com/view/rahulmishracse/invited-speaker" }
+    ]
   },
 ] as const;
