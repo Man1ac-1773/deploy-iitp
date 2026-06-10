@@ -26,12 +26,7 @@ export function BentoCard({ card, className, onClick }: BentoCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
-    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+    // Kept for structural compatibility if needed later, but removed radial gradient tracking
   };
 
   const CARD_INDEXES: Record<string, string> = {
@@ -71,25 +66,9 @@ export function BentoCard({ card, className, onClick }: BentoCardProps) {
     >
       <div
         className={cn(
-          "relative w-full h-full flex flex-col bg-background/5 backdrop-blur-[2px] border border-white/5 hover:border-accent/40 shadow-xl shadow-black/20 p-6 sm:p-8 lg:p-10 rounded-sm overflow-hidden",
+          "relative w-full h-full flex flex-col bg-background/5 backdrop-blur-[2px] border border-white/5 hover:bg-white/5 hover:border-slate-300/30 transition-colors duration-500 shadow-xl shadow-black/20 p-6 sm:p-8 lg:p-10 rounded-none overflow-hidden",
         )}
       >
-        {/* Radial Background Hover Glow */}
-        <div
-          className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-          style={{
-            background: "radial-gradient(500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(91, 141, 239, 0.05), transparent 80%)",
-          }}
-        />
-        
-        {/* Radial Glowing Border Mask Overlay */}
-        <div
-          className="pointer-events-none absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 border border-accent/15"
-          style={{
-            maskImage: "radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 30%, transparent 70%)",
-            WebkitMaskImage: "radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black 30%, transparent 70%)",
-          }}
-        />
 
         {/* Domain-specific SVG Metaphor Overlays */}
         {card.id === "research-areas" && (

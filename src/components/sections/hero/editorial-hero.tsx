@@ -67,10 +67,10 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           </div>
           <div className="text-right" aria-hidden="true">
             <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent/80 uppercase">
-              [SYS.STATE: NOISE_SUPPRESSION_ACTIVE]
+              H-INDEX: 12 // i10-INDEX: 15
             </p>
             <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/40 mt-1">
-              EDGE_NODES_ACTIVE: 124 // UPTIME: 99.9%
+              CITATIONS: 450+ // PUBLICATIONS: 45
             </p>
           </div>
         </div>
@@ -132,16 +132,17 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           {professor.heroImage && (
             <motion.div 
               style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] rounded-lg overflow-hidden border border-border/50 shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto"
+              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto p-3 bg-white/5 border border-white/10 rounded-none"
             >
-              <Image 
-                src={professor.heroImage} 
-                alt={`Portrait of ${professor.fullName}`} 
-                fill 
-                className="object-cover object-top"
-                priority
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-lg pointer-events-none" />
+              <div className="relative w-full h-full overflow-hidden border border-white/5">
+                <Image 
+                  src={professor.heroImage} 
+                  alt={`Portrait of ${professor.fullName}`} 
+                  fill 
+                  className="object-cover object-top grayscale contrast-[1.15]"
+                  priority
+                />
+              </div>
             </motion.div>
           )}
         </div>
@@ -149,7 +150,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         {/* Bottom Scroll Anchor */}
         <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
           <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30 uppercase" aria-hidden="true">
-            SYS.PORTFOLIO.V2 // {new Date().getFullYear()}
+            ACADEMIC.PORTFOLIO // {new Date().getFullYear()}
           </span>
           <a
             href="#research"
