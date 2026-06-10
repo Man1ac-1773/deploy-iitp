@@ -113,15 +113,31 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             {professor.heroImage && (
               <motion.div 
                 style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-                className="relative shrink-0 w-32 h-40 sm:w-48 sm:h-64 rounded-sm overflow-hidden border border-border shadow-2xl mb-2"
+                className="flex flex-col gap-2 p-2 sm:p-3 rounded-md border border-border/40 bg-surface/30 backdrop-blur-md shadow-2xl mb-1 sm:mb-2"
               >
-                <Image 
-                  src={professor.heroImage} 
-                  alt={`Portrait of ${professor.fullName}`} 
-                  fill 
-                  className="object-cover object-top"
-                  priority
-                />
+                <div className="relative shrink-0 w-32 h-40 sm:w-48 sm:h-64 rounded-sm overflow-hidden border border-border/50">
+                  <Image 
+                    src={professor.heroImage} 
+                    alt={`Portrait of ${professor.fullName}`} 
+                    fill 
+                    className="object-cover object-top"
+                    priority
+                  />
+                </div>
+                <div className="flex items-center justify-between px-1 py-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="font-mono text-[8px] sm:text-[9px] tracking-widest text-muted-foreground uppercase">
+                      Active
+                    </span>
+                  </div>
+                  <span className="font-mono text-[8px] sm:text-[9px] tracking-widest text-muted-foreground uppercase">
+                    ID: RM-124
+                  </span>
+                </div>
               </motion.div>
             )}
           </div>
