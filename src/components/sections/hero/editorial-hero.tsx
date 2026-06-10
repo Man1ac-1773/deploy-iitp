@@ -75,13 +75,14 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           </div>
         </div>
 
-        {/* Center/Lower Massive Identity */}
+        {/* Center/Lower Massive Identity (Split-Screen Anchor) */}
         <div
           data-transition-id="professor-identity"
-          className="flex flex-col gap-6 mt-auto mb-16 md:mb-24"
+          className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16 xl:gap-24 mt-auto mb-16 md:mb-24 w-full"
           style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.2s forwards" }}
         >
-          <div className="flex flex-col md:flex-row md:items-end gap-8 sm:gap-12">
+          {/* Left Side: Typography and Bio (60%) */}
+          <div className="flex flex-col gap-6 lg:w-[60%] shrink-0">
             <div className="flex flex-col gap-4">
               <span className="block font-mono text-xs sm:text-sm font-semibold tracking-[0.4em] text-accent/90 uppercase ml-1 sm:ml-2">
                 {professor.honorific}
@@ -110,47 +111,39 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               </h1>
             </div>
 
-            {professor.heroImage && (
-              <motion.div 
-                style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-                className="flex flex-col gap-2 p-2 sm:p-3 rounded-md border border-border/40 bg-surface/30 backdrop-blur-md shadow-2xl mb-1 sm:mb-2"
-              >
-                <div className="relative shrink-0 w-32 h-40 sm:w-48 sm:h-64 rounded-sm overflow-hidden border border-border/50">
-                  <Image 
-                    src={professor.heroImage} 
-                    alt={`Portrait of ${professor.fullName}`} 
-                    fill 
-                    className="object-cover object-top"
-                    priority
-                  />
-                </div>
-                <div className="flex items-center justify-between px-1 py-0.5">
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span className="font-mono text-[8px] sm:text-[9px] tracking-widest text-muted-foreground uppercase">
-                      Active
-                    </span>
-                  </div>
-                  <span className="font-mono text-[8px] sm:text-[9px] tracking-widest text-muted-foreground uppercase">
-                    ID: RM-124
-                  </span>
-                </div>
-              </motion.div>
-            )}
+            <div className="flex flex-col gap-8 mt-4 ml-1 sm:ml-3">
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="h-[1px] w-12 sm:w-24 bg-accent/40" aria-hidden="true" />
+                <p className="text-lg sm:text-xl text-foreground/80 font-medium tracking-tight">
+                  {professor.role}
+                </p>
+                <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block" aria-hidden="true">
+                  // {professor.affiliation}
+                </p>
+              </div>
+              
+              <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground/90 font-light">
+                {professor.bio}
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6 mt-8 sm:mt-12 ml-1 sm:ml-3">
-            <div className="h-[1px] w-12 sm:w-24 bg-accent/40" aria-hidden="true" />
-            <p className="text-lg sm:text-xl text-foreground/80 font-medium tracking-tight">
-              {professor.role}
-            </p>
-            <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block" aria-hidden="true">
-              // RESEARCH DOMAIN: FEDERATED LEARNING & FOG COMPUTING
-            </p>
-          </div>
+          {/* Right Side: Massive Portrait Anchor (40%) */}
+          {professor.heroImage && (
+            <motion.div 
+              style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
+              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] rounded-lg overflow-hidden border border-border/50 shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto"
+            >
+              <Image 
+                src={professor.heroImage} 
+                alt={`Portrait of ${professor.fullName}`} 
+                fill 
+                className="object-cover object-top"
+                priority
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-lg pointer-events-none" />
+            </motion.div>
+          )}
         </div>
 
         {/* Bottom Scroll Anchor */}
