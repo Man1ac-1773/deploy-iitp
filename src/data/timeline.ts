@@ -42,4 +42,18 @@ export const timelineEvents: readonly TimelineEvent[] = [
     description: "Completed Ph.D. in Computer Science and Engineering, focusing on sensor data analytics, deep learning, and Internet of Things.",
     type: "academic",
   },
+  {
+    id: "time-6",
+    year: 2017,
+    title: "M.Tech Gold Medalist (MMMUT)",
+    description: "Received M.Tech degree in Computer Engineering with Gold Medal distinction from Madan Mohan Malaviya University of Technology, Gorakhpur.",
+    type: "award",
+  },
+  {
+    id: "time-7",
+    year: 2015,
+    title: "GATE Postgraduate Fellowship & B.Tech Honors",
+    description: "Awarded GATE Fellowship for research (2015–2017). Completed B.Tech in CSE with First Class Honors from APJ Abdul Kalam Technical University.",
+    type: "academic",
+  },
 ] as const;

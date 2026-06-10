@@ -45,7 +45,7 @@ export function TimelineSection({ className }: TimelineSectionProps) {
 
             {/* Right Column: Milestone Details (75% width) */}
             <div className="md:col-span-3 flex flex-col gap-2">
-              <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl group-hover:text-accent transition-colors duration-300">
+              <h3 className="font-sans text-lg font-semibold tracking-tight text-foreground sm:text-xl group-hover:text-accent transition-colors duration-300">
                 {event.title}
               </h3>
               <p className="max-w-prose text-sm leading-relaxed text-muted-foreground sm:text-base font-light">

@@ -9,7 +9,7 @@ export const siteConfig = {
     affiliation: "Indian Institute of Technology Patna",
     location: "Patna, Bihar, India",
     email: "rahul_mishra@iitp.ac.in",
-    bio: "Researching Deep Learning, Fog Computing, Internet of Things (IoT), Wireless Sensors Network (WSN), and Smart Sensing.",
+    bio: "Assistant Professor in CSE at IIT Patna. Focused on building deployment-ready solutions in Fog Computing, Smart Sensing, and Noise-Resilient Federated Learning for agricultural and industrial IoT environments.",
     profileImage: null as string | null,
     initials: "RM",
   },

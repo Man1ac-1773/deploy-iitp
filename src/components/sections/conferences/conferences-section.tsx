@@ -24,7 +24,7 @@ export function ConferencesSection() {
                 <span className="font-mono text-xs text-muted-foreground uppercase">{conf.venue}</span>
                 <span className="font-mono text-[10px] text-accent/50 border border-accent/20 px-1.5 py-0.5 rounded-sm uppercase tracking-widest">{conf.type}</span>
               </div>
-              <h3 className="text-sm md:text-base font-medium text-foreground/90 mt-2 tracking-tight text-balance leading-relaxed">
+              <h3 className="font-sans text-base md:text-lg font-medium text-foreground/90 mt-2 tracking-tight text-balance leading-snug">
                 {conf.title}
               </h3>
               <p className="text-xs md:text-sm text-muted-foreground mt-1 max-w-prose">
