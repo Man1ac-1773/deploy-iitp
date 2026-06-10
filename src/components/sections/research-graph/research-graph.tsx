@@ -178,11 +178,13 @@ export function ResearchGraph({ className }: { className?: string }) {
 
       ctx.clearRect(0, 0, w, h);
       
+      const isDark = document.documentElement.classList.contains('dark');
+      
       if (gridDirty && gridCtx) {
         gridCanvas.width = canvas.width;
         gridCanvas.height = canvas.height;
         gridCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        gridCtx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        gridCtx.strokeStyle = isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.03)";
         gridCtx.lineWidth = 1;
         for (let i = 0; i < w; i += 30) {
           gridCtx.beginPath(); gridCtx.moveTo(i, 0); gridCtx.lineTo(i, h); gridCtx.stroke();
@@ -199,7 +201,7 @@ export function ResearchGraph({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.moveTo(node.x, node.y);
         ctx.lineTo(globalServer.x, globalServer.y);
-        ctx.strokeStyle = node.isStraggler ? "rgba(255, 255, 255, 0.05)" : "rgba(6, 182, 212, 0.15)";
+        ctx.strokeStyle = node.isStraggler ? (isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)") : (isDark ? "rgba(6, 182, 212, 0.15)" : "rgba(180, 83, 9, 0.15)");
         ctx.lineWidth = 1;
         if (simParams.current.personalization) {
           ctx.setLineDash([5, 5]);
@@ -231,9 +233,9 @@ export function ResearchGraph({ className }: { className?: string }) {
       // Draw Global Server
       ctx.beginPath();
       ctx.arc(globalServer.x, globalServer.y, globalServer.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "#1e293b";
+      ctx.fillStyle = isDark ? "#1e293b" : "#f1f5f9";
       ctx.fill();
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.8)";
+      ctx.strokeStyle = isDark ? "rgba(6, 182, 212, 0.8)" : "rgba(180, 83, 9, 0.8)";
       ctx.lineWidth = 2;
       ctx.stroke();
       
@@ -241,16 +243,16 @@ export function ResearchGraph({ className }: { className?: string }) {
       const pulse = Math.sin(time / 500) * 4;
       ctx.beginPath();
       ctx.arc(globalServer.x, globalServer.y, globalServer.radius + 4 + pulse, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.3)";
+      ctx.strokeStyle = isDark ? "rgba(6, 182, 212, 0.3)" : "rgba(180, 83, 9, 0.3)";
       ctx.stroke();
 
       // Draw Edge Nodes
       edgeNodes.forEach((node) => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.baseRadius, 0, Math.PI * 2);
-        ctx.fillStyle = node.isStraggler ? "#f59e0b" : "#475569";
+        ctx.fillStyle = node.isStraggler ? "#f59e0b" : (isDark ? "#475569" : "#cbd5e1");
         ctx.fill();
-        ctx.strokeStyle = node.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(255, 255, 255, 0.5)";
+        ctx.strokeStyle = node.isStraggler ? "rgba(245, 158, 11, 0.8)" : (isDark ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.3)");
         ctx.lineWidth = 1.5;
         ctx.stroke();
       });
@@ -358,13 +360,14 @@ export function ResearchGraph({ className }: { className?: string }) {
         <div className="lg:col-span-7 flex flex-col gap-3">
           <div className="relative overflow-hidden rounded-sm border border-border/40 bg-surface/20 p-1 min-h-[400px] flex items-center justify-center">
             {/* Overlay Grid UI */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background dark:opacity-100 opacity-50 z-10 pointer-events-none" />
             <div className="absolute top-4 left-5 select-none font-mono text-[9px] tracking-widest text-muted-foreground/50 uppercase pointer-events-none z-10">
               SIMULATION.CANVAS // EDGE_NODES: ACTIVE
             </div>
             
             <canvas 
               ref={canvasRef} 
-              className="absolute inset-0 w-full h-full bg-[#0A0C10] rounded-sm cursor-crosshair"
+              className="absolute inset-0 w-full h-full bg-[#f4f1ea] dark:bg-[#0A0C10] rounded-sm cursor-crosshair"
               aria-label="Interactive Federated Learning particle simulation"
             >
               <p className="sr-only">

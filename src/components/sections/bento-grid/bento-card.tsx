@@ -71,7 +71,7 @@ export function BentoCard({ card, className, onClick }: BentoCardProps) {
     >
       <div
         className={cn(
-          "relative w-full h-full flex flex-col bg-background/5 backdrop-blur-[2px] border border-white/5 hover:border-accent/40 shadow-xl shadow-black/20 p-6 sm:p-8 lg:p-10 rounded-sm overflow-hidden",
+          "relative w-full h-full flex flex-col bg-white/40 dark:bg-background/5 backdrop-blur-md dark:backdrop-blur-[2px] border border-white/60 dark:border-white/5 hover:bg-white/60 dark:hover:bg-transparent hover:border-white/80 dark:hover:border-accent/40 transition-colors duration-500 shadow-xl shadow-black/5 dark:shadow-black/20 p-6 sm:p-8 lg:p-10 rounded-none dark:rounded-sm overflow-hidden",
         )}
       >
         {/* Radial Background Hover Glow */}

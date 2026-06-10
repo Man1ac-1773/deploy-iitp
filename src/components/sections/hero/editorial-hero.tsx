@@ -29,15 +29,32 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       const fillOpacity = Math.max(0, 1 - ratio * 1.5); // fades out a bit faster
       const strokeWidth = ratio * 1.5;
       
-      nameRef.current.style.webkitTextFillColor = `rgba(255, 255, 255, ${fillOpacity})`;
-      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(255, 255, 255, ${ratio * 0.8})`;
+      const isDark = document.documentElement.classList.contains('dark');
+      const rgb = isDark ? '255, 255, 255' : '30, 41, 59';
+      
+      nameRef.current.style.webkitTextFillColor = `rgba(${rgb}, ${fillOpacity})`;
+      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(${rgb}, ${ratio * 0.8})`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     // Initialize once
     handleScroll();
     
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Create an observer to re-run handleScroll when the dark class changes on HTML
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          handleScroll();
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -66,11 +83,11 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             </p>
           </div>
           <div className="text-right" aria-hidden="true">
-            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent/80 uppercase">
-              [SYS.STATE: NOISE_SUPPRESSION_ACTIVE]
+            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent uppercase">
+              H-INDEX: 12 // i10-INDEX: 15
             </p>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/40 mt-1">
-              EDGE_NODES_ACTIVE: 124 // UPTIME: 99.9%
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground mt-1">
+              CITATIONS: 450+ // PUBLICATIONS: 45
             </p>
           </div>
         </div>
@@ -132,24 +149,26 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           {professor.heroImage && (
             <motion.div 
               style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] rounded-lg overflow-hidden border border-border/50 shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto"
+              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto p-3 bg-black/5 dark:bg-background/80 border border-black/10 dark:border-border/50 rounded-none dark:rounded-lg"
             >
-              <Image 
-                src={professor.heroImage} 
-                alt={`Portrait of ${professor.fullName}`} 
-                fill 
-                className="object-cover object-top"
-                priority
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-lg pointer-events-none" />
+              <div className="relative w-full h-full overflow-hidden border border-black/5 dark:border-transparent rounded-none dark:rounded-lg">
+                <Image 
+                  src={professor.heroImage} 
+                  alt={`Portrait of ${professor.fullName}`} 
+                  fill 
+                  className="object-cover object-top dark:contrast-100 dark:saturate-100 contrast-[1.05] saturate-[1.1]"
+                  priority
+                />
+              </div>
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-lg pointer-events-none hidden dark:block" />
             </motion.div>
           )}
         </div>
 
         {/* Bottom Scroll Anchor */}
         <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
-          <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30 uppercase" aria-hidden="true">
-            SYS.PORTFOLIO.V2 // {new Date().getFullYear()}
+          <span className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase" aria-hidden="true">
+            ACADEMIC.PORTFOLIO // {new Date().getFullYear()}
           </span>
           <a
             href="#research"

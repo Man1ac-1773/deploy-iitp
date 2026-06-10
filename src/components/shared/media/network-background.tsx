@@ -190,7 +190,9 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         ctx.lineTo(this.x - s, this.y);
         ctx.closePath();
         
-        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(6, 182, 212, 0.9)";
+        const isDark = document.documentElement.classList.contains('dark');
+        const rgb = isDark ? '6, 182, 212' : '180, 83, 9';
+        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : `rgba(${rgb}, 0.9)`;
         ctx.fill();
         
         // Active glow
@@ -210,7 +212,10 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         return;
       }
 
-      ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.classList.contains('dark');
+      const rgb = isDark ? '6, 182, 212' : '180, 83, 9';
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw Connections (Mesh Network)
       for (let i = 0; i < uavs.length; i++) {
@@ -222,7 +227,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
           if (distSq < CONNECTION_DIST_SQ) {
             const distance = Math.sqrt(distSq);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / Math.sqrt(CONNECTION_DIST_SQ))})`;
+            ctx.strokeStyle = `rgba(${rgb}, ${0.15 * (1 - distance / Math.sqrt(CONNECTION_DIST_SQ))})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(uavs[i].x, uavs[i].y);
             ctx.lineTo(uavs[j].x, uavs[j].y);
@@ -245,7 +250,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
             const opacity = 0.25 * (1 - distance / (mouse.radius * 0.6));
             ctx.strokeStyle = uavs[i].isStraggler 
               ? `rgba(245, 158, 11, ${opacity})` 
-              : `rgba(229, 169, 59, ${opacity})`;
+              : `rgba(${rgb}, ${opacity})`;
             ctx.lineWidth = uavs[i].isStraggler ? 0.5 : 1.2;
             
             if (uavs[i].isStraggler) {
@@ -294,7 +299,8 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       <div className="absolute inset-0 opacity-30 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 size-full opacity-25 mix-blend-screen"
+        className="absolute inset-0 z-0 pointer-events-none opacity-30 mix-blend-multiply dark:opacity-20 dark:mix-blend-screen"
+        aria-hidden="true"
       />
       {/* Telemetry overlay to anchor the simulation context */}
       <div className="absolute top-8 left-8 flex flex-col gap-1 z-20">

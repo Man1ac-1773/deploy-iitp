@@ -3,6 +3,8 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
 import { SmoothScrollProvider } from "@/components/layout/smooth-scroll-provider";
+import { ThemeProvider } from "@/components/layout/theme-provider";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import "./globals.css";
 
 const inter = Inter({
@@ -46,22 +48,26 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "dark font-sans",
+        "font-sans",
         inter.variable,
         cormorantGaramond.variable,
         GeistMono.variable,
       )}
+      suppressHydrationWarning
     >
       <head>
         <meta name="color-scheme" content="dark" />
       </head>
       <body className="min-h-dvh antialiased">
-        <a href="#portfolio" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-foreground">
-          Skip to content
-        </a>
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <a href="#portfolio" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-foreground">
+            Skip to content
+          </a>
+          <ThemeToggle />
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
