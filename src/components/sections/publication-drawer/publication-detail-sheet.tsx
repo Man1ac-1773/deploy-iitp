@@ -73,13 +73,39 @@ export function PublicationDetailSheet({
           </SheetHeader>
 
           <div className="flex flex-col gap-6 px-6 py-8">
-            <div className="flex flex-col gap-3">
-              <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                Abstract
-              </h3>
-              <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
-                {displayPub.abstract}
-              </p>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                  The Core Problem
+                </h3>
+                <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
+                  {displayPub.abstract}
+                </p>
+              </div>
+
+              {displayPub.researchSummary ? (
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                    The Engineering Approach
+                  </h3>
+                  <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
+                    {displayPub.researchSummary}
+                  </p>
+                </div>
+              ) : null}
+
+              {displayPub.impact ? (
+                <div className="flex flex-col gap-4 mt-2">
+                  <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                    Global Impact
+                  </h3>
+                  <div className="border-l-2 border-accent pl-4 py-1">
+                    <p className="text-lg font-serif italic text-foreground sm:text-xl">
+                      "{displayPub.impact}"
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             {displayPub.tags.length > 0 ? (
