@@ -291,12 +291,12 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden bg-[#0A0C10] z-0",
+        "pointer-events-none absolute inset-0 overflow-hidden bg-background z-0",
         className,
       )}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,#0A0C10_100%)] z-10" />
-      <div className="absolute inset-0 opacity-30 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,var(--background)_100%)] z-10" />
+      <div className="absolute inset-0 opacity-10 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(180,83,9,0.8)_0%,transparent_40%)] dark:bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 pointer-events-none opacity-30 mix-blend-multiply dark:opacity-20 dark:mix-blend-screen"
