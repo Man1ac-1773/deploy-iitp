@@ -12,14 +12,14 @@ type PublicationExplorerProps = {
   publications: readonly Publication[];
 };
 
-const FILTERS = ["ALL", "JOURNAL", "FEDERATED LEARNING", "EDGE AI", "IOT"] as const;
+const FILTERS = ["ALL", "JOURNAL", "CONFERENCE", "FEDERATED LEARNING", "EDGE AI", "IOT"] as const;
 
 export function PublicationExplorer({
   publications,
 }: PublicationExplorerProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("ALL");
+  const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("JOURNAL");
 
   const selectedPublication =
     publications.find((publication) => publication.id === selectedId) ?? null;
@@ -40,7 +40,7 @@ export function PublicationExplorer({
     let matchesFilter = true;
     if (activeFilter !== "ALL") {
       const filterLower = activeFilter.toLowerCase();
-      if (filterLower === "journal") {
+      if (filterLower === "journal" || filterLower === "conference") {
         matchesFilter = pub.type === filterLower;
       } else {
         // Tag matching (case-insensitive)

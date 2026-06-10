@@ -105,8 +105,6 @@ export const bentoCards: readonly BentoCardData[] = [
       "IEEE Membership"
     ],
     modalLinks: [
-      { label: "Research Portfolio", url: "https://sites.google.com/view/rahulmishracse/research" },
-      { label: "Teaching Portfolio", url: "https://sites.google.com/view/rahulmishracse/teaching" },
       { label: "Projects Portfolio", url: "https://sites.google.com/view/rahulmishracse/projects" },
       { label: "Invited Speaker", url: "https://sites.google.com/view/rahulmishracse/invited-speaker" }
     ]

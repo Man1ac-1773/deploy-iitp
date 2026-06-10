@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import type { BentoCardData } from "@/types/bento";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 
 type BentoModalProps = {
@@ -11,7 +12,10 @@ type BentoModalProps = {
 };
 
 export function BentoModal({ card, onClose }: BentoModalProps) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -24,8 +28,10 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
     };
   }, [onClose]);
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-12">
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-12" style={{ position: 'fixed' }}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -91,7 +97,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
             </ul>
           ) : null}
 
-          {card.modalLinks && (
+          {card.modalLinks && card.modalLinks.length > 0 && (
             <div className="mt-4 pt-8 border-t border-white/5 flex flex-col gap-4">
               <h3 className="text-sm font-mono tracking-wider text-muted-foreground uppercase">External Portfolios</h3>
               <div className="flex flex-wrap gap-3">
@@ -114,6 +120,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
           )}
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 }
