@@ -13,7 +13,7 @@ export function ProfilePanelShell({
   return (
     <div
       className={cn(
-        "flex h-full flex-col justify-between gap-12 px-8 py-16 sm:px-12 sm:py-24 lg:max-h-dvh lg:overflow-y-auto lg:px-14 lg:py-24",
+        "flex h-full flex-col justify-between gap-8 px-8 py-10 sm:px-12 sm:py-12 lg:max-h-dvh lg:overflow-y-auto lg:px-14 lg:py-12",
         className,
       )}
     >
