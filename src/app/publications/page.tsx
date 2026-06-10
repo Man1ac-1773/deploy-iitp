@@ -24,7 +24,7 @@ export default function PublicationsPage() {
             </Link>
           </div>
           
-          <div className="scroll-reveal">
+          <div className="animate-in fade-in duration-1000 ease-out fill-mode-forwards">
             <PublicationExplorer publications={publications} />
           </div>
         </ContentPanel>

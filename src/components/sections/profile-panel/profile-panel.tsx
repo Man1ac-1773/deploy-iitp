@@ -3,6 +3,26 @@ import { ProfilePhotoSlot } from "@/components/shared/media/profile-photo-slot";
 import { SectionNav } from "@/components/shared/navigation/section-nav";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import { siteConfig } from "@/config/site";
+import { GraduationCap, BookOpen } from "lucide-react";
+
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 export function ProfilePanel() {
   const { professor, lab } = siteConfig;
@@ -60,14 +80,14 @@ export function ProfilePanel() {
         <div className="flex flex-col gap-3">
           <h3 className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Profiles</h3>
           <div className="flex flex-col gap-2">
-            <a href="https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
-              <span className="font-mono text-[9px] text-accent/50">[ GS ]</span> Google Scholar
+            <a href="https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-3">
+              <GraduationCap className="w-4 h-4 text-accent/70" /> Google Scholar
             </a>
-            <a href="https://www.researchgate.net/profile/Rahul-Mishra-22" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
-              <span className="font-mono text-[9px] text-accent/50">[ RG ]</span> ResearchGate
+            <a href="https://www.researchgate.net/profile/Rahul-Mishra-22" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-3">
+              <BookOpen className="w-4 h-4 text-accent/70" /> ResearchGate
             </a>
-            <a href="https://www.linkedin.com/in/rahul-mishra-052205146/" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
-              <span className="font-mono text-[9px] text-accent/50">[ IN ]</span> LinkedIn
+            <a href="https://www.linkedin.com/in/rahul-mishra-052205146/" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-3">
+              <LinkedinIcon className="w-4 h-4 text-accent/70" /> LinkedIn
             </a>
           </div>
         </div>
