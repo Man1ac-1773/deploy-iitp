@@ -123,9 +123,9 @@ export function PublicationDetailSheet({
                         href={displayPub.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-foreground hover:text-primary"
+                        className="inline-flex items-center justify-center border border-accent/40 bg-accent/5 px-4 py-2 mt-2 text-sm font-mono tracking-widest text-accent uppercase hover:bg-accent hover:text-background transition-colors duration-300 w-fit rounded-sm"
                       >
-                        View publication
+                        [ Read Paper ]
                       </a>
                     ) : null}
                   </div>

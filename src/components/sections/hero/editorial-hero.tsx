@@ -119,7 +119,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             SYS.PORTFOLIO.V2 // {new Date().getFullYear()}
           </span>
           <a
-            href="#portfolio"
+            href="#research"
             aria-label="Explore Research"
             className="group flex flex-col items-end gap-3 text-muted-foreground"
           >

@@ -45,15 +45,32 @@ export function ProfilePanel() {
         <SectionNav />
       </div>
 
-      <div className="flex flex-col gap-2 border-t border-muted-foreground/15 pt-8">
-        <h3 className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Contact</h3>
-        <a
-          href={`mailto:${professor.email}`}
-          className="text-sm text-foreground hover:text-accent"
-        >
-          {professor.email}
-        </a>
-        <p className="text-sm text-muted-foreground">{professor.location}</p>
+      <div className="flex flex-col gap-6 border-t border-muted-foreground/15 pt-8">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Contact</h3>
+          <a
+            href={`mailto:${professor.email}`}
+            className="text-sm text-foreground hover:text-accent transition-colors"
+          >
+            {professor.email}
+          </a>
+          <p className="text-sm text-muted-foreground">{professor.location}</p>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Profiles</h3>
+          <div className="flex flex-col gap-2">
+            <a href="https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
+              <span className="font-mono text-[9px] text-accent/50">[ GS ]</span> Google Scholar
+            </a>
+            <a href="https://www.researchgate.net/profile/Rahul-Mishra-22" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
+              <span className="font-mono text-[9px] text-accent/50">[ RG ]</span> ResearchGate
+            </a>
+            <a href="https://www.linkedin.com/in/rahul-mishra-052205146/" target="_blank" rel="noreferrer" className="text-sm text-foreground hover:text-accent transition-colors flex items-center gap-2">
+              <span className="font-mono text-[9px] text-accent/50">[ IN ]</span> LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
     </ProfilePanelShell>
   );
