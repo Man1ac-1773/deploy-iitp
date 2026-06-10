@@ -27,11 +27,11 @@
   --hero-name-size: clamp(3.5rem, 10vw, 30rem);
   --section-title-size: clamp(2.5rem, 8vw, 6rem);
   --hero-name-leading: 0.82;
-  --background: #020617;
-  --foreground: #f8fafc;
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
-  --popover: #0f172a;
+  --background: #f4f1ea;
+  --foreground: #1e293b;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --popover: #ffffff;
   --popover-foreground: #1e293b;
   --primary: #b45309;
   --primary-foreground: #ffffff;
@@ -52,7 +52,7 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.375rem;
-  --sidebar: #0f172a;
+  --sidebar: #ffffff;
   --sidebar-foreground: #1e293b;
   --sidebar-primary: #b45309;
   --sidebar-primary-foreground: #ffffff;

@@ -58,18 +58,18 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         {/* Top Header - Strategic Balance */}
         <div className="flex w-full items-start justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-[11px] font-bold tracking-[0.35em] text-foreground/80 uppercase">
+            <p className="font-mono text-[11px] font-bold tracking-[0.35em] text-foreground uppercase">
               {siteConfig.lab}
             </p>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/60 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
               {professor.affiliation}
             </p>
           </div>
           <div className="text-right" aria-hidden="true">
-            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent/80 uppercase">
+            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent uppercase">
               H-INDEX: 12 // i10-INDEX: 15
             </p>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/40 mt-1">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground mt-1">
               CITATIONS: 450+ // PUBLICATIONS: 45
             </p>
           </div>
@@ -139,7 +139,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
                   src={professor.heroImage} 
                   alt={`Portrait of ${professor.fullName}`} 
                   fill 
-                  className="object-cover object-top grayscale contrast-[1.15]"
+                  className="object-cover object-top contrast-[1.05] saturate-[1.1]"
                   priority
                 />
               </div>
@@ -149,7 +149,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
 
         {/* Bottom Scroll Anchor */}
         <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
-          <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30 uppercase" aria-hidden="true">
+          <span className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase" aria-hidden="true">
             ACADEMIC.PORTFOLIO // {new Date().getFullYear()}
           </span>
           <a

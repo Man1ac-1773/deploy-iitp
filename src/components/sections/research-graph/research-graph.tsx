@@ -356,7 +356,7 @@ export function ResearchGraph({ className }: { className?: string }) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
         {/* Left Column: Interactive Simulation Canvas */}
         <div className="lg:col-span-7 flex flex-col gap-3">
-          <div className="relative overflow-hidden rounded-sm border border-border/40 bg-surface/20 p-1 min-h-[400px] flex items-center justify-center">
+          <div className="relative overflow-hidden rounded-sm border border-border bg-white/50 p-1 min-h-[400px] flex items-center justify-center">
             {/* Overlay Grid UI */}
             <div className="absolute top-4 left-5 select-none font-mono text-[9px] tracking-widest text-muted-foreground/50 uppercase pointer-events-none z-10">
               SIMULATION.CANVAS // EDGE_NODES: ACTIVE
@@ -364,7 +364,7 @@ export function ResearchGraph({ className }: { className?: string }) {
             
             <canvas 
               ref={canvasRef} 
-              className="absolute inset-0 w-full h-full bg-[#0A0C10] rounded-sm cursor-crosshair"
+              className="absolute inset-0 w-full h-full bg-card rounded-sm cursor-crosshair"
               aria-label="Interactive Federated Learning particle simulation"
             >
               <p className="sr-only">
@@ -408,7 +408,7 @@ export function ResearchGraph({ className }: { className?: string }) {
         </div>
 
         {/* Right Column: Telemetry HUD Panel */}
-        <div className="lg:col-span-5 flex flex-col justify-between gap-6 border border-border/40 bg-surface/10 p-5 rounded-sm relative min-h-[420px]">
+        <div className="lg:col-span-5 flex flex-col justify-between gap-6 border border-border bg-card p-5 rounded-sm relative min-h-[420px]">
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between border-b border-border/40 pb-3">
               <h3 className="font-mono text-[10px] tracking-widest text-accent font-semibold uppercase">
@@ -428,27 +428,27 @@ export function ResearchGraph({ className }: { className?: string }) {
               </span>
             </div>
 
-            <div className="flex flex-col gap-3 font-mono text-xs text-foreground/90 bg-background/40 p-3 rounded-sm border border-border/30">
+            <div className="flex flex-col gap-3 font-mono text-xs text-foreground/90 bg-black/5 p-3 rounded-sm border border-black/5">
               <div className="flex justify-between">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Global Accuracy:</span>
+                <span className="text-muted-foreground uppercase text-[9px]">Global Accuracy:</span>
                 <span className="font-bold text-accent" ref={accuracyRef}>
                   92.40%
                 </span>
               </div>
-              <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Comm. Rounds:</span>
+              <div className="flex justify-between border-t border-black/5 pt-2">
+                <span className="text-muted-foreground uppercase text-[9px]">Comm. Rounds:</span>
                 <span className="font-bold" ref={roundsRef}>120</span>
               </div>
-              <div className="flex justify-between border-t border-border/10 pt-2">
-                <span className="text-muted-foreground/60 uppercase text-[9px]">Data Corruption Rate:</span>
-                <span className="font-bold text-muted-foreground" ref={noiseRef}>
+              <div className="flex justify-between border-t border-black/5 pt-2">
+                <span className="text-muted-foreground uppercase text-[9px]">Data Corruption Rate:</span>
+                <span className="font-bold text-foreground" ref={noiseRef}>
                   5.0%
                 </span>
               </div>
             </div>
 
             {/* Dynamic Publication Card */}
-            <div className="flex flex-col gap-2.5 border border-border/30 bg-surface/20 p-4 rounded-sm transition-colors duration-300 min-h-[240px]">
+            <div className="flex flex-col gap-2.5 border border-black/5 bg-black/5 p-4 rounded-sm transition-colors duration-300 min-h-[240px]">
               <span className="font-mono text-[9px] tracking-wider text-accent uppercase block mb-1">
                 [ Proposed Research Solution ]
               </span>

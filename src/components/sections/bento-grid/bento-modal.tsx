@@ -41,14 +41,14 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
       />
       <motion.div
         layoutId={`bento-${card.id}`}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-background/80 backdrop-blur-xl border border-accent/40 rounded-sm shadow-2xl shadow-accent/10 flex flex-col z-10 custom-scrollbar"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border border-accent/40 rounded-sm shadow-2xl shadow-black/5 flex flex-col z-10 custom-scrollbar"
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
-        <div className="sticky top-0 bg-background/90 backdrop-blur-sm border-b border-white/5 p-6 sm:p-8 flex items-start justify-between z-20">
+        <div className="sticky top-0 bg-card/90 backdrop-blur-sm border-b border-black/10 p-6 sm:p-8 flex items-start justify-between z-20">
           <div className="flex flex-col gap-2">
             <SectionLabel className="text-accent/80">EXPANDED DATA // {card.id}</SectionLabel>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-accent drop-shadow-[0_0_15px_rgba(91,141,239,0.5)]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-accent">
               {card.modalTitle}
             </h2>
             {card.modalDescription && (
@@ -77,7 +77,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
                   </h3>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {tab.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 bg-white/5 p-4 rounded-sm border border-white/5 hover:border-accent/30 transition-colors">
+                      <li key={idx} className="flex items-start gap-3 bg-black/5 p-4 rounded-sm border border-black/5 hover:border-accent/30 transition-colors">
                         <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70" />
                         <span className="text-sm sm:text-base text-foreground/90">{item}</span>
                       </li>
@@ -89,7 +89,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
           ) : card.modalList ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {card.modalList.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-white/5 p-4 rounded-sm border border-white/5 hover:border-accent/30 transition-colors">
+                <li key={idx} className="flex items-start gap-3 bg-black/5 p-4 rounded-sm border border-black/5 hover:border-accent/30 transition-colors">
                   <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70" />
                   <span className="text-sm sm:text-base text-foreground/90">{item}</span>
                 </li>
@@ -98,7 +98,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
           ) : null}
 
           {card.modalLinks && card.modalLinks.length > 0 && (
-            <div className="mt-4 pt-8 border-t border-white/5 flex flex-col gap-4">
+            <div className="mt-4 pt-8 border-t border-black/10 flex flex-col gap-4">
               <h3 className="text-sm font-mono tracking-wider text-muted-foreground uppercase">External Portfolios</h3>
               <div className="flex flex-wrap gap-3">
                 {card.modalLinks.map((link) => (

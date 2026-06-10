@@ -10,12 +10,12 @@ export function ConferencesSection() {
     <section id="conferences" className="py-section relative border-t border-white/5">
       <SectionHeading>Global Conferences</SectionHeading>
       
-      <div className="mt-12 md:mt-16 flex flex-col gap-[1px] bg-white/10 border border-white/5 rounded-sm overflow-hidden">
+      <div className="mt-12 md:mt-16 flex flex-col gap-[1px] bg-transparent border border-border rounded-sm overflow-hidden">
         {displayedConferences.map((conf, i) => (
           <article 
             key={conf.id} 
             className={cn(
-              "group relative flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#0A0C10] p-6 hover:bg-[#0f121a] transition-colors duration-300",
+              "group relative flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card p-6 hover:bg-black/5 transition-colors duration-300",
             )}
           >
             {/* Terminal decorative prefix */}
