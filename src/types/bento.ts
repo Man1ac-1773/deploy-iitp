@@ -11,4 +11,7 @@ export type BentoCardData = {
   description: string;
   span: BentoSpan;
   items: readonly string[];
+  backTitle?: string;
+  backDescription?: string;
+  backItems?: readonly string[];
 };

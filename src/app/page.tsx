@@ -5,6 +5,7 @@ import { BentoSection } from "@/components/sections/bento-grid/bento-section";
 import { EditorialHero } from "@/components/sections/hero/editorial-hero";
 import { ProfilePanel } from "@/components/sections/profile-panel/profile-panel";
 import { PublicationSection } from "@/components/sections/publication-drawer/publication-section";
+import { ConferencesSection } from "@/components/sections/conferences/conferences-section";
 import { ResearchGraph } from "@/components/sections/research-graph/research-graph";
 import { TimelineSection } from "@/components/sections/timeline/timeline-section";
 import { StudentsSection } from "@/components/sections/students/students-section";
@@ -32,6 +33,10 @@ export default function HomePage() {
 
           <div className="scroll-reveal">
             <PublicationSection />
+          </div>
+
+          <div className="scroll-reveal">
+            <ConferencesSection />
           </div>
 
           <div className="scroll-reveal">
