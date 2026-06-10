@@ -20,7 +20,7 @@ export function BentoGrid({ cards, className, children }: BentoGridProps) {
   const selectedCard = cards.find((c) => c.id === selectedId) ?? null;
 
   return (
-    <LayoutGroup>
+    <>
       <div
         data-bento-grid
         className={cn(
@@ -38,7 +38,7 @@ export function BentoGrid({ cards, className, children }: BentoGridProps) {
           ))}
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {selectedCard && (
           <BentoModal 
             card={selectedCard} 
@@ -46,6 +46,6 @@ export function BentoGrid({ cards, className, children }: BentoGridProps) {
           />
         )}
       </AnimatePresence>
-    </LayoutGroup>
+    </>
   );
 }

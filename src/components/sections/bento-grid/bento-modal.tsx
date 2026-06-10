@@ -36,17 +36,26 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         onClick={onClose}
         className="absolute inset-0 bg-background/60 backdrop-blur-md"
       />
       <motion.div
-        layoutId={`bento-${card.id}`}
+        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border border-accent/40 rounded-sm shadow-2xl shadow-black/5 flex flex-col z-10 custom-scrollbar"
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
         <div className="sticky top-0 bg-card/90 backdrop-blur-sm border-b border-black/10 p-6 sm:p-8 flex items-start justify-between z-20">
-          <div className="flex flex-col gap-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+            className="flex flex-col gap-2"
+          >
             <SectionLabel className="text-accent/80">EXPANDED DATA // {card.id}</SectionLabel>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-accent">
               {card.modalTitle}
@@ -54,7 +63,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
             {card.modalDescription && (
               <p className="text-muted-foreground mt-2 max-w-2xl">{card.modalDescription}</p>
             )}
-          </div>
+          </motion.div>
           <button
             onClick={onClose}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors group"
@@ -66,7 +75,12 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
           </button>
         </div>
 
-        <div className="p-6 sm:p-8 relative z-10 flex flex-col gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="p-6 sm:p-8 relative z-10 flex flex-col gap-8"
+        >
           {card.modalTabs ? (
             <div className="flex flex-col gap-8">
               {card.modalTabs.map((tab) => (
@@ -118,7 +132,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </motion.div>
     </div>,
     document.body
