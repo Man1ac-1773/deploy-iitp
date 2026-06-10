@@ -46,14 +46,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "dark font-sans",
+        "font-sans",
         inter.variable,
         cormorantGaramond.variable,
         GeistMono.variable,
       )}
     >
       <head>
-        <meta name="color-scheme" content="dark" />
+        <meta name="color-scheme" content="light" />
       </head>
       <body className="min-h-dvh antialiased">
         <a href="#portfolio" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-foreground">

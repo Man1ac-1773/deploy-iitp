@@ -26,7 +26,7 @@ export function ProfilePhotoSlot({
       )}
     >
       {src ? (
-        <div className="group relative z-10 size-full overflow-hidden rounded-none cursor-pointer border border-white/10 p-0.5 bg-white/5">
+        <div className="group relative z-10 size-full overflow-hidden rounded-none cursor-pointer border border-black/10 p-0.5 bg-black/5">
           <div className="relative size-full overflow-hidden">
             <Image 
               src={src} 

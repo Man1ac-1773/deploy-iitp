@@ -29,8 +29,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       const fillOpacity = Math.max(0, 1 - ratio * 1.5); // fades out a bit faster
       const strokeWidth = ratio * 1.5;
       
-      nameRef.current.style.webkitTextFillColor = `rgba(255, 255, 255, ${fillOpacity})`;
-      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(255, 255, 255, ${ratio * 0.8})`;
+      nameRef.current.style.webkitTextFillColor = `rgba(30, 41, 59, ${fillOpacity})`;
+      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(30, 41, 59, ${ratio * 0.8})`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -102,8 +102,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
                   data-transition-target="professor-name" 
                   className="block transition-colors duration-100 ease-out"
                   style={{
-                    WebkitTextFillColor: "rgba(255, 255, 255, 1)",
-                    WebkitTextStroke: "0px rgba(255, 255, 255, 0)"
+                    WebkitTextFillColor: "rgba(30, 41, 59, 1)",
+                    WebkitTextStroke: "0px rgba(30, 41, 59, 0)"
                   }}
                 >
                   {professor.name}
@@ -132,9 +132,9 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           {professor.heroImage && (
             <motion.div 
               style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto p-3 bg-white/5 border border-white/10 rounded-none"
+              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto p-3 bg-black/5 border border-black/10 rounded-none"
             >
-              <div className="relative w-full h-full overflow-hidden border border-white/5">
+              <div className="relative w-full h-full overflow-hidden border border-black/5">
                 <Image 
                   src={professor.heroImage} 
                   alt={`Portrait of ${professor.fullName}`} 

@@ -190,7 +190,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
         ctx.lineTo(this.x - s, this.y);
         ctx.closePath();
         
-        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(6, 182, 212, 0.9)";
+        ctx.fillStyle = this.isStraggler ? "rgba(245, 158, 11, 0.8)" : "rgba(180, 83, 9, 0.9)";
         ctx.fill();
         
         // Active glow
@@ -222,7 +222,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
           if (distSq < CONNECTION_DIST_SQ) {
             const distance = Math.sqrt(distSq);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / Math.sqrt(CONNECTION_DIST_SQ))})`;
+            ctx.strokeStyle = `rgba(30, 41, 59, ${0.2 * (1 - distance / Math.sqrt(CONNECTION_DIST_SQ))})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(uavs[i].x, uavs[i].y);
             ctx.lineTo(uavs[j].x, uavs[j].y);
@@ -286,15 +286,15 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden bg-[#0A0C10] z-0",
+        "pointer-events-none absolute inset-0 overflow-hidden bg-background z-0",
         className,
       )}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,#0A0C10_100%)] z-10" />
-      <div className="absolute inset-0 opacity-30 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,var(--color-background)_100%)] z-10" />
+      <div className="absolute inset-0 opacity-[0.05] mix-blend-multiply blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(180,83,9,0.8)_0%,transparent_40%)]" />
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 size-full opacity-25 mix-blend-screen"
+        className="absolute inset-0 size-full opacity-30 mix-blend-multiply"
       />
       {/* Telemetry overlay to anchor the simulation context */}
       <div className="absolute top-8 left-8 flex flex-col gap-1 z-20">
