@@ -27,7 +27,13 @@ export function ProfilePhotoSlot({
     >
       {src ? (
         <div className="relative z-10 size-full overflow-hidden rounded-sm">
-          <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 96px, (min-width: 640px) 80px, 64px" className="object-cover" />
+          <Image 
+            src={src} 
+            alt={alt} 
+            fill 
+            sizes="(min-width: 1024px) 96px, (min-width: 640px) 80px, 64px" 
+            className="object-cover grayscale contrast-125 hover:grayscale-0 hover:contrast-100 hover:scale-105 transition-all duration-500" 
+          />
         </div>
       ) : null}
       {!src ? (

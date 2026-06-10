@@ -3,6 +3,8 @@
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 type EditorialHeroProps = {
   className?: string;
@@ -11,6 +13,8 @@ type EditorialHeroProps = {
 export function EditorialHero({ className }: EditorialHeroProps) {
   const { professor } = siteConfig;
   const nameRef = useRef<HTMLSpanElement>(null);
+  const { scrollY } = useScroll();
+  const imageY = useTransform(scrollY, [0, 800], [0, 200]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +54,28 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       {/* Massive Typography Hero Container */}
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">
         
+        {/* Parallax Hero Image */}
+        {professor.heroImage && (
+          <motion.div 
+            style={{ y: imageY, opacity: 0, animation: "fadeIn 1.2s ease-out 0.3s forwards" }}
+            className="absolute right-[-5%] sm:right-[5%] top-[10%] w-[65%] sm:w-[45%] max-w-[550px] aspect-[3/4] mix-blend-luminosity z-[-1] pointer-events-none opacity-80"
+          >
+            <div 
+              className="relative w-full h-full"
+              style={{ clipPath: "polygon(8% 0, 100% 0, 92% 100%, 0 100%)" }}
+            >
+              <Image 
+                src={professor.heroImage} 
+                alt={`Portrait of ${professor.fullName}`} 
+                fill 
+                className="object-cover object-top grayscale contrast-125"
+                priority
+              />
+              {/* Hardware glitch overlay */}
+              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay" />
+            </div>
+          </motion.div>
+        )}
         {/* Top Header - Strategic Balance */}
         <div className="flex w-full items-start justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
           <div className="flex flex-col gap-1">

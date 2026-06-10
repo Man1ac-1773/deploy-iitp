@@ -10,7 +10,8 @@ export const siteConfig = {
     location: "Patna, Bihar, India",
     email: "rahul_mishra@iitp.ac.in",
     bio: "A dedicated and detail-oriented researcher thriving in high-pressure environments. My focus is on engineering deployment-ready solutions for complex, emerging challenges in Fog Computing, Smart Sensing, and Noise-Resilient Federated Learning.",
-    profileImage: null as string | null,
+    profileImage: "/images/rahul_mishra_1.jpg",
+    heroImage: "/images/rahul_mishra.jpg",
     initials: "RM",
   },
 } as const;
