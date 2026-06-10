@@ -56,7 +56,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta name="color-scheme" content="dark" />
       </head>
       <body className="min-h-dvh antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
