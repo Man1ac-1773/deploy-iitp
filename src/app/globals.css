@@ -24,7 +24,7 @@
 }
 
 :root {
-  --hero-name-size: clamp(4rem, 16vw, 16rem);
+  --hero-name-size: clamp(3.5rem, 8vw, 8rem);
   --section-title-size: clamp(2.5rem, 8vw, 6rem);
   --hero-name-leading: 0.82;
   --background: #020617;

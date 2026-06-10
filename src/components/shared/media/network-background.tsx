@@ -294,7 +294,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       <div className="absolute inset-0 opacity-30 mix-blend-screen blur-[120px] bg-[radial-gradient(circle_at_20%_30%,rgba(120,135,160,0.15)_0%,transparent_40%)]" />
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 size-full opacity-70 mix-blend-screen"
+        className="absolute inset-0 size-full opacity-25 mix-blend-screen"
       />
       {/* Telemetry overlay to anchor the simulation context */}
       <div className="absolute top-8 left-8 flex flex-col gap-1 z-20">

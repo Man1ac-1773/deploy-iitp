@@ -54,31 +54,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       {/* Massive Typography Hero Container */}
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">
         
-        {/* Parallax Hero Image - Ghostly Vignette */}
-        {professor.heroImage && (
-          <motion.div 
-            style={{ y: imageY, opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-            className="absolute right-0 sm:right-[5%] top-[15%] w-[80%] sm:w-[50%] max-w-[600px] aspect-square pointer-events-none opacity-40 mix-blend-screen"
-          >
-            <div 
-              className="relative w-full h-full"
-              style={{ 
-                maskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 70%)",
-                WebkitMaskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 70%)" 
-              }}
-            >
-              <Image 
-                src={professor.heroImage} 
-                alt={`Portrait of ${professor.fullName}`} 
-                fill 
-                className="object-cover object-top grayscale contrast-150 brightness-75"
-                priority
-              />
-              {/* Cyan Data Tint */}
-              <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-            </div>
-          </motion.div>
-        )}
+        {/* Portrait has been moved to the identity block below */}
         {/* Top Header - Strategic Balance */}
         <div className="flex w-full items-start justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
           <div className="flex flex-col gap-1">
@@ -102,34 +78,53 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         {/* Center/Lower Massive Identity */}
         <div
           data-transition-id="professor-identity"
-          className="flex flex-col gap-4 mt-auto mb-16 md:mb-24"
+          className="flex flex-col gap-6 mt-auto mb-16 md:mb-24"
           style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.2s forwards" }}
         >
-          <span className="block font-mono text-xs sm:text-sm font-semibold tracking-[0.4em] text-accent/90 uppercase ml-1 sm:ml-2">
-            {professor.honorific}
-          </span>
-          <h1
-            id="hero-heading"
-            className="hero-name w-full max-w-full font-semibold text-foreground uppercase mix-blend-difference"
-            style={{ 
-              fontSize: "clamp(5rem, 18vw, 22rem)", 
-              lineHeight: "0.82", 
-              letterSpacing: "-0.04em",
-              marginLeft: "-0.04em" // optically align the massive text
-            }}
-          >
-            <span 
-              ref={nameRef}
-              data-transition-target="professor-name" 
-              className="block transition-colors duration-100 ease-out"
-              style={{
-                WebkitTextFillColor: "rgba(255, 255, 255, 1)",
-                WebkitTextStroke: "0px rgba(255, 255, 255, 0)"
-              }}
-            >
-              {professor.name}
-            </span>
-          </h1>
+          <div className="flex flex-col md:flex-row md:items-end gap-8 sm:gap-12">
+            <div className="flex flex-col gap-4">
+              <span className="block font-mono text-xs sm:text-sm font-semibold tracking-[0.4em] text-accent/90 uppercase ml-1 sm:ml-2">
+                {professor.honorific}
+              </span>
+              <h1
+                id="hero-heading"
+                className="hero-name w-full max-w-full font-semibold text-foreground uppercase"
+                style={{ 
+                  fontSize: "var(--hero-name-size, clamp(3.5rem, 8vw, 8rem))", 
+                  lineHeight: "0.9", 
+                  letterSpacing: "-0.02em",
+                  marginLeft: "-0.04em" // optically align the text
+                }}
+              >
+                <span 
+                  ref={nameRef}
+                  data-transition-target="professor-name" 
+                  className="block transition-colors duration-100 ease-out"
+                  style={{
+                    WebkitTextFillColor: "rgba(255, 255, 255, 1)",
+                    WebkitTextStroke: "0px rgba(255, 255, 255, 0)"
+                  }}
+                >
+                  {professor.name}
+                </span>
+              </h1>
+            </div>
+
+            {professor.heroImage && (
+              <motion.div 
+                style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
+                className="relative shrink-0 w-32 h-40 sm:w-48 sm:h-64 rounded-sm overflow-hidden border border-border shadow-2xl mb-2"
+              >
+                <Image 
+                  src={professor.heroImage} 
+                  alt={`Portrait of ${professor.fullName}`} 
+                  fill 
+                  className="object-cover object-top"
+                  priority
+                />
+              </motion.div>
+            )}
+          </div>
 
           <div className="flex items-center gap-6 mt-8 sm:mt-12 ml-1 sm:ml-3">
             <div className="h-[1px] w-12 sm:w-24 bg-accent/40" aria-hidden="true" />
