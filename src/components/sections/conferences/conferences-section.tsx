@@ -1,14 +1,17 @@
+import Link from "next/link";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { conferences } from "@/data/conferences";
 import { cn } from "@/lib/utils";
 
 export function ConferencesSection() {
+  const displayedConferences = conferences.slice(0, 3);
+
   return (
     <section id="conferences" className="py-section relative border-t border-white/5">
       <SectionHeading>Global Conferences</SectionHeading>
       
       <div className="mt-12 md:mt-16 flex flex-col gap-[1px] bg-white/10 border border-white/5 rounded-sm overflow-hidden">
-        {conferences.map((conf, i) => (
+        {displayedConferences.map((conf, i) => (
           <article 
             key={conf.id} 
             className={cn(
@@ -42,6 +45,18 @@ export function ConferencesSection() {
             </div>
           </article>
         ))}
+      </div>
+
+      <div className="mt-8 flex justify-center md:justify-start">
+        <Link 
+          href="/publications"
+          className="inline-flex items-center gap-3 px-6 py-3 font-mono text-xs md:text-sm text-accent uppercase tracking-widest border border-accent/40 rounded-sm hover:bg-accent/5 hover:border-accent transition-colors duration-300 group"
+        >
+          Explore All Conferences
+          <svg className="size-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Link>
       </div>
     </section>
   );
