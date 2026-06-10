@@ -26,14 +26,17 @@ export function ProfilePhotoSlot({
       )}
     >
       {src ? (
-        <div className="relative z-10 size-full overflow-hidden rounded-sm">
+        <div className="group relative z-10 size-full overflow-hidden rounded-sm cursor-pointer">
           <Image 
             src={src} 
             alt={alt} 
             fill 
             sizes="(min-width: 1024px) 96px, (min-width: 640px) 80px, 64px" 
-            className="object-cover grayscale contrast-125 hover:grayscale-0 hover:contrast-100 hover:scale-105 transition-all duration-500" 
+            className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-105 transition-all duration-700 ease-out" 
           />
+          {/* Cyber Scanline Effect on Hover */}
+          <div className="absolute inset-0 bg-accent/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute left-0 top-0 h-[2px] w-full bg-accent/80 blur-[1px] translate-y-[-10px] group-hover:animate-scan-fast" />
         </div>
       ) : null}
       {!src ? (

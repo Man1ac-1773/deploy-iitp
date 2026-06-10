@@ -54,25 +54,28 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       {/* Massive Typography Hero Container */}
       <div className="relative z-10 flex size-full flex-col justify-between p-6 sm:p-12 md:p-16 lg:p-24">
         
-        {/* Parallax Hero Image */}
+        {/* Parallax Hero Image - Ghostly Vignette */}
         {professor.heroImage && (
           <motion.div 
-            style={{ y: imageY, opacity: 0, animation: "fadeIn 1.2s ease-out 0.3s forwards" }}
-            className="absolute right-[-5%] sm:right-[5%] top-[10%] w-[65%] sm:w-[45%] max-w-[550px] aspect-[3/4] mix-blend-luminosity z-[-1] pointer-events-none opacity-80"
+            style={{ y: imageY, opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
+            className="absolute right-0 sm:right-[5%] top-[15%] w-[80%] sm:w-[50%] max-w-[600px] aspect-square pointer-events-none opacity-40 mix-blend-screen"
           >
             <div 
               className="relative w-full h-full"
-              style={{ clipPath: "polygon(8% 0, 100% 0, 92% 100%, 0 100%)" }}
+              style={{ 
+                maskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 70%)",
+                WebkitMaskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 70%)" 
+              }}
             >
               <Image 
                 src={professor.heroImage} 
                 alt={`Portrait of ${professor.fullName}`} 
                 fill 
-                className="object-cover object-top grayscale contrast-125"
+                className="object-cover object-top grayscale contrast-150 brightness-75"
                 priority
               />
-              {/* Hardware glitch overlay */}
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay" />
+              {/* Cyan Data Tint */}
+              <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
             </div>
           </motion.div>
         )}
