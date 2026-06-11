@@ -10,8 +10,8 @@ type TimelineSectionProps = {
 export function TimelineSection({ className }: TimelineSectionProps) {
   return (
     <section
-      id="timeline"
-      aria-labelledby="timeline-heading"
+      id="experience"
+      aria-labelledby="experience-heading"
       className={cn("flex flex-col gap-8 sm:gap-10", className)}
     >
       <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
@@ -19,7 +19,7 @@ export function TimelineSection({ className }: TimelineSectionProps) {
           <SectionLabel>Timeline</SectionLabel>
           <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">04 // RECORD</span>
         </div>
-        <SectionHeading as="h2" id="timeline-heading" className="uppercase font-bold">
+        <SectionHeading as="h2" id="experience-heading" className="uppercase font-bold">
           Milestones & records
         </SectionHeading>
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">

@@ -6,11 +6,14 @@ import { EditorialHero } from "@/components/sections/hero/editorial-hero";
 import { ProfilePanel } from "@/components/sections/profile-panel/profile-panel";
 import { PublicationSection } from "@/components/sections/publication-drawer/publication-section";
 import { ConferencesSection } from "@/components/sections/conferences/conferences-section";
-import { ResearchGraph } from "@/components/sections/research-graph/research-graph";
 import { TimelineSection } from "@/components/sections/timeline/timeline-section";
 import { StudentsSection } from "@/components/sections/students/students-section";
 import { ContactSection } from "@/components/sections/contact/contact-section";
+import { TeachingSection } from "@/components/sections/teaching/teaching-section";
+import { ActivitiesSection } from "@/components/sections/activities/activities-section";
 import { NetworkBackground } from "@/components/shared/media/network-background";
+import { ResearchGraph } from "@/components/sections/research-graph/research-graph";
+import { SiteNav } from "@/components/layout/site-nav";
 
 export default function HomePage() {
   return (
@@ -19,6 +22,7 @@ export default function HomePage() {
         <NetworkBackground />
       </div>
       <ScrollPhaseTracker />
+      <SiteNav />
       <EditorialHero />
 
       <MainLayout profilePanel={<ProfilePanel />}>
@@ -33,6 +37,14 @@ export default function HomePage() {
 
           <div className="scroll-reveal">
             <PublicationSection />
+          </div>
+
+          <div className="scroll-reveal">
+            <TeachingSection />
+          </div>
+
+          <div className="scroll-reveal">
+            <ActivitiesSection />
           </div>
 
           <div className="scroll-reveal">

@@ -61,6 +61,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
 
   return (
     <section
+      id="portfolio"
       data-hero-root
       data-transition-phase="hero"
       aria-labelledby="hero-heading"
@@ -100,8 +101,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16 xl:gap-24 mt-auto mb-16 md:mb-24 w-full"
           style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.2s forwards" }}
         >
-          {/* Left Side: Typography and Bio (60%) */}
-          <div className="flex flex-col gap-6 lg:w-[60%] shrink-0">
+          {/* Left Side: Typography and Bio */}
+          <div className="flex flex-col gap-6 flex-1 shrink-0 lg:shrink">
             <div className="flex flex-col gap-4">
               <span className="block font-mono text-xs sm:text-sm font-semibold tracking-[0.4em] text-accent/90 uppercase ml-1 sm:ml-2">
                 {professor.honorific}
@@ -147,11 +148,11 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             </div>
           </div>
 
-          {/* Right Side: Massive Portrait Anchor (40%) */}
+          {/* Right Side: Massive Portrait Anchor */}
           {professor.heroImage && (
             <motion.div 
               style={{ opacity: 0, animation: "fadeIn 1.5s ease-out 0.5s forwards" }}
-              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[40%] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 xl:ml-auto p-3 bg-black/5 dark:bg-background/80 border border-black/10 dark:border-border/50 rounded-none dark:rounded-lg"
+              className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[38%] xl:w-[32%] max-w-[420px] aspect-[4/5] shadow-2xl shrink-0 ml-auto lg:ml-0 lg:mr-8 xl:mr-24 p-3 bg-black/5 dark:bg-background/80 border border-black/10 dark:border-border/50 rounded-none dark:rounded-lg"
             >
               <div className="relative w-full h-full overflow-hidden border border-black/5 dark:border-transparent rounded-none dark:rounded-lg">
                 <Image 

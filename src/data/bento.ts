@@ -98,9 +98,5 @@ export const bentoCards: readonly BentoCardData[] = [
       "Co-Author: AICTE Textbook on Design and Analysis of Algorithms.",
       "Active IEEE Member contributing to international technical standards and peer review.",
     ],
-    modalLinks: [
-      { label: "Projects Portfolio", url: "https://sites.google.com/view/rahulmishracse/projects" },
-      { label: "Invited Speaker", url: "https://sites.google.com/view/rahulmishracse/invited-speaker" }
-    ]
   },
 ] as const;

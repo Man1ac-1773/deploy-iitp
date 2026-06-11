@@ -411,3 +411,69 @@ html:not(.dark) .laser-scan-line-vertical {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+@media print {
+  :root,
+  .dark {
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --card-foreground: #000000;
+    --border: #cccccc;
+    --muted: #f3f4f6;
+    --muted-foreground: #4b5563;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide interactive/heavy chrome */
+  header,
+  footer,
+  nav,
+  aside,
+  .canvas-container,
+  [data-hero-root] canvas,
+  .pointer-events-none {
+    display: none !important;
+  }
+
+  /* Force elements to reset their animation states */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+
+  section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000000 !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

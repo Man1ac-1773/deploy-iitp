@@ -1,0 +1,64 @@
+export type Patent = {
+  title: string;
+  inventors: string[];
+  number: string;
+  status: string;
+  description: string;
+};
+
+export const patents: readonly Patent[] = [
+  {
+    title:
+      "Racket Sports Activities Monitoring and Corrections using Grip Embedded Sensors and Smartphone",
+    inventors: ["Rahul Mishra", "T. K. Maiti", "A. Jain", "P. Lalwani", "R. Shah"],
+    number: "202411014828",
+    status: "Patent filed",
+    description:
+      "Monitoring and correction of racket-sports activities using grip-embedded sensors and a smartphone.",
+  },
+];
+
+export type BookItem = {
+  title: string;
+  publisher: string;
+  description: string;
+};
+
+export const books: readonly BookItem[] = [
+  {
+    title: "AICTE Textbook on Design and Analysis of Algorithm",
+    publisher: "AICTE (All India Council for Technical Education)",
+    description: "AICTE-sponsored textbook on Design and Analysis of Algorithms.",
+  },
+];
+
+export type AwardItem = {
+  name: string;
+  organization: string;
+  year: string;
+  description: string;
+};
+
+export const awards: readonly AwardItem[] = [
+  {
+    name: "Student Conference Grant",
+    organization: "IEEE Communications Society (ComSoc)",
+    year: "2021, 2022",
+    description:
+      "Received student conference grant sponsored by IEEE ComSoc for INFOCOM 2021 and 2022.",
+  },
+];
+
+export type Membership = {
+  organization: string;
+  type: string;
+  status: string;
+};
+
+export const memberships: readonly Membership[] = [
+  {
+    organization: "IEEE (Institute of Electrical and Electronics Engineers)",
+    type: "Member",
+    status: "Active",
+  },
+];

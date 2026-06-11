@@ -358,11 +358,13 @@ export function ResearchGraph({ className }: { className?: string }) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
         {/* Left Column: Interactive Simulation Canvas */}
         <div className="lg:col-span-7 flex flex-col gap-3">
-          <div className="relative overflow-hidden rounded-sm border border-border/40 bg-surface/20 p-1 min-h-[400px] flex items-center justify-center">
-            {/* Overlay Grid UI */}
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background dark:opacity-100 opacity-50 z-10 pointer-events-none" />
-            <div className="absolute top-4 left-5 select-none font-mono text-[9px] tracking-widest text-muted-foreground/50 uppercase pointer-events-none z-10">
-              SIMULATION.CANVAS // EDGE_NODES: ACTIVE
+          <div className="relative aspect-video w-full rounded-sm border border-border/40 bg-surface/20 overflow-hidden canvas-container">
+            {/* Accessibility Fallback for Canvas */}
+            <div className="sr-only" aria-live="polite">
+              Interactive Federated Learning Simulation showing {activeState} state.
+              Currently displaying data related to publication: {displayPub.title}.
+              Global Server Accuracy: {metricsRef.current.accuracy.toFixed(1)}%,
+              Communication Rounds: {Math.floor(metricsRef.current.rounds)}.
             </div>
             
             <canvas 
@@ -374,6 +376,12 @@ export function ResearchGraph({ className }: { className?: string }) {
                 Your browser does not support the canvas element. This section contains an interactive visualization of edge nodes sending data to a global server.
               </p>
             </canvas>
+
+            {/* Overlay Grid UI */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background dark:opacity-100 opacity-50 z-10 pointer-events-none" />
+            <div className="absolute top-4 left-5 select-none font-mono text-[9px] tracking-widest text-muted-foreground/50 uppercase pointer-events-none z-10">
+              SIMULATION.CANVAS // EDGE_NODES: ACTIVE
+            </div>
             
             {/* Controls Overlay */}
             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 z-10">
