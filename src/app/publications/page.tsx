@@ -13,6 +13,17 @@ export default function PublicationsPage() {
         <NetworkBackground />
       </div>
 
+      {/* Force professor identity visibility on this static page */}
+      <style suppressHydrationWarning>{`
+        @media (min-width: 1024px) {
+          aside [data-transition-id="professor-identity"] {
+            opacity: 1 !important;
+            transform: translateY(0px) !important;
+            filter: none !important;
+          }
+        }
+      `}</style>
+
       <MainLayout profilePanel={<ProfilePanel />}>
         <ContentPanel>
           <div className="mb-8">
