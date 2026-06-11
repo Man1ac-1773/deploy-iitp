@@ -72,14 +72,26 @@ export function ActivityDetailSheet({
           <div className="flex flex-col gap-6 px-6 py-8">
             <div className="flex flex-col gap-6">
               {!isPatent && (
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                    Description
-                  </h3>
-                  <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
-                    {displayItem.description}
-                  </p>
-                </div>
+                <>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                      Description
+                    </h3>
+                    <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
+                      {displayItem.description}
+                    </p>
+                  </div>
+                  {displayItem.coAuthors && displayItem.coAuthors.length > 0 && (
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                        Co-Authored With
+                      </h3>
+                      <p className="text-sm leading-relaxed text-foreground/90 font-mono">
+                        {displayItem.coAuthors.join(", ")}
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
 
               {isPatent && (

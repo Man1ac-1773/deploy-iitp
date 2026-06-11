@@ -25,6 +25,7 @@ export type BookItem = {
   publisher: string;
   description: string;
   link?: string;
+  coAuthors?: string[];
 };
 
 export const books: readonly BookItem[] = [
@@ -32,7 +33,8 @@ export const books: readonly BookItem[] = [
     title: "AICTE Textbook on Design and Analysis of Algorithm",
     publisher: "AICTE (All India Council for Technical Education)",
     description: "AICTE-sponsored textbook on Design and Analysis of Algorithms.",
-    link: "https://www.aicte-india.org/education/books-engineering",
+    link: "https://www.khannabooks.com/design-and-analysis-of-algorithms",
+    coAuthors: ["Dr. Hari Prabhat Gupta"],
   },
 ];
 
