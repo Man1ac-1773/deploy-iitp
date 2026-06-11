@@ -35,14 +35,14 @@ export function TeachingSection({ className }: TeachingSectionProps) {
             // Current Courses
           </h3>
           <div className="flex flex-col gap-4">
-            {featuredCourses.map((course) => (
+            {featuredCourses.map((course, index) => (
               <div
-                key={course.code}
+                key={course.title + index}
                 className="group flex flex-col gap-2 rounded-sm border border-border/40 bg-surface/20 p-5 hover:border-accent/40 hover:bg-surface/40 transition-colors duration-300"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-mono text-sm font-semibold tracking-wider text-accent transition-colors duration-300">
-                    {course.code}
+                  <span className="font-mono text-xs font-semibold tracking-wider text-accent transition-colors duration-300">
+                    {course.code || `[ ${course.category} ]`}
                   </span>
                   <span className="rounded-full border border-border/50 bg-background/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
                     {course.level}

@@ -54,14 +54,14 @@ export default function TeachingPage() {
                     // All Courses
                   </h3>
                   <div className="flex flex-col gap-4">
-                    {courses.map((course) => (
+                    {courses.map((course, index) => (
                       <div
-                        key={course.code}
+                        key={course.title + index}
                         className="group flex flex-col gap-2 rounded-sm border border-border/40 bg-surface/20 p-5 hover:border-accent/40 hover:bg-surface/40 transition-colors duration-300"
                       >
                         <div className="flex items-center justify-between gap-4">
-                          <span className="font-mono text-sm font-semibold tracking-wider text-accent transition-colors duration-300">
-                            {course.code}
+                          <span className="font-mono text-xs font-semibold tracking-wider text-accent transition-colors duration-300">
+                            {course.code || `[ ${course.category} ]`}
                           </span>
                           <span className="rounded-full border border-border/50 bg-background/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
                             {course.level}
@@ -70,9 +70,14 @@ export default function TeachingPage() {
                         <h4 className="text-base font-semibold text-foreground tracking-tight">
                           {course.title}
                         </h4>
-                        <p className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
-                          &gt; {course.category}
-                        </p>
+                        <div className="flex flex-col gap-1 mt-2">
+                          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/80 uppercase">
+                            {course.timeline}
+                          </p>
+                          <p className="text-xs text-muted-foreground/70 uppercase tracking-widest">
+                            &gt; {course.institution}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -115,12 +120,15 @@ export default function TeachingPage() {
       </MainLayout>
 
       {/* Force professor identity visibility on this static page */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        [data-scroll-phase] .professor-identity {
-          opacity: 1 !important;
-          transform: none !important;
+      <style suppressHydrationWarning>{`
+        @media (min-width: 1024px) {
+          aside [data-transition-id="professor-identity"] {
+            opacity: 1 !important;
+            transform: translateY(0px) !important;
+            filter: none !important;
+          }
         }
-      `}} />
+      `}</style>
     </>
   );
 }

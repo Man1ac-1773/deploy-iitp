@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "#research", id: "research", label: "Overview", index: "01" },
-  { href: "#graph", id: "graph", label: "Taxonomy", index: "02" },
-  { href: "#publications", id: "publications", label: "Archive", index: "03" },
-  { href: "#timeline", id: "timeline", label: "Record", index: "04" },
-  { href: "#students", id: "students", label: "Advisees", index: "05" },
-  { href: "#contact", id: "contact", label: "Terminal", index: "06" },
+  { id: "research", label: "Overview", index: "01" },
+  { id: "graph", label: "Taxonomy", index: "02" },
+  { id: "featured-publications", label: "Archive", index: "03" },
+  { id: "experience", label: "Record", index: "04" },
+  { id: "students", label: "Advisees", index: "05" },
+  { id: "contact", label: "Terminal", index: "06" },
 ] as const;
 
 type SectionNavProps = {
@@ -18,6 +20,8 @@ type SectionNavProps = {
 
 export function SectionNav({ className }: SectionNavProps) {
   const [activeId, setActiveId] = useState<string>("research");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const observerOptions = {
@@ -53,11 +57,12 @@ export function SectionNav({ className }: SectionNavProps) {
       <ul className="flex flex-col gap-4 border-l border-border/60 pl-5 py-2">
         {NAV_ITEMS.map((item) => {
           const isActive = activeId === item.id;
+          const href = isHome ? `#${item.id}` : `/#${item.id}`;
 
           return (
-            <li key={item.href}>
-              <a
-                href={item.href}
+            <li key={item.id}>
+              <Link
+                href={href}
                 className={cn(
                   "group flex items-baseline gap-3 text-xs transition-colors duration-300",
                   isActive
@@ -78,7 +83,7 @@ export function SectionNav({ className }: SectionNavProps) {
                 <span className="tracking-wider uppercase">
                   {item.label}
                 </span>
-              </a>
+              </Link>
             </li>
           );
         })}

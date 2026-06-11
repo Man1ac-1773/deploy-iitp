@@ -178,12 +178,15 @@ export default function ServicePage() {
       />
 
       {/* Force professor identity visibility on this static page */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        [data-scroll-phase] .professor-identity {
-          opacity: 1 !important;
-          transform: none !important;
+      <style suppressHydrationWarning>{`
+        @media (min-width: 1024px) {
+          aside [data-transition-id="professor-identity"] {
+            opacity: 1 !important;
+            transform: translateY(0px) !important;
+            filter: none !important;
+          }
         }
-      `}} />
+      `}</style>
     </>
   );
 }
