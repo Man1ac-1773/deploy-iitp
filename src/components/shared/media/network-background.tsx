@@ -58,7 +58,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       });
     };
     // Only update on load and resize, completely detaching from the scroll event
-    setTimeout(updateRects, 100); 
+    const rectTimerId = setTimeout(updateRects, 100); 
     
     const handleResize = () => {
       width = window.innerWidth;
@@ -283,6 +283,7 @@ export function NetworkBackground({ className }: NetworkBackgroundProps) {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("visibilitychange", handleVisibility);
+      clearTimeout(rectTimerId);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);

@@ -44,8 +44,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10 custom-scrollbar"
+        className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10 custom-scrollbar"
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         

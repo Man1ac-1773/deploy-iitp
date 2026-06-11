@@ -79,13 +79,13 @@ export function ProfilePanel() {
         <div className="flex flex-col gap-2 pt-2">
           <h3 className="text-[10px] font-medium tracking-[0.2em] text-muted-foreground uppercase">Profiles</h3>
           <div className="flex items-center gap-4">
-            <a href="https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" aria-label="Google Scholar" className="p-2 -ml-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
+            <a href="https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" className="p-2 -ml-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
               <GraduationCap className="w-5 h-5" />
             </a>
-            <a href="https://www.researchgate.net/profile/Rahul-Mishra-22" target="_blank" rel="noreferrer" aria-label="ResearchGate" className="p-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
+            <a href="https://www.researchgate.net/profile/Rahul-Mishra-22" target="_blank" rel="noopener noreferrer" aria-label="ResearchGate" className="p-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
               <BookOpen className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/rahul-mishra-052205146/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="p-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
+            <a href="https://www.linkedin.com/in/rahul-mishra-052205146/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-sm transition-all">
               <LinkedinIcon className="w-5 h-5" />
             </a>
           </div>

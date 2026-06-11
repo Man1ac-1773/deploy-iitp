@@ -15,8 +15,9 @@ export function MainLayout({
   return (
     <div
       id="portfolio"
+      tabIndex={-1}
       data-transition-phase="portfolio"
-      className={cn("min-h-dvh scroll-mt-0 relative z-10", className)}
+      className={cn("min-h-dvh scroll-mt-0 relative z-10 focus:outline-none", className)}
     >
       <div className="mx-auto flex w-full max-w-[1600px] flex-col lg:min-h-dvh lg:flex-row">
         <aside
