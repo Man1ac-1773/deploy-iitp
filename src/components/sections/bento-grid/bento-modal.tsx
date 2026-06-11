@@ -101,12 +101,43 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
             </div>
           ) : card.modalList ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {card.modalList.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-white/40 dark:bg-white/5 p-4 rounded-sm border border-white/60 dark:border-white/5 hover:border-accent/30 transition-colors">
-                  <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70" />
-                  <span className="text-sm sm:text-base text-foreground/90">{item}</span>
-                </li>
-              ))}
+              {card.modalList.map((item, idx) => {
+                const isObj = typeof item === "object";
+                const text = isObj ? item.text : item;
+                const href = isObj ? item.href : undefined;
+                const tooltip = isObj ? item.tooltip : undefined;
+
+                const inner = (
+                  <>
+                    <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70 transition-transform group-hover:scale-125" />
+                    <span className="text-sm sm:text-base text-foreground/90 transition-colors group-hover:text-foreground">{text}</span>
+                    {tooltip && (
+                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-foreground text-background text-xs font-mono tracking-wider rounded-sm opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 whitespace-nowrap z-50 shadow-xl">
+                        {tooltip}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground" />
+                      </div>
+                    )}
+                  </>
+                );
+
+                const baseClasses = "group relative flex items-start gap-3 bg-white/40 dark:bg-white/5 p-4 rounded-sm border border-white/60 dark:border-white/5 hover:border-accent/50 hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-300";
+
+                if (href) {
+                  return (
+                    <li key={idx} className="flex">
+                      <a href={href} onClick={onClose} className={`w-full ${baseClasses}`}>
+                        {inner}
+                      </a>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={idx} className={baseClasses}>
+                    {inner}
+                  </li>
+                );
+              })}
             </ul>
           ) : null}
 

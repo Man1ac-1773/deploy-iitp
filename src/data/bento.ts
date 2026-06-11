@@ -17,10 +17,26 @@ export const bentoCards: readonly BentoCardData[] = [
     modalTitle: "Core Philosophies & Research Innovation",
     modalDescription: "I leverage deep learning and IoT to solve real, deployment-scale problems. My current focus is pushing the boundaries of Federated Learning by suppressing noisy labels in decentralized edge environments without compromising data privacy.",
     modalList: [
-      "Pioneering Noise-Resilient Federated Learning architectures.",
-      "Developing Lightweight Deep Neural Networks optimized for IoT.",
-      "Enhancing lifetime and efficiency of UAV-Enabled Aerial Networks.",
-      "Designing Task Offloading systems in Fog Computing.",
+      {
+        text: "Pioneering Noise-Resilient Federated Learning architectures.",
+        href: "#graph",
+        tooltip: "Explore Interactive Simulation"
+      },
+      {
+        text: "Developing Lightweight Deep Neural Networks optimized for IoT.",
+        href: "#featured-publications",
+        tooltip: "View Related Publications"
+      },
+      {
+        text: "Enhancing lifetime and efficiency of UAV-Enabled Aerial Networks.",
+        href: "#featured-publications",
+        tooltip: "View Drone Trajectory Paper"
+      },
+      {
+        text: "Designing Task Offloading systems in Fog Computing.",
+        href: "#featured-publications",
+        tooltip: "View Fog Computing Research"
+      },
     ],
   },
   {

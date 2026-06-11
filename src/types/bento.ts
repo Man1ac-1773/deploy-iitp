@@ -10,6 +10,12 @@ export type ModalTab = {
   items: readonly string[];
 };
 
+export type ModalListItem = {
+  text: string;
+  href?: string;
+  tooltip?: string;
+};
+
 export type BentoCardData = {
   id: string;
   label: string;
@@ -21,6 +27,6 @@ export type BentoCardData = {
   modalTitle: string;
   modalDescription?: string;
   modalTabs?: readonly ModalTab[]; // If tabbed data
-  modalList?: readonly string[]; // If simple list data
+  modalList?: readonly (string | ModalListItem)[]; // If simple list data
   modalLinks?: readonly { label: string; url: string }[]; // External links for hubs
 };
