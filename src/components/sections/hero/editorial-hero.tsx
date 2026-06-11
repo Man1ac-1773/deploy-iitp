@@ -3,6 +3,7 @@
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
@@ -15,6 +16,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
   const nameRef = useRef<HTMLSpanElement>(null);
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 800], [0, 200]);
+  const lenis = useLenis();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +65,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       data-transition-phase="hero"
       aria-labelledby="hero-heading"
       className={cn(
-        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col overflow-hidden",
+        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col overflow-x-hidden",
         className,
       )}
     >
@@ -172,6 +174,12 @@ export function EditorialHero({ className }: EditorialHeroProps) {
           </span>
           <a
             href="#research"
+            onClick={(e) => {
+              if (lenis) {
+                e.preventDefault();
+                lenis.scrollTo("#research");
+              }
+            }}
             aria-label="Explore Research"
             className="group flex flex-col items-end gap-3 text-muted-foreground"
           >
