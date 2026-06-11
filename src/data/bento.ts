@@ -56,7 +56,11 @@ export const bentoCards: readonly BentoCardData[] = [
       "Multiple IEEE INFOCOM Student Grants (2021, 2022).",
       "M.Tech Gold Medalist for Academic Excellence (2017).",
       "Prestigious GATE Postgraduate Fellowships (2015, 2017).",
-      "Patented innovation in Racket Sports Activities Monitoring using Embedded Sensors (202411014828).",
+      {
+        text: "Patented innovation in Racket Sports Activities Monitoring using Embedded Sensors (202411014828).",
+        href: "#activities",
+        tooltip: "View Intellectual Property"
+      },
     ],
   },
   {

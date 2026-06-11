@@ -1,14 +1,27 @@
+"use client";
+
+import { useState } from "react";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import { patents, books, memberships, awards } from "@/data/activities";
 import { cn } from "@/lib/utils";
+import { ActivityDetailSheet, type ActivityItem } from "./activity-detail-sheet";
 
 type ActivitiesSectionProps = {
   className?: string;
 };
 
 export function ActivitiesSection({ className }: ActivitiesSectionProps) {
+  const [selectedItem, setSelectedItem] = useState<ActivityItem | null>(null);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleOpenSheet = (item: ActivityItem) => {
+    setSelectedItem(item);
+    setIsSheetOpen(true);
+  };
+
   return (
+    <>
     <section
       id="activities"
       aria-labelledby="activities-heading"
@@ -37,7 +50,11 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
               // Intellectual Property
             </h3>
             {patents.map((patent, i) => (
-              <div key={i} className="flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 transition-colors">
+              <button
+                key={i}
+                onClick={() => handleOpenSheet({ type: "patent", ...patent })}
+                className="group flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
+              >
                 <div className="flex items-start justify-between gap-2">
                   <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{patent.title}</h4>
                   <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
@@ -50,7 +67,7 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
                   <span className="hidden sm:inline">|</span>
                   <span className="truncate">Inventors: {patent.inventors.join(", ")}</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
 
@@ -59,11 +76,15 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
               // Authored Books
             </h3>
             {books.map((book, i) => (
-              <div key={i} className="flex flex-col gap-1.5 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 transition-colors">
+              <button
+                key={i}
+                onClick={() => handleOpenSheet({ type: "book", ...book })}
+                className="group flex flex-col gap-1.5 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
+              >
                 <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{book.title}</h4>
                 <p className="text-xs font-mono text-accent/80 uppercase tracking-widest">{book.publisher}</p>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">{book.description}</p>
-              </div>
+              </button>
             ))}
           </div>
 
@@ -105,5 +126,12 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
 
       </div>
     </section>
+    
+    <ActivityDetailSheet
+      item={selectedItem}
+      open={isSheetOpen}
+      onOpenChange={setIsSheetOpen}
+    />
+    </>
   );
 }

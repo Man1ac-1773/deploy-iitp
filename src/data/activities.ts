@@ -4,6 +4,7 @@ export type Patent = {
   number: string;
   status: string;
   description: string;
+  link?: string;
 };
 
 export const patents: readonly Patent[] = [
@@ -15,6 +16,7 @@ export const patents: readonly Patent[] = [
     status: "Patent filed",
     description:
       "Monitoring and correction of racket-sports activities using grip-embedded sensors and a smartphone.",
+    link: "https://ipindia.gov.in/",
   },
 ];
 
@@ -22,6 +24,7 @@ export type BookItem = {
   title: string;
   publisher: string;
   description: string;
+  link?: string;
 };
 
 export const books: readonly BookItem[] = [
@@ -29,6 +32,7 @@ export const books: readonly BookItem[] = [
     title: "AICTE Textbook on Design and Analysis of Algorithm",
     publisher: "AICTE (All India Council for Technical Education)",
     description: "AICTE-sponsored textbook on Design and Analysis of Algorithms.",
+    link: "https://www.aicte-india.org/education/books-engineering",
   },
 ];
 
