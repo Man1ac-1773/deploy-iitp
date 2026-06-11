@@ -8,9 +8,10 @@ import { motion } from "framer-motion";
 const sections = [
   { id: "portfolio", label: "Overview" },
   { id: "research", label: "Research Focus" },
-  { id: "publications", label: "Publications" },
+  { id: "featured-publications", label: "Publications" },
   { id: "teaching", label: "Teaching" },
-  { id: "activities", label: "Professional Service" },
+  { id: "activities", label: "Service" },
+  { id: "conferences", label: "Conferences" },
   { id: "experience", label: "Experience" },
   { id: "students", label: "Mentorship" },
   { id: "contact", label: "Contact" },
@@ -62,7 +63,7 @@ export function SiteNav() {
 
   return (
     <nav
-      className="fixed right-4 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col gap-4 py-8 px-4"
+      className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4 py-8 px-4"
       aria-label="Section navigation"
     >
       <div className="absolute inset-0 bg-background/5 dark:bg-background/20 backdrop-blur-md rounded-full border border-black/5 dark:border-white/5 pointer-events-none" />
@@ -84,8 +85,8 @@ export function SiteNav() {
             <motion.div
               initial={{ opacity: 0, x: 10, pointerEvents: "none" }}
               animate={{
-                opacity: isHovered || isActive ? 1 : 0,
-                x: isHovered || isActive ? 0 : 10,
+                opacity: isHovered ? 1 : 0,
+                x: isHovered ? 0 : 10,
               }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               className={cn(
