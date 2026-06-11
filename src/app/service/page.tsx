@@ -65,25 +65,6 @@ export default function ServicePage() {
                 
                 {/* Left Column */}
                 <div className="md:col-span-7 flex flex-col gap-12">
-                  
-                  {/* Responsibilities */}
-                  <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
-                      // Administrative & Social Responsibilities
-                    </h3>
-                    {responsibilities.map((resp, i) => (
-                      <div key={i} className="flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20">
-                        <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{resp.title}</h4>
-                          <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
-                            {resp.category}
-                          </span>
-                        </div>
-                        <p className="text-xs font-mono text-accent/80 uppercase tracking-widest">{resp.organization}</p>
-                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">{resp.description}</p>
-                      </div>
-                    ))}
-                  </div>
 
                   {/* Intellectual Property */}
                   <div className="flex flex-col gap-4">
@@ -109,6 +90,25 @@ export default function ServicePage() {
                           <span className="truncate">Inventors: {patent.inventors.join(", ")}</span>
                         </div>
                       </button>
+                    ))}
+                  </div>
+                  
+                  {/* Responsibilities */}
+                  <div className="flex flex-col gap-4">
+                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                      // Administrative & Social Responsibilities
+                    </h3>
+                    {responsibilities.map((resp, i) => (
+                      <div key={i} className="flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20">
+                        <div className="flex items-start justify-between gap-2">
+                          <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{resp.title}</h4>
+                          <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
+                            {resp.category}
+                          </span>
+                        </div>
+                        <p className="text-xs font-mono text-accent/80 uppercase tracking-widest">{resp.organization}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">{resp.description}</p>
+                      </div>
                     ))}
                   </div>
 

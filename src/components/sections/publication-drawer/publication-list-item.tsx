@@ -29,7 +29,7 @@ export function PublicationListItem({
       aria-label={`Open details for ${publication.title}`}
       onClick={() => onSelect(publication.id)}
       className={cn(
-        "flex w-full flex-col gap-3 border-b border-border py-6 text-left",
+        "flex w-full flex-col gap-3 border-b border-border py-6 px-4 sm:px-6 rounded-sm text-left transition-colors duration-300",
         "hover:bg-card/60 focus-visible:bg-card/60 focus-visible:outline-none",
         isSelected && "bg-card/40",
       )}
