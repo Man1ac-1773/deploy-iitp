@@ -7,8 +7,9 @@ export function BentoSection() {
   return (
     <section
       id="research"
+      tabIndex={-1}
       aria-labelledby="bento-section-heading"
-      className="flex flex-col gap-8 sm:gap-10"
+      className="flex flex-col gap-8 sm:gap-10 focus:outline-none scroll-mt-24"
     >
       <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
         <div className="flex items-center justify-between">

@@ -178,6 +178,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               if (lenis) {
                 e.preventDefault();
                 lenis.scrollTo("#research");
+                document.getElementById('research')?.focus({ preventScroll: true });
               }
             }}
             aria-label="Explore Research"
