@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import { patents, books, memberships, awards } from "@/data/activities";
@@ -124,6 +125,20 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
 
         </div>
 
+      </div>
+
+      <div className="flex justify-center md:justify-start pt-6 border-t border-border/20 mt-4">
+        <Link
+          href="/service"
+          className="group flex items-center gap-4 bg-accent/5 hover:bg-accent/10 border border-accent/20 hover:border-accent/40 px-6 py-4 transition-all duration-300 w-full sm:w-auto"
+        >
+          <span className="font-mono text-xs uppercase tracking-widest text-accent group-hover:text-accent-warm transition-colors">
+            [ Explore Full Professional Service ]
+          </span>
+          <svg aria-hidden="true" className="w-4 h-4 text-accent group-hover:text-accent-warm transition-all group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M4 12h16m0 0l-6-6m6 6l-6 6" />
+          </svg>
+        </Link>
       </div>
     </section>
     
