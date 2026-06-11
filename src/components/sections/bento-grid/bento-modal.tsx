@@ -108,19 +108,27 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
                 const tooltip = isObj ? item.tooltip : undefined;
 
                 const inner = (
-                  <>
-                    <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70 transition-transform group-hover:scale-125" />
-                    <span className="text-sm sm:text-base text-foreground/90 transition-colors group-hover:text-foreground">{text}</span>
+                  <div className="flex flex-col gap-3 w-full h-full justify-between">
+                    <div className="flex items-start gap-3">
+                      <span aria-hidden className="mt-[0.35em] size-1.5 shrink-0 rounded-sm bg-accent/70 transition-transform duration-300 group-hover:scale-125 group-hover:bg-accent" />
+                      <span className="text-sm sm:text-base text-foreground/90 transition-colors duration-300 group-hover:text-foreground">
+                        {text}
+                      </span>
+                    </div>
                     {tooltip && (
-                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-foreground text-background text-xs font-mono tracking-wider rounded-sm opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 whitespace-nowrap z-50 shadow-xl">
-                        {tooltip}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground" />
+                      <div className="flex items-center justify-end mt-auto pt-2 overflow-hidden border-t border-transparent group-hover:border-accent/10 transition-colors duration-300">
+                        <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-accent/80 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1">
+                          {tooltip}
+                          <svg className="size-3 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </span>
                       </div>
                     )}
-                  </>
+                  </div>
                 );
 
-                const baseClasses = "group relative flex items-start gap-3 bg-white/40 dark:bg-white/5 p-4 rounded-sm border border-white/60 dark:border-white/5 hover:border-accent/50 hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-300";
+                const baseClasses = "group relative flex items-stretch bg-white/40 dark:bg-white/5 p-4 rounded-sm border border-white/60 dark:border-white/5 hover:border-accent/50 hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-300 cursor-pointer h-full";
 
                 if (href) {
                   return (
