@@ -48,7 +48,7 @@ export function TeachingSection({ className }: TeachingSectionProps) {
                     {course.level}
                   </span>
                 </div>
-                <h4 className="text-base font-semibold text-foreground tracking-tight">
+                <h4 className="text-lg sm:text-xl font-semibold text-foreground tracking-tight">
                   {course.title}
                 </h4>
               </div>

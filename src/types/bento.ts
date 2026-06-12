@@ -2,7 +2,9 @@ export type BentoSpan =
   | "feature-tall"
   | "sidebar-top"
   | "sidebar-bottom"
-  | "wide";
+  | "wide"
+  | "half-left"
+  | "half-right";
 
 export type ModalTab = {
   id: string;

@@ -67,7 +67,7 @@ export default function TeachingPage() {
                             {course.level}
                           </span>
                         </div>
-                        <h4 className="text-base font-semibold text-foreground tracking-tight">
+                        <h4 className="text-lg sm:text-xl font-semibold text-foreground tracking-tight">
                           {course.title}
                         </h4>
                         <div className="flex flex-col gap-1 mt-2">
@@ -93,7 +93,7 @@ export default function TeachingPage() {
                         key={method.label}
                         className="relative pl-6 py-4 before:absolute before:-left-[5px] before:top-6 before:h-2 before:w-2 before:rounded-full before:bg-accent/40 before:ring-4 before:ring-background hover:before:bg-accent transition-colors duration-300"
                       >
-                        <h4 className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
+                        <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">
                           {method.label}
                         </h4>
                         <p className="mt-1 max-w-prose text-sm text-muted-foreground leading-relaxed">

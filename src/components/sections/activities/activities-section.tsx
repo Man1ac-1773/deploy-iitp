@@ -57,7 +57,7 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
                 className="group flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{patent.title}</h4>
+                  <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{patent.title}</h4>
                   <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
                     {patent.status}
                   </span>
@@ -82,7 +82,7 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
                 onClick={() => handleOpenSheet({ type: "book", ...book })}
                 className="group flex flex-col gap-1.5 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
               >
-                <h4 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{book.title}</h4>
+                <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{book.title}</h4>
                 <p className="text-xs font-mono text-accent/80 uppercase tracking-widest">{book.publisher}</p>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">{book.description}</p>
               </button>
@@ -101,7 +101,7 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
             {awards.map((award, i) => (
               <div key={i} className="flex flex-col gap-1 relative pl-4 border-l border-accent/20">
                 <span className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-accent/40"></span>
-                <h4 className="text-sm font-semibold text-foreground">{award.name}</h4>
+                <h4 className="text-base sm:text-lg font-semibold tracking-tight text-foreground">{award.name}</h4>
                 <p className="text-xs text-muted-foreground">{award.organization}</p>
                 <span className="font-mono text-[10px] tracking-widest text-accent/60 mt-1">{award.year}</span>
               </div>
@@ -115,7 +115,7 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
             {memberships.map((membership, i) => (
               <div key={i} className="flex items-center justify-between p-3 rounded-sm bg-surface/5 border border-border/10">
                 <div className="flex flex-col gap-0.5">
-                  <h4 className="text-sm font-semibold text-foreground">{membership.organization}</h4>
+                  <h4 className="text-base sm:text-lg font-semibold tracking-tight text-foreground">{membership.organization}</h4>
                   <p className="text-xs font-mono text-muted-foreground uppercase">{membership.type}</p>
                 </div>
                 <span className="h-2 w-2 rounded-full bg-green-500/80 ring-2 ring-green-500/20" title={membership.status}></span>

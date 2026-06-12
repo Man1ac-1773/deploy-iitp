@@ -19,22 +19,22 @@ export const bentoCards: readonly BentoCardData[] = [
     modalList: [
       {
         text: "Pioneering Noise-Resilient Federated Learning architectures.",
-        href: "#graph",
+        href: "#publications", // Using native anchor instead of complex URL passing
         tooltip: "Explore Interactive Simulation"
       },
       {
         text: "Developing Lightweight Deep Neural Networks optimized for IoT.",
-        href: "#featured-publications",
+        href: "#publications",
         tooltip: "View Related Publications"
       },
       {
         text: "Enhancing lifetime and efficiency of UAV-Enabled Aerial Networks.",
-        href: "#featured-publications",
+        href: "#publications",
         tooltip: "View Drone Trajectory Paper"
       },
       {
         text: "Designing Task Offloading systems in Fog Computing.",
-        href: "#featured-publications",
+        href: "#publications",
         tooltip: "View Fog Computing Research"
       },
     ],
@@ -55,7 +55,8 @@ export const bentoCards: readonly BentoCardData[] = [
     modalList: [
       "Multiple IEEE INFOCOM Student Grants (2021, 2022).",
       "M.Tech Gold Medalist for Academic Excellence (2017).",
-      "Prestigious GATE Postgraduate Fellowships (2015, 2017).",
+      "Prestigious GATE Postgraduate Fellowships for M.Tech & PhD (2015, 2017).",
+      "Best Paper Presentation Award at Research Scholar Day (MMMUT).",
       {
         text: "Patented innovation in Racket Sports Activities Monitoring using Embedded Sensors (202411014828).",
         href: "#activities",
@@ -106,7 +107,7 @@ export const bentoCards: readonly BentoCardData[] = [
     title: "Service & External Profiles",
     description:
       "Active contributor to global technical discourse, specialized portfolios, and textbook authorship.",
-    span: "wide",
+    span: "half-left",
     items: [
       "AICTE Textbook Co-Author",
       "Active IEEE Contributor",
@@ -119,4 +120,40 @@ export const bentoCards: readonly BentoCardData[] = [
       "Active IEEE Member contributing to international technical standards and peer review.",
     ],
   },
+  {
+    id: "datasets",
+    label: "Open Data",
+    title: "IEEE Dataport Datasets",
+    description: "Providing high-value, validated datasets to accelerate global research.",
+    span: "half-right",
+    items: [
+      "Mobile Sink Sensor Data",
+      "IMU Handwritten Digits",
+      "Signal Quality Measurement",
+    ],
+    modalTitle: "Open Science & Datasets",
+    modalDescription: "My research group actively publishes our validated datasets to IEEE Dataport, providing the global research community with ground-truth data for IoT, smart sensing, and ML applications.",
+    modalList: [
+      {
+        text: "Sensor Data of Mobile Sink for Precision Agriculture.",
+        href: "http://dx.doi.org/10.21227/ympr-t542",
+        tooltip: "View on IEEE Dataport"
+      },
+      {
+        text: "A Dataset of Inertial Measurement Units for Handwritten English Alphabets.",
+        href: "https://dx.doi.org/10.21227/av6q-jj17",
+        tooltip: "View on IEEE Dataport"
+      },
+      {
+        text: "Signal Quality Measurement (SQM) dataset.",
+        href: "https://dx.doi.org/10.21227/aysz-nq69",
+        tooltip: "View on IEEE Dataport"
+      },
+      {
+        text: "Accelerometer, Gyroscope, and Magnetometer Sensors based Data for Recognizing Handwritten Digits.",
+        href: "http://dx.doi.org/10.21227/52d9-8y30",
+        tooltip: "View on IEEE Dataport"
+      }
+    ]
+  }
 ] as const;

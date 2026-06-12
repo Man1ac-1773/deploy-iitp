@@ -4,6 +4,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-001",
     title: "Towards Understanding the Impact of Participant and its Wearable Devices in Federated Learning",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "IEEE Transactions on Mobile Computing",
     year: 2025,
@@ -19,6 +20,8 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-002",
     title: "Fed-NL: A Federated Learning Approach to Suppress Noise in Participant Datasets to Reduce Communication Rounds for Convergence",
+    status: "Accepted",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "IEEE Transactions on Mobile Computing",
     year: 2024,
@@ -34,6 +37,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-003",
     title: "Fed-RAC: Resource-Aware Clustering for Tackling Heterogeneity of Participants in Federated Learning",
+    volume: "35",
+    issue: "7",
+    pages: "1207-1220",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta", "G. Banga", "S. K. Das"],
     venue: "IEEE Transactions on Parallel and Distributed Systems",
     year: 2024,
@@ -49,6 +56,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-004",
     title: "A Model Personalization-based Federated Learning Approach for Heterogeneous Participants with Variability in the Dataset",
+    volume: "20",
+    issue: "1",
+    pages: "Article 22, 28 pages",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "ACM Transactions on Sensor Networks",
     year: 2024,
@@ -64,6 +75,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-005",
     title: "Designing and Training of Lightweight Neural Networks on Edge Devices Using Early Halting in Knowledge Distillation",
+    volume: "23",
+    issue: "5",
+    pages: "4665-4677",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "IEEE Transactions on Mobile Computing",
     year: 2024,
@@ -79,6 +94,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-006",
     title: "Transforming Large-Size to Lightweight Deep Neural Networks for IoT Applications",
+    volume: "55",
+    issue: "11",
+    pages: "Article 233, 35 pages",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "ACM Computing Surveys",
     year: 2023,
@@ -94,6 +113,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-007",
     title: "Leveraging Augmented Intelligence of Things to Enhance Lifetime of UAV-Enabled Aerial Networks",
+    volume: "19",
+    issue: "1",
+    pages: "586-593",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta", "R. Kumar", "T. Dutta"],
     venue: "IEEE Transactions on Industrial Informatics",
     year: 2023,
@@ -109,6 +132,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-008",
     title: "A Task Offloading and Reallocation Scheme for Passenger Assistance Using Fog Computing",
+    volume: "19",
+    issue: "3",
+    pages: "3032-3047",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta", "P. Kumari", "D. Y. Suh", "M. J. Piran"],
     venue: "IEEE Transactions on Network and Service Management",
     year: 2022,
@@ -124,6 +151,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-009",
     title: "Locomotion Mode Recognition Using Sensory Data with Noisy Labels: A Deep Learning Approach",
+    volume: "22",
+    issue: "6",
+    pages: "3460-3471",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "A. Gupta", "H. P. Gupta"],
     venue: "IEEE Transactions on Mobile Computing",
     year: 2023,
@@ -139,6 +170,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-010",
     title: "A Sensors Based Deep Learning Model for Unseen Locomotion Mode Identification using Multiple Semantic Matrices",
+    volume: "21",
+    issue: "3",
+    pages: "799-810",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "A. Gupta", "H. P. Gupta", "T. Dutta"],
     venue: "IEEE Transactions on Mobile Computing",
     year: 2022,
@@ -154,6 +189,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-011",
     title: "A Road Health Monitoring System Using Sensors in Optimal Deep Neural Network",
+    volume: "21",
+    issue: "14",
+    pages: "15527-15534",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "IEEE Sensors Journal",
     year: 2021,
@@ -169,6 +208,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-012",
     title: "Analysis, Modeling, and Representation of COVID-19 Spread: A Case Study on India",
+    volume: "8",
+    issue: "4",
+    pages: "964-973",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "IEEE Transactions on Computational Social Systems",
     year: 2021,
@@ -184,6 +227,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-013",
     title: "Optimizing Activity Recognition Through Dominant Axis Identification in Inertial Sensors",
+    correspondingAuthor: false,
     authors: ["R. Mishra", "A. Soni", "A. Jain", "P. Lalwani", "R. Shah"],
     venue: "IEEE Sensors Letters",
     year: 2024,
@@ -199,6 +243,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-014",
     title: "A Machine Learning-Based Overlay Technique for Improving the Mechanism of Road Traffic Prediction Using Global Positioning System",
+    volume: "9",
+    pages: "300",
+    correspondingAuthor: true,
     authors: ["A. D. Pandey", "R. Mishra", "et al."],
     venue: "Innovative Infrastructure Solutions",
     year: 2024,
@@ -214,6 +261,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-015",
     title: "Huber SVR-Based Hybrid Models for Significant Wave Height Forecasting Using Buoy Sensors",
+    volume: "7",
+    issue: "12",
+    pages: "1-4 (Art. no. 6010104)",
+    correspondingAuthor: false,
     authors: ["P. Anand", "S. Jain", "R. Mishra"],
     venue: "IEEE Sensors Letters",
     year: 2023,
@@ -229,6 +280,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-016",
     title: "Machine Learning-Based Interference Mitigation in Long-Range Networks for High-Ceiling Smart Buildings",
+    volume: "11",
+    pages: "96103-96118",
+    correspondingAuthor: true,
     authors: ["R. Kumar", "H. P. Gupta", "R. Mishra", "S. Pandey"],
     venue: "IEEE Access",
     year: 2023,
@@ -244,6 +298,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-017",
     title: "A Federated Learning-Based Patient Monitoring System in Internet of Medical Things",
+    volume: "10",
+    issue: "4",
+    pages: "1622-1628",
+    correspondingAuthor: true,
     authors: ["C. Singh", "R. Mishra", "H. P. Gupta", "G. Banga"],
     venue: "IEEE Transactions on Computational Social Systems",
     year: 2023,
@@ -259,6 +317,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-018",
     title: "A Federated Learning Approach with Imperfect Labels in LoRa-Based Transportation Systems",
+    volume: "24",
+    issue: "11",
+    pages: "13099-13107",
+    correspondingAuthor: true,
     authors: ["R. Kumar", "R. Mishra", "H. P. Gupta"],
     venue: "IEEE Transactions on Intelligent Transportation Systems",
     year: 2023,
@@ -274,6 +336,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-019",
     title: "Fair-select: A Federated Learning Approach to Ensure Fairness in Selection of Participants",
+    correspondingAuthor: true,
     authors: ["A. Soni", "R. Mishra"],
     venue: "Multimedia Tools and Applications",
     year: 2024,
@@ -289,6 +352,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-020",
     title: "Smart Sensing for Agriculture: Applications, Advancements, and Challenges",
+    volume: "10",
+    issue: "4",
+    pages: "51-56",
+    correspondingAuthor: true,
     authors: ["R. Kumar", "R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "IEEE Consumer Electronics Magazine",
     year: 2021,
@@ -304,6 +371,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-021",
     title: "An Energy-Efficient River Water Pollution Monitoring System in Internet of Things",
+    volume: "5",
+    issue: "2",
+    pages: "693-702",
+    correspondingAuthor: true,
     authors: ["S. Chopade", "H. P. Gupta", "R. Mishra", "P. Kumari", "T. Dutta"],
     venue: "IEEE Transactions on Green Communications and Networking",
     year: 2021,
@@ -319,6 +390,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-022",
     title: "An Energy Efficient Smart Metering System Using Edge Computing in LoRa Network",
+    volume: "7",
+    issue: "4",
+    pages: "786-798",
+    correspondingAuthor: false,
     authors: ["P. Kumari", "R. Mishra", "H. P. Gupta", "T. Dutta", "S. K. Das"],
     venue: "IEEE Transactions on Sustainable Computing",
     year: 2022,
@@ -334,6 +409,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-023",
     title: "Secure Industrial IoT Task Containerization with Deadline Constraint: A Stackelberg Game Approach",
+    volume: "18",
+    issue: "12",
+    pages: "8674-8681",
+    correspondingAuthor: true,
     authors: ["C. Singh", "P. Kumari", "R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "IEEE Transactions on Industrial Informatics",
     year: 2022,
@@ -349,6 +428,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-024",
     title: "A Sensors-Based River Water Quality Assessment System Using Deep Neural Network",
+    volume: "9",
+    issue: "16",
+    pages: "14375-14384",
+    correspondingAuthor: true,
     authors: ["S. Chopade", "H. P. Gupta", "R. Mishra", "A. Oswal", "P. Kumari", "T. Dutta"],
     venue: "IEEE Internet of Things Journal",
     year: 2022,
@@ -364,6 +447,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-025",
     title: "Jointly Prediction of Activities, Locations, and Starting Times for Isolated Elderly People",
+    volume: "27",
+    issue: "5",
+    pages: "2288-2295",
+    correspondingAuthor: false,
     authors: ["A. Chaudhary", "R. Mishra", "H. P. Gupta", "K. K. Shukla"],
     venue: "IEEE Journal of Biomedical and Health Informatics",
     year: 2023,
@@ -379,6 +466,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-026",
     title: "A Knowledge Distillation-Based Transportation System for Sensory Data Sharing Using LoRa",
+    volume: "21",
+    issue: "22",
+    pages: "25315-25322",
+    correspondingAuthor: false,
     authors: ["P. Kumari", "R. Mishra", "H. P. Gupta"],
     venue: "IEEE Sensors Journal",
     year: 2021,
@@ -394,6 +485,10 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-027",
     title: "The Internet of Drones in Precision Agriculture: Challenges, Solutions, and Research Opportunities",
+    volume: "5",
+    issue: "1",
+    pages: "180-184",
+    correspondingAuthor: true,
     authors: ["C. Singh", "R. Mishra", "H. P. Gupta", "P. Kumari"],
     venue: "IEEE Internet of Things Magazine",
     year: 2022,
@@ -409,6 +504,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-028",
     title: "Challenges and Solutions in Software-Defined Networking: A Survey",
+    volume: "141",
+    pages: "23-58",
+    correspondingAuthor: true,
     authors: ["S. Saraswat", "V. Agarwal", "H. P. Gupta", "R. Mishra", "A. Gupta", "T. Dutta"],
     venue: "Journal of Network and Computer Applications",
     year: 2019,
@@ -424,6 +522,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-029",
     title: "Coverage and Connectivity in WSNs: A Survey, Research Issues and Challenges",
+    volume: "6",
+    pages: "26971-26992",
+    correspondingAuthor: false,
     authors: ["A. Tripathi", "H. P. Gupta", "T. Dutta", "R. Mishra", "K. K. Shukla", "S. Jit"],
     venue: "IEEE Access",
     year: 2018,
@@ -439,6 +540,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-030",
     title: "i-Care: A Multi-Modal Data Integration Approach for Real-time Surveillance and Voice Assistance to Improve Infant Care",
+    dates: "Nov 7-8, 2024",
+    location: "Hangzhou, China",
+    status: "Accepted Regular Paper",
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "11th ACM International Conference on Systems for Energy-Efficient Buildings, Cities, and Transportation (BuildSys)",
     year: 2024,
@@ -452,6 +556,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-031",
     title: "On Demand Reliability in the Internet of Things Enabled Sensors Networks",
+    dates: "May 27-31, 2024",
+    location: "Ayia Napa, Cyprus",
+    status: "Regular paper, Core B conference",
     authors: ["R. Mishra", "P. Anand"],
     venue: "20th International Wireless Communications & Mobile Computing Conference (IWCMC)",
     year: 2024,
@@ -465,6 +572,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-032",
     title: "A Federated Learning Approach to Minimize Communication Rounds Using Noise Rectification",
+    dates: "April 21-24, 2024",
+    location: "Dubai, UAE",
+    status: "Accepted",
     authors: ["R. Mishra", "H. P. Gupta"],
     venue: "IEEE Wireless Communications and Networking Conference (WCNC)",
     year: 2024,
@@ -478,6 +588,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-033",
     title: "A Game Theory-based Transportation System using Fog Computing for Passenger Assistance",
+    status: "Regular paper, Core A conference",
     authors: ["R. Mishra", "P. Kumari", "H. P. Gupta", "Diksha", "T. Dutta", "D. Y. Suh", "M. J. Piran"],
     venue: "Proceedings of IEEE WoWMoM",
     year: 2021,
@@ -491,6 +602,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-034",
     title: "Minimizing Intra-Interference in LoRaWAN for Seamless Connectivity in Ubiquitous Networking",
+    status: "Accepted",
     authors: ["R. Mishra", "S. Godhaneeya", "A. Soni"],
     venue: "COMSNETS MINDS Workshop",
     year: 2024,
@@ -504,6 +616,9 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-035",
     title: "Your Gesture Can Prevent Oops Moments in Online Meetings",
+    dates: "December 10-13, 2024",
+    location: "Abu Dhabi, UAE",
+    status: "Accepted Poster",
     authors: ["A. K. Shina", "R. Mishra", "H. P. Gupta"],
     venue: "International Conference on Embedded Wireless Systems and Networks (EWSN)",
     year: 2024,
@@ -517,6 +632,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-036",
     title: "Noise-Resilient Federated Learning: Suppressing Noisy Labels in the Local Datasets of Participants",
+    status: "Poster, Core A* conference",
     authors: ["R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "Proceedings of IEEE INFOCOM",
     year: 2022,
@@ -530,6 +646,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-037",
     title: "An Energy-Efficient Smart Space System using LoRa Network with Deadline and Security Constraints",
+    status: "Regular paper, Core A conference",
     authors: ["P. Kumari", "H. P. Gupta", "R. Mishra", "S. K. Das"],
     venue: "Proceedings of ACM MSWIM",
     year: 2021,
@@ -543,6 +660,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-038",
     title: "A Network Resource Aware Federated Learning Approach using Knowledge Distillation",
+    status: "Poster, Core A* conference",
     authors: ["R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "Proceedings of IEEE INFOCOM",
     year: 2021,
@@ -569,6 +687,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-040",
     title: "Unseen Locomotion Mode Detection Problems using Inertial Sensors",
+    status: "PhD-forum (pp. 1-3)",
     authors: ["R. Mishra", "H. P. Gupta", "T. Dutta"],
     venue: "Proceedings of IEEE COMSNETS",
     year: 2021,
@@ -582,6 +701,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-041",
     title: "Game theory based early classification of rivers using time series data",
+    status: "pp. 686-691",
     authors: ["A. Gupta", "R. Pal", "R. Mishra", "H. P. Gupta", "T. Dutta", "P. Hirani"],
     venue: "Proceedings of IEEE WF-IoT",
     year: 2019,
@@ -595,6 +715,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-042",
     title: "A real-time precision agriculture monitoring system using mobile sink in WSNs",
+    status: "pp. 1-5",
     authors: ["A. Gupta", "H. P. Gupta", "P. Kumari", "R. Mishra", "S. Saraswat", "T. Dutta"],
     venue: "Proceedings of IEEE ANTS",
     year: 2018,
@@ -608,6 +729,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-043",
     title: "Gateway Discovery in MANET using Machine Learning and Soft Computing: A Survey",
+    status: "pp. 221-227",
     authors: ["R. Mishra", "P. Verma", "R. Kumar"],
     venue: "Proceedings of International Conference on Innovations in Information Embedded and Communication Systems (ICIIECS)",
     year: 2017,
@@ -621,6 +743,7 @@ export const publications: readonly Publication[] = [
   {
     id: "pub-044",
     title: "Fault-Tolerant Energy Efficient Power Management System for Smart Room",
+    status: "pp. 1-4",
     authors: ["R. Mishra", "D. Singh"],
     venue: "Proceedings of International Conference on Advanced Computing and Software Engineering (ICACSE)",
     year: 2018,
@@ -645,3 +768,4 @@ export const publications: readonly Publication[] = [
     tags: ["RSSI", "Tracking", "Ubiquitous Systems"],
   }
 ];
+

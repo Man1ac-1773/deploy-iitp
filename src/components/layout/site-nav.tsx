@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const sections = [
   { id: "portfolio", label: "Overview" },
   { id: "research", label: "Research Focus" },
+  { id: "graph", label: "Simulation" },
   { id: "featured-publications", label: "Publications" },
   { id: "teaching", label: "Teaching" },
   { id: "activities", label: "Service" },

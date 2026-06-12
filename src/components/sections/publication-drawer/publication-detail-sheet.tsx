@@ -70,6 +70,19 @@ export function PublicationDetailSheet({
             </SheetDescription>
 
             <p className="text-sm text-muted-foreground">{displayPub.venue}</p>
+            
+            {/* Advanced Academic Metadata Block */}
+            {(displayPub.volume || displayPub.issue || displayPub.pages || displayPub.status || displayPub.location || displayPub.dates || displayPub.correspondingAuthor) ? (
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-[10px] font-mono tracking-wide text-muted-foreground/80">
+                {displayPub.status ? <span className="text-accent/80 border border-accent/20 px-1 py-0.5 rounded-sm">STATUS: {displayPub.status.toUpperCase()}</span> : null}
+                {displayPub.volume ? <span>VOL: {displayPub.volume}</span> : null}
+                {displayPub.issue ? <span>ISSUE: {displayPub.issue}</span> : null}
+                {displayPub.pages ? <span>PP: {displayPub.pages}</span> : null}
+                {displayPub.dates ? <span>DATES: {displayPub.dates}</span> : null}
+                {displayPub.location ? <span>LOC: {displayPub.location}</span> : null}
+                {displayPub.correspondingAuthor ? <span className="text-accent/60">[ CORRESPONDING AUTHOR ]</span> : null}
+              </div>
+            ) : null}
           </SheetHeader>
 
           <div className="flex flex-col gap-6 px-6 py-8">

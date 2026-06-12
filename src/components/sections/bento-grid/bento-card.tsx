@@ -13,6 +13,8 @@ const SPAN_CLASSES = {
   "sidebar-bottom":
     "lg:col-span-4 lg:row-span-1 lg:row-start-2 lg:col-start-9 z-20",
   wide: "lg:col-span-12 lg:row-span-1 lg:row-start-3 lg:col-start-1 lg:translate-y-12",
+  "half-left": "lg:col-span-6 lg:row-span-1 lg:row-start-3 lg:col-start-1 lg:translate-y-12",
+  "half-right": "lg:col-span-6 lg:row-span-1 lg:row-start-3 lg:col-start-7 lg:translate-y-12",
 } as const;
 
 type BentoCardProps = {
@@ -58,7 +60,7 @@ export function BentoCard({ card, className, onClick }: BentoCardProps) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onClick={onClick}
-      id={card.id}
+      id={`bento-${card.id}`}
       data-bento-span={card.span}
       data-repel-swarm="true"
       className={cn(

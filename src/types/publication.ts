@@ -18,4 +18,14 @@ export type Publication = {
   url?: string;
   tags: readonly string[];
   citationCount?: number;
+  
+  // Advanced Academic Metadata (from v2)
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  status?: string; // e.g., "Accepted", "Under Review", "Core A*"
+  correspondingAuthor?: boolean;
+  location?: string; // for conferences
+  dates?: string; // for conferences
+  details?: string; // freeform detail string if needed
 };
