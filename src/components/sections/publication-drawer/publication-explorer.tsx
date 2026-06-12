@@ -100,7 +100,7 @@ export function PublicationExplorer({
                   type="button"
                   onClick={() => setActiveFilter(filter)}
                   className={cn(
-                    "border px-4 py-2 font-mono text-mini tracking-wider uppercase rounded-sm transition-colors duration-300 select-none cursor-pointer",
+                    "border px-2.5 py-1 font-mono text-[9px] tracking-wider uppercase rounded-sm transition-colors duration-300 select-none cursor-pointer",
                     isActive
                       ? "bg-accent-warm text-background border-accent-warm font-semibold shadow-[0_0_10px_rgba(229,169,59,0.15)]"
                       : "bg-background/20 text-muted-foreground/80 hover:text-foreground border-border/40 hover:bg-background/40",
