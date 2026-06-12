@@ -29,7 +29,7 @@ export default function TeachingPage() {
                 </svg>
               </Link>
               <div className="flex flex-col">
-                <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Return to Overview</span>
+                <span className="font-mono text-mini tracking-widest text-muted-foreground uppercase">Return to Overview</span>
                 <span className="text-sm font-semibold tracking-tight">Main Portfolio</span>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function TeachingPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 <div className="flex flex-col gap-6">
-                  <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase">
+                  <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase">
                     // All Courses
                   </h3>
                   <div className="flex flex-col gap-4">
@@ -63,7 +63,7 @@ export default function TeachingPage() {
                           <span className="font-mono text-xs font-semibold tracking-wider text-accent transition-colors duration-300">
                             {course.code || `[ ${course.category} ]`}
                           </span>
-                          <span className="rounded-full border border-border/50 bg-background/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+                          <span className="rounded-full border border-border/50 bg-background/50 px-2 py-0.5 text-mini font-medium text-muted-foreground uppercase tracking-wider">
                             {course.level}
                           </span>
                         </div>
@@ -71,7 +71,7 @@ export default function TeachingPage() {
                           {course.title}
                         </h4>
                         <div className="flex flex-col gap-1 mt-2">
-                          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/80 uppercase">
+                          <p className="font-mono text-mini tracking-widest text-muted-foreground/80 uppercase">
                             {course.timeline}
                           </p>
                           <p className="text-xs text-muted-foreground/70 uppercase tracking-widest">
@@ -84,7 +84,7 @@ export default function TeachingPage() {
                 </div>
 
                 <div className="flex flex-col gap-6">
-                  <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase">
+                  <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase">
                     // Teaching Methodology
                   </h3>
                   <div className="flex flex-col border-l border-border/40">
@@ -103,7 +103,7 @@ export default function TeachingPage() {
                           {method.courseCodes.map((code) => (
                             <span
                               key={code}
-                              className="font-mono text-[10px] text-muted-foreground/80 bg-accent/5 px-1.5 py-0.5 rounded-sm border border-accent/10"
+                              className="font-mono text-mini text-muted-foreground/80 bg-accent/5 px-1.5 py-0.5 rounded-sm border border-accent/10"
                             >
                               {code}
                             </span>

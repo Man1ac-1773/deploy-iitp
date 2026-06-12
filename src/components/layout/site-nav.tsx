@@ -111,7 +111,7 @@ export function SiteNav() {
               }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               className={cn(
-                "absolute right-8 mr-2 whitespace-nowrap rounded-sm px-2 py-1 font-mono text-[10px] uppercase tracking-widest",
+                "absolute right-8 mr-2 whitespace-nowrap rounded-sm px-2 py-1 font-mono text-mini uppercase tracking-widest",
                 isActive
                   ? "bg-accent/10 text-accent font-semibold"
                   : "bg-surface/80 text-muted-foreground shadow-sm border border-border/50"

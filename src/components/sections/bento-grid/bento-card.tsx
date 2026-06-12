@@ -132,7 +132,7 @@ export function BentoCard({ card, className, onClick }: BentoCardProps) {
           </svg>
         )}
 
-        <span className="font-mono text-[9px] tracking-wider text-muted-foreground/30 absolute top-4 right-4 group-hover:text-accent/60 transition-colors duration-300" aria-hidden="true">
+        <span className="font-mono text-micro tracking-wider text-muted-foreground/30 absolute top-4 right-4 group-hover:text-accent/60 transition-colors duration-300" aria-hidden="true">
           [ {CARD_INDEXES[card.id] || "00"} ]
         </span>
 

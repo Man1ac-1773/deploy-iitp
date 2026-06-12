@@ -46,7 +46,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10"
+        className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto hide-scrollbar bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10"
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
@@ -119,7 +119,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
                     </div>
                     {tooltip && (
                       <div className="flex items-center justify-end mt-auto pt-2 overflow-hidden border-t border-transparent group-hover:border-accent/10 transition-colors duration-300">
-                        <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-accent/80 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1">
+                        <span className="text-micro font-mono tracking-[0.2em] uppercase text-accent/80 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1">
                           {tooltip}
                           <svg className="size-3 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />

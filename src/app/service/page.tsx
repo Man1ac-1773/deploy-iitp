@@ -1,5 +1,3 @@
-"use client";
-
 import { MainLayout } from "@/components/layout/main-layout";
 import { ProfilePanel } from "@/components/sections/profile-panel/profile-panel";
 import { ContentPanel } from "@/components/layout/content-panel";
@@ -9,21 +7,12 @@ import { SectionLabel } from "@/components/shared/typography/section-label";
 import { books, memberships, awards } from "@/data/activities";
 import { patents } from "@/data/patents";
 import { responsibilities } from "@/data/responsibilities";
-import { ActivityDetailSheet, type ActivityItem } from "@/components/sections/activities/activity-detail-sheet";
-import { useState } from "react";
+import { ServiceModalProvider, ServiceModalTrigger } from "@/components/sections/activities/service-modal";
 import Link from "next/link";
 
 export default function ServicePage() {
-  const [selectedItem, setSelectedItem] = useState<ActivityItem | null>(null);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-  const handleOpenSheet = (item: ActivityItem) => {
-    setSelectedItem(item);
-    setIsSheetOpen(true);
-  };
-
   return (
-    <>
+    <ServiceModalProvider>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <NetworkBackground />
       </div>
@@ -43,7 +32,7 @@ export default function ServicePage() {
                 </svg>
               </Link>
               <div className="flex flex-col">
-                <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Return to Overview</span>
+                <span className="font-mono text-mini tracking-widest text-muted-foreground uppercase">Return to Overview</span>
                 <span className="text-sm font-semibold tracking-tight">Main Portfolio</span>
               </div>
             </div>
@@ -69,18 +58,18 @@ export default function ServicePage() {
 
                   {/* Intellectual Property */}
                   <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                    <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
                       // Intellectual Property
                     </h3>
                     {patents.map((patent, i) => (
-                      <button
+                      <ServiceModalTrigger
                         key={i}
-                        onClick={() => handleOpenSheet({ type: "patent", ...patent })}
+                        item={{ type: "patent", ...patent }}
                         className="group flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{patent.title}</h4>
-                          <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
+                          <span className="font-mono text-micro uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
                             {patent.status}
                           </span>
                         </div>
@@ -90,20 +79,20 @@ export default function ServicePage() {
                           <span className="hidden sm:inline">|</span>
                           <span className="truncate">Inventors: {patent.inventors.join(", ")}</span>
                         </div>
-                      </button>
+                      </ServiceModalTrigger>
                     ))}
                   </div>
                   
                   {/* Responsibilities */}
                   <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                    <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
                       // Administrative & Social Responsibilities
                     </h3>
                     {responsibilities.map((resp, i) => (
                       <div key={i} className="flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20">
                         <div className="flex items-start justify-between gap-2">
                           <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{resp.title}</h4>
-                          <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
+                          <span className="font-mono text-micro uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
                             {resp.category}
                           </span>
                         </div>
@@ -120,24 +109,24 @@ export default function ServicePage() {
 
                   {/* Authored Books */}
                   <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                    <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
                       // Authored Books
                     </h3>
                     {books.map((book, i) => (
-                      <button
+                      <ServiceModalTrigger
                         key={i}
-                        onClick={() => handleOpenSheet({ type: "book", ...book })}
+                        item={{ type: "book", ...book }}
                         className="group flex flex-col gap-1.5 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
                       >
                         <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{book.title}</h4>
                         <p className="text-xs font-mono text-accent/80 uppercase tracking-widest">{book.publisher}</p>
                         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">{book.description}</p>
-                      </button>
+                      </ServiceModalTrigger>
                     ))}
                   </div>
                   
                   <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                    <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
                       // Awards & Grants
                     </h3>
                     {awards.map((award, i) => (
@@ -145,13 +134,13 @@ export default function ServicePage() {
                         <span className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-accent/40"></span>
                         <h4 className="text-base sm:text-lg font-semibold tracking-tight text-foreground">{award.name}</h4>
                         <p className="text-xs text-muted-foreground">{award.organization}</p>
-                        <span className="font-mono text-[10px] tracking-widest text-accent/60 mt-1">{award.year}</span>
+                        <span className="font-mono text-mini tracking-widest text-accent/60 mt-1">{award.year}</span>
                       </div>
                     ))}
                   </div>
 
                   <div className="flex flex-col gap-4">
-                    <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
+                    <h3 className="font-mono text-mini tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
                       // Professional Memberships
                     </h3>
                     {memberships.map((membership, i) => (
@@ -172,12 +161,6 @@ export default function ServicePage() {
         </ContentPanel>
       </MainLayout>
 
-      <ActivityDetailSheet
-        item={selectedItem}
-        open={isSheetOpen}
-        onOpenChange={setIsSheetOpen}
-      />
-
       {/* Force professor identity visibility on this static page */}
       <style suppressHydrationWarning>{`
         @media (min-width: 1024px) {
@@ -188,6 +171,6 @@ export default function ServicePage() {
           }
         }
       `}</style>
-    </>
+    </ServiceModalProvider>
   );
 }

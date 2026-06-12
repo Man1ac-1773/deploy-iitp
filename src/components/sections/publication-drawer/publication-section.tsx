@@ -1,23 +1,15 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import { publications } from "@/data/publications";
 import { PublicationListItem } from "./publication-list-item";
-import { PublicationDetailSheet } from "./publication-detail-sheet";
+import { PublicationModalProvider } from "./publication-modal";
 
 export function PublicationSection() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-
   // Show only the top 3 featured journal publications
   const featuredPublications = publications.slice(0, 3);
-  const selectedPublication =
-    publications.find((publication) => publication.id === selectedId) ?? null;
-
   return (
-    <>
+    <PublicationModalProvider>
       <section
         id="featured-publications"
         aria-labelledby="featured-publications-heading"
@@ -41,8 +33,6 @@ export function PublicationSection() {
             <div key={publication.id} role="listitem">
               <PublicationListItem
                 publication={publication}
-                isSelected={selectedId === publication.id}
-                onSelect={setSelectedId}
               />
             </div>
           ))}
@@ -62,16 +52,6 @@ export function PublicationSection() {
           </Link>
         </div>
       </section>
-
-      <PublicationDetailSheet
-        publication={selectedPublication}
-        open={selectedId !== null}
-        onOpenChange={(open) => {
-          if (!open) {
-            setSelectedId(null);
-          }
-        }}
-      />
-    </>
+    </PublicationModalProvider>
   );
 }

@@ -1,8 +1,7 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import type { Publication } from "@/types/publication";
 import { cn } from "@/lib/utils";
+import { PublicationModalTrigger } from "./publication-modal";
 
 const TYPE_LABELS: Record<Publication["type"], string> = {
   journal: "Journal",
@@ -13,28 +12,20 @@ const TYPE_LABELS: Record<Publication["type"], string> = {
 
 type PublicationListItemProps = {
   publication: Publication;
-  isSelected: boolean;
-  onSelect: (id: string) => void;
 };
 
 export function PublicationListItem({
   publication,
-  isSelected,
-  onSelect,
 }: PublicationListItemProps) {
   return (
-    <button
-      type="button"
-      aria-pressed={isSelected}
-      aria-label={`Open details for ${publication.title}`}
-      onClick={() => onSelect(publication.id)}
+    <PublicationModalTrigger
+      publication={publication}
       className={cn(
         "flex w-full flex-col gap-3 border-b border-border py-6 px-4 sm:px-6 rounded-sm text-left transition-colors duration-300",
         "hover:bg-card/60 focus-visible:bg-card/60 focus-visible:outline-none",
-        isSelected && "bg-card/40",
       )}
     >
-      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-accent/80 uppercase">
+      <div className="flex flex-wrap items-center gap-3 font-mono text-mini tracking-widest text-accent/80 uppercase">
         <span className="tabular-nums">[{publication.year}]</span>
         <span>// {TYPE_LABELS[publication.type]}</span>
       </div>
@@ -46,6 +37,6 @@ export function PublicationListItem({
       <span className="text-sm text-muted-foreground">
         {publication.authors.join(", ")} · {publication.venue}
       </span>
-    </button>
+    </PublicationModalTrigger>
   );
 }

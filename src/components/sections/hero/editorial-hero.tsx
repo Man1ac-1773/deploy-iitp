@@ -40,18 +40,18 @@ export function EditorialHero({ className }: EditorialHeroProps) {
         {/* Top Header - Strategic Balance */}
         <div className="flex w-full items-start justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-[11px] font-bold tracking-[0.35em] text-foreground/80 uppercase">
+            <p className="font-mono text-tiny font-bold tracking-[0.35em] text-foreground/80 uppercase">
               {siteConfig.lab}
             </p>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/60 uppercase">
+            <p className="font-mono text-tiny tracking-[0.2em] text-muted-foreground/60 uppercase">
               {professor.affiliation}
             </p>
           </div>
           <div className="text-right">
-            <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent uppercase">
+            <p className="font-mono text-tiny font-semibold tracking-[0.25em] text-accent uppercase">
               H-INDEX: 12 <span aria-hidden="true">//</span> i10-INDEX: 15
             </p>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground mt-1">
+            <p className="font-mono text-tiny tracking-[0.2em] text-muted-foreground mt-1">
               CITATIONS: 450+ <span aria-hidden="true">//</span> PUBLICATIONS: 45
             </p>
           </div>
@@ -105,7 +105,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
                 <p className="text-lg sm:text-xl text-foreground/80 font-medium tracking-tight">
                   {professor.role}
                 </p>
-                <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block">
+                <p className="font-mono text-tiny tracking-widest text-muted-foreground/60 uppercase hidden sm:block">
                   <span aria-hidden="true">//</span> {professor.affiliation}
                 </p>
               </div>
@@ -138,7 +138,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
 
         {/* Bottom Scroll Anchor */}
         <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
-          <span className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">
+          <span className="font-mono text-tiny tracking-widest text-muted-foreground uppercase">
             ACADEMIC.PORTFOLIO <span aria-hidden="true">//</span> {new Date().getFullYear()}
           </span>
           <a
@@ -153,7 +153,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
             aria-label="Explore Research"
             className="group flex flex-col items-end gap-3 text-muted-foreground"
           >
-            <span className="font-mono text-[11px] font-bold tracking-[0.24em] uppercase text-foreground/60 group-hover:text-accent transition-colors duration-300">
+            <span className="font-mono text-tiny font-bold tracking-[0.24em] uppercase text-foreground/60 group-hover:text-accent transition-colors duration-300">
               Explore Research
             </span>
             <div className="relative h-12 w-[1px] overflow-hidden bg-border" aria-hidden="true">

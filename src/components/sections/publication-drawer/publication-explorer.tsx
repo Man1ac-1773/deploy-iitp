@@ -4,8 +4,8 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
 import type { Publication } from "@/types/publication";
-import { PublicationDetailSheet } from "./publication-detail-sheet";
 import { PublicationListItem } from "./publication-list-item";
+import { PublicationModalProvider } from "./publication-modal";
 import { cn } from "@/lib/utils";
 
 type PublicationExplorerProps = {
@@ -17,12 +17,8 @@ const FILTERS = ["ALL", "JOURNAL", "CONFERENCE", "FEDERATED LEARNING", "EDGE AI"
 export function PublicationExplorer({
   publications,
 }: PublicationExplorerProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("JOURNAL");
-
-  const selectedPublication =
-    publications.find((publication) => publication.id === selectedId) ?? null;
 
   // Case-insensitive filtering logic
   const filteredPublications = publications.filter((pub) => {
@@ -52,7 +48,7 @@ export function PublicationExplorer({
   });
 
   return (
-    <>
+    <PublicationModalProvider>
       <section
         id="publications"
         aria-labelledby="publications-heading"
@@ -87,7 +83,7 @@ export function PublicationExplorer({
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[9px] text-muted-foreground/60 hover:text-foreground uppercase tracking-widest cursor-pointer select-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-micro text-muted-foreground/60 hover:text-foreground uppercase tracking-widest cursor-pointer select-none"
               >
                 [ Clear ]
               </button>
@@ -104,7 +100,7 @@ export function PublicationExplorer({
                   type="button"
                   onClick={() => setActiveFilter(filter)}
                   className={cn(
-                    "border px-4 py-2 font-mono text-[10px] tracking-wider uppercase rounded-sm transition-colors duration-300 select-none cursor-pointer",
+                    "border px-4 py-2 font-mono text-mini tracking-wider uppercase rounded-sm transition-colors duration-300 select-none cursor-pointer",
                     isActive
                       ? "bg-accent-warm text-background border-accent-warm font-semibold shadow-[0_0_10px_rgba(229,169,59,0.15)]"
                       : "bg-background/20 text-muted-foreground/80 hover:text-foreground border-border/40 hover:bg-background/40",
@@ -127,14 +123,12 @@ export function PublicationExplorer({
               <div key={publication.id} role="listitem">
                 <PublicationListItem
                   publication={publication}
-                  isSelected={selectedId === publication.id}
-                  onSelect={setSelectedId}
                 />
               </div>
             ))
           ) : (
             <div className="flex flex-col items-center justify-center py-16 px-4 border-b border-border/40 rounded-sm bg-surface/5">
-              <span className="font-mono text-[10px] text-accent-warm uppercase tracking-widest mb-2">
+              <span className="font-mono text-mini text-accent-warm uppercase tracking-widest mb-2">
                 [ Exploration Failure ]
               </span>
               <p className="text-sm text-muted-foreground text-center max-w-md font-light">
@@ -146,7 +140,7 @@ export function PublicationExplorer({
                   setSearchQuery("");
                   setActiveFilter("ALL");
                 }}
-                className="mt-4 px-4 py-1.5 border border-accent/40 hover:border-accent hover:bg-accent/5 font-mono text-[9px] text-accent uppercase tracking-wider rounded-sm transition-colors duration-300 cursor-pointer"
+                className="mt-4 px-4 py-1.5 border border-accent/40 hover:border-accent hover:bg-accent/5 font-mono text-micro text-accent uppercase tracking-wider rounded-sm transition-colors duration-300 cursor-pointer"
               >
                 Reset Search parameters
               </button>
@@ -155,15 +149,6 @@ export function PublicationExplorer({
         </div>
       </section>
 
-      <PublicationDetailSheet
-        publication={selectedPublication}
-        open={selectedId !== null}
-        onOpenChange={(open) => {
-          if (!open) {
-            setSelectedId(null);
-          }
-        }}
-      />
-    </>
+    </PublicationModalProvider>
   );
 }
