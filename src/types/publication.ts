@@ -18,6 +18,7 @@ export type Publication = {
   url?: string;
   tags: readonly string[];
   citationCount?: number;
+  bibtex?: string;
   
   // Advanced Academic Metadata (from v2)
   volume?: string;

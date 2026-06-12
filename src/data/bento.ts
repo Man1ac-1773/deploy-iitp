@@ -19,22 +19,22 @@ export const bentoCards: readonly BentoCardData[] = [
     modalList: [
       {
         text: "Pioneering Noise-Resilient Federated Learning architectures.",
-        href: "#publications", // Using native anchor instead of complex URL passing
+        href: "#featured-publications", // Using native anchor instead of complex URL passing
         tooltip: "Explore Interactive Simulation"
       },
       {
         text: "Developing Lightweight Deep Neural Networks optimized for IoT.",
-        href: "#publications",
+        href: "#featured-publications",
         tooltip: "View Related Publications"
       },
       {
         text: "Enhancing lifetime and efficiency of UAV-Enabled Aerial Networks.",
-        href: "#publications",
+        href: "#featured-publications",
         tooltip: "View Drone Trajectory Paper"
       },
       {
         text: "Designing Task Offloading systems in Fog Computing.",
-        href: "#publications",
+        href: "#featured-publications",
         tooltip: "View Fog Computing Research"
       },
     ],
@@ -136,22 +136,22 @@ export const bentoCards: readonly BentoCardData[] = [
     modalList: [
       {
         text: "Sensor Data of Mobile Sink for Precision Agriculture.",
-        href: "http://dx.doi.org/10.21227/ympr-t542",
+        href: "https://ieee-dataport.org",
         tooltip: "View on IEEE Dataport"
       },
       {
         text: "A Dataset of Inertial Measurement Units for Handwritten English Alphabets.",
-        href: "https://dx.doi.org/10.21227/av6q-jj17",
+        href: "https://ieee-dataport.org",
         tooltip: "View on IEEE Dataport"
       },
       {
         text: "Signal Quality Measurement (SQM) dataset.",
-        href: "https://dx.doi.org/10.21227/aysz-nq69",
+        href: "https://ieee-dataport.org",
         tooltip: "View on IEEE Dataport"
       },
       {
         text: "Accelerometer, Gyroscope, and Magnetometer Sensors based Data for Recognizing Handwritten Digits.",
-        href: "http://dx.doi.org/10.21227/52d9-8y30",
+        href: "https://ieee-dataport.org",
         tooltip: "View on IEEE Dataport"
       }
     ]

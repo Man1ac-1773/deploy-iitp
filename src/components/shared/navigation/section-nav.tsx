@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { id: "research", label: "Overview", index: "01" },
   { id: "graph", label: "Taxonomy", index: "02" },
-  { id: "featured-publications", label: "Archive", index: "03" },
-  { id: "experience", label: "Record", index: "04" },
-  { id: "students", label: "Advisees", index: "05" },
-  { id: "contact", label: "Terminal", index: "06" },
+  { id: "featured-publications", label: "Featured", index: "03" },
+  { id: "conferences", label: "Conferences", index: "04" },
+  { id: "experience", label: "Experience", index: "05" },
+  { id: "teaching", label: "Lecture", index: "06" },
+  { id: "activities", label: "Impact", index: "07" },
+  { id: "contact", label: "Terminal", index: "08" },
 ] as const;
 
 type SectionNavProps = {

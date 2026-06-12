@@ -19,7 +19,7 @@ export function TeachingSection({ className }: TeachingSectionProps) {
       <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
         <div className="flex items-center justify-between">
           <SectionLabel>Pedagogy</SectionLabel>
-          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">05 // LECTURE</span>
+          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">06 // LECTURE</span>
         </div>
         <SectionHeading as="h2" id="teaching-heading" className="uppercase font-bold">
           Teaching & Methods

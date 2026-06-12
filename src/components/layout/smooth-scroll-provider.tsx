@@ -21,7 +21,14 @@ function HashScroller() {
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   return (
-    <ReactLenis root options={{ smoothWheel: false }}>
+    <ReactLenis 
+      root 
+      options={{ 
+        smoothWheel: true,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // Premium expo easing
+      }}
+    >
       <HashScroller />
       {children}
     </ReactLenis>

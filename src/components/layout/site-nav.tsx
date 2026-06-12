@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLenis } from "lenis/react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -10,17 +10,18 @@ const sections = [
   { id: "research", label: "Research Focus" },
   { id: "graph", label: "Simulation" },
   { id: "featured-publications", label: "Publications" },
-  { id: "teaching", label: "Teaching" },
-  { id: "activities", label: "Service" },
   { id: "conferences", label: "Conferences" },
   { id: "experience", label: "Experience" },
-  { id: "students", label: "Mentorship" },
+  { id: "teaching", label: "Teaching" },
+  { id: "activities", label: "Service" },
   { id: "contact", label: "Contact" },
 ];
 
 export function SiteNav() {
   const [activeSection, setActiveSection] = useState<string>("portfolio");
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const isClickScrolling = useRef(false);
+  const clickTimeout = useRef<NodeJS.Timeout | null>(null);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export function SiteNav() {
       if (element) {
         const observer = new IntersectionObserver(
           ([entry]) => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !isClickScrolling.current) {
               setActiveSection(id);
             }
           },
@@ -49,15 +50,34 @@ export function SiteNav() {
     };
   }, []);
 
+  // Check if we hit the bottom of the page organically
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isClickScrolling.current) return;
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+        setActiveSection(sections[sections.length - 1].id);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleNavClick = (id: string) => {
     if (lenis) {
+      isClickScrolling.current = true;
+      if (clickTimeout.current) clearTimeout(clickTimeout.current);
+      
       const element = document.getElementById(id);
       if (element) {
         lenis.scrollTo(element, { offset: -40 });
-        // Only set focus if it's focusable to aid accessibility
         element.focus({ preventScroll: true });
-        // Sync active state immediately for perceived performance
         setActiveSection(id);
+        
+        clickTimeout.current = setTimeout(() => {
+          isClickScrolling.current = false;
+        }, 1000); // Wait for scroll to finish
+      } else {
+        isClickScrolling.current = false;
       }
     }
   };

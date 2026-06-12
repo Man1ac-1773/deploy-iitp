@@ -14,7 +14,14 @@ export const publications: readonly Publication[] = [
     impact: "Provides insights into managing participant heterogeneity.",
     doi: "10.1109/TMC.2025.3530818",
     url: "https://doi.org/10.1109/TMC.2025.3530818",
-    tags: ["Federated Learning", "Wearable Devices", "Mobile Computing"],
+    tags: ["Federated Learning", "Wearable Devices", "Mobile Computing"],,
+    bibtex: `@article{mishra2025towards,
+  title={Towards Understanding the Impact of Participant and its Wearable Devices in Federated Learning},
+  author={R. Mishra and H. P. Gupta},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2025},
+  doi={10.1109/TMC.2025.3530818}
+}`
     citationCount: 0,
   },
   {
@@ -29,9 +36,14 @@ export const publications: readonly Publication[] = [
     abstract: "A novel federated learning approach to handle noise in datasets to improve convergence rates.",
     researchSummary: "Introduces a noise suppression mechanism at the client side to boost overall model convergence.",
     impact: "Reduces communication rounds for FL convergence.",
-    doi: "10.1109/TMC.2024.FedNL",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["Federated Learning", "Noise Suppression", "Convergence"],
+    tags: ["Federated Learning", "Noise Suppression", "Convergence"],,
+    bibtex: `@article{mishra2024fed,
+  title={Fed-NL: A Federated Learning Approach to Suppress Noise in Participant Datasets to Reduce Communication Rounds for Convergence},
+  author={R. Mishra and H. P. Gupta},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2024}
+}`
     citationCount: 5,
   },
   {
@@ -49,8 +61,18 @@ export const publications: readonly Publication[] = [
     researchSummary: "Optimizes participant selection and clustering based on available computational and network resources.",
     impact: "Significantly improves training time and resource utilization.",
     doi: "10.1109/TPDS.2024.3379933",
-    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["Federated Learning", "Clustering", "Resource Awareness", "Heterogeneity"],
+    url: "https://doi.org/10.1109/TPDS.2024.3379933",
+    tags: ["Federated Learning", "Clustering", "Resource Awareness", "Heterogeneity"],,
+    bibtex: `@article{mishra2024fed,
+  title={Fed-RAC: Resource-Aware Clustering for Tackling Heterogeneity of Participants in Federated Learning},
+  author={R. Mishra and H. P. Gupta and G. Banga and S. K. Das},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  year={2024},
+  volume={35},
+  number={7},
+  pages={1207-1220},
+  doi={10.1109/TPDS.2024.3379933}
+}`
     citationCount: 12,
   },
   {
@@ -68,8 +90,18 @@ export const publications: readonly Publication[] = [
     researchSummary: "Enhances personal model accuracy without sacrificing global generalization.",
     impact: "Improves model performance on non-IID datasets.",
     doi: "10.1145/3629978",
-    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["Federated Learning", "Personalization", "Non-IID", "Sensor Networks"],
+    url: "https://doi.org/10.1145/3629978",
+    tags: ["Federated Learning", "Personalization", "Non-IID", "Sensor Networks"],,
+    bibtex: `@article{mishra2024a,
+  title={A Model Personalization-based Federated Learning Approach for Heterogeneous Participants with Variability in the Dataset},
+  author={R. Mishra and H. P. Gupta},
+  journal={ACM Transactions on Sensor Networks},
+  year={2024},
+  volume={20},
+  number={1},
+  pages={Article 22, 28 pages},
+  doi={10.1145/3629978}
+}`
     citationCount: 15,
   },
   {
@@ -87,8 +119,18 @@ export const publications: readonly Publication[] = [
     researchSummary: "Reduces computational overhead during training on edge devices.",
     impact: "Enables efficient edge-based deep learning.",
     doi: "10.1109/TMC.2023.3297026",
-    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["Knowledge Distillation", "Edge AI", "Lightweight Networks", "Deep Learning"],
+    url: "https://doi.org/10.1109/TMC.2023.3297026",
+    tags: ["Knowledge Distillation", "Edge AI", "Lightweight Networks", "Deep Learning"],,
+    bibtex: `@article{mishra2024designing,
+  title={Designing and Training of Lightweight Neural Networks on Edge Devices Using Early Halting in Knowledge Distillation},
+  author={R. Mishra and H. P. Gupta},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2024},
+  volume={23},
+  number={5},
+  pages={4665-4677},
+  doi={10.1109/TMC.2023.3297026}
+}`
     citationCount: 20,
   },
   {
@@ -106,8 +148,18 @@ export const publications: readonly Publication[] = [
     researchSummary: "Reviews state-of-the-art model compression, pruning, and quantization methods.",
     impact: "A key reference for edge intelligence deployment.",
     doi: "10.1145/3570955",
-    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["IoT", "Model Compression", "Edge Computing", "Deep Learning"],
+    url: "https://doi.org/10.1145/3570955",
+    tags: ["IoT", "Model Compression", "Edge Computing", "Deep Learning"],,
+    bibtex: `@article{mishra2023transforming,
+  title={Transforming Large-Size to Lightweight Deep Neural Networks for IoT Applications},
+  author={R. Mishra and H. P. Gupta},
+  journal={ACM Computing Surveys},
+  year={2023},
+  volume={55},
+  number={11},
+  pages={Article 233, 35 pages},
+  doi={10.1145/3570955}
+}`
     citationCount: 35,
   },
   {
@@ -125,8 +177,18 @@ export const publications: readonly Publication[] = [
     researchSummary: "Optimizes UAV flight paths and communication scheduling.",
     impact: "Extends UAV network lifetime and efficiency.",
     doi: "10.1109/TII.2022.3197410",
-    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en&oi=sra",
-    tags: ["UAV Networks", "AIoT", "Energy Optimization", "Drones"],
+    url: "https://doi.org/10.1109/TII.2022.3197410",
+    tags: ["UAV Networks", "AIoT", "Energy Optimization", "Drones"],,
+    bibtex: `@article{mishra2023leveraging,
+  title={Leveraging Augmented Intelligence of Things to Enhance Lifetime of UAV-Enabled Aerial Networks},
+  author={R. Mishra and H. P. Gupta and R. Kumar and T. Dutta},
+  journal={IEEE Transactions on Industrial Informatics},
+  year={2023},
+  volume={19},
+  number={1},
+  pages={586-593},
+  doi={10.1109/TII.2022.3197410}
+}`
     citationCount: 28,
   },
   {
@@ -145,7 +207,17 @@ export const publications: readonly Publication[] = [
     impact: "Significantly reduces delay and load congestion in passenger assistance architectures.",
     doi: "10.1109/TNSM.2022.3172602",
     url: "https://doi.org/10.1109/TNSM.2022.3172602",
-    tags: ["Fog Computing", "Task Offloading", "Passenger Assistance"],
+    tags: ["Fog Computing", "Task Offloading", "Passenger Assistance"],,
+    bibtex: `@article{mishra2022a,
+  title={A Task Offloading and Reallocation Scheme for Passenger Assistance Using Fog Computing},
+  author={R. Mishra and H. P. Gupta and P. Kumari and D. Y. Suh and M. J. Piran},
+  journal={IEEE Transactions on Network and Service Management},
+  year={2022},
+  volume={19},
+  number={3},
+  pages={3032-3047},
+  doi={10.1109/TNSM.2022.3172602}
+}`
     citationCount: 15,
   },
   {
@@ -164,7 +236,17 @@ export const publications: readonly Publication[] = [
     impact: "Boosts recognition accuracy on imperfectly labeled user activity datasets.",
     doi: "10.1109/TMC.2021.3135878",
     url: "https://doi.org/10.1109/TMC.2021.3135878",
-    tags: ["Locomotion Recognition", "Noisy Labels", "Deep Learning", "Sensors"],
+    tags: ["Locomotion Recognition", "Noisy Labels", "Deep Learning", "Sensors"],,
+    bibtex: `@article{mishra2023locomotion,
+  title={Locomotion Mode Recognition Using Sensory Data with Noisy Labels: A Deep Learning Approach},
+  author={R. Mishra and A. Gupta and H. P. Gupta},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2023},
+  volume={22},
+  number={6},
+  pages={3460-3471},
+  doi={10.1109/TMC.2021.3135878}
+}`
     citationCount: 18,
   },
   {
@@ -183,7 +265,17 @@ export const publications: readonly Publication[] = [
     impact: "Enables zero-shot activity detection in smart wearable environments.",
     doi: "10.1109/TMC.2020.3015546",
     url: "https://doi.org/10.1109/TMC.2020.3015546",
-    tags: ["Zero-Shot Learning", "Activity Recognition", "Wearables", "Semantic Transfer"],
+    tags: ["Zero-Shot Learning", "Activity Recognition", "Wearables", "Semantic Transfer"],,
+    bibtex: `@article{mishra2022a,
+  title={A Sensors Based Deep Learning Model for Unseen Locomotion Mode Identification using Multiple Semantic Matrices},
+  author={R. Mishra and A. Gupta and H. P. Gupta and T. Dutta},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2022},
+  volume={21},
+  number={3},
+  pages={799-810},
+  doi={10.1109/TMC.2020.3015546}
+}`
     citationCount: 22,
   },
   {
@@ -202,7 +294,17 @@ export const publications: readonly Publication[] = [
     impact: "Enables low-cost, crowdsourced road condition analytics.",
     doi: "10.1109/JSEN.2020.3005998",
     url: "https://doi.org/10.1109/JSEN.2020.3005998",
-    tags: ["Road Monitoring", "Mobile Sensing", "Deep Learning", "Infrastructure"],
+    tags: ["Road Monitoring", "Mobile Sensing", "Deep Learning", "Infrastructure"],,
+    bibtex: `@article{mishra2021a,
+  title={A Road Health Monitoring System Using Sensors in Optimal Deep Neural Network},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={IEEE Sensors Journal},
+  year={2021},
+  volume={21},
+  number={14},
+  pages={15527-15534},
+  doi={10.1109/JSEN.2020.3005998}
+}`
     citationCount: 14,
   },
   {
@@ -221,7 +323,17 @@ export const publications: readonly Publication[] = [
     impact: "Provided key statistical indicators for infection curve containment.",
     doi: "10.1109/TCSS.2021.3077701",
     url: "https://doi.org/10.1109/TCSS.2021.3077701",
-    tags: ["Epidemiological Modeling", "Social Networks", "Data Analytics"],
+    tags: ["Epidemiological Modeling", "Social Networks", "Data Analytics"],,
+    bibtex: `@article{mishra2021analysis,
+  title={Analysis, Modeling, and Representation of COVID-19 Spread: A Case Study on India},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={IEEE Transactions on Computational Social Systems},
+  year={2021},
+  volume={8},
+  number={4},
+  pages={964-973},
+  doi={10.1109/TCSS.2021.3077701}
+}`
     citationCount: 16,
   },
   {
@@ -237,7 +349,14 @@ export const publications: readonly Publication[] = [
     impact: "Saves energy on wearable device batteries while maintaining high activity recognition accuracy.",
     doi: "10.1109/LSENS.2024.3523334",
     url: "https://doi.org/10.1109/LSENS.2024.3523334",
-    tags: ["Dominant Axis", "Inertial Sensors", "Energy Optimization", "HAR"],
+    tags: ["Dominant Axis", "Inertial Sensors", "Energy Optimization", "HAR"],,
+    bibtex: `@article{mishra2024optimizing,
+  title={Optimizing Activity Recognition Through Dominant Axis Identification in Inertial Sensors},
+  author={R. Mishra and A. Soni and A. Jain and P. Lalwani and R. Shah},
+  journal={IEEE Sensors Letters},
+  year={2024},
+  doi={10.1109/LSENS.2024.3523334}
+}`
     citationCount: 3,
   },
   {
@@ -255,7 +374,16 @@ export const publications: readonly Publication[] = [
     impact: "Refines navigation arrival time accuracy in urban routing networks.",
     doi: "10.1007/s41062-024-01622-2",
     url: "https://doi.org/10.1007/s41062-024-01622-2",
-    tags: ["Traffic Prediction", "GPS", "Machine Learning", "Smart Cities"],
+    tags: ["Traffic Prediction", "GPS", "Machine Learning", "Smart Cities"],,
+    bibtex: `@article{pandey2024a,
+  title={A Machine Learning-Based Overlay Technique for Improving the Mechanism of Road Traffic Prediction Using Global Positioning System},
+  author={A. D. Pandey and R. Mishra and et al.},
+  journal={Innovative Infrastructure Solutions},
+  year={2024},
+  volume={9},
+  pages={300},
+  doi={10.1007/s41062-024-01622-2}
+}`
     citationCount: 2,
   },
   {
@@ -274,7 +402,17 @@ export const publications: readonly Publication[] = [
     impact: "Increases coastal disaster alert prediction accuracy in turbulent sea conditions.",
     doi: "10.1109/LSENS.2023.3333967",
     url: "https://doi.org/10.1109/LSENS.2023.3333967",
-    tags: ["Wave Forecasting", "Buoy Sensors", "Huber SVR", "Oceanography"],
+    tags: ["Wave Forecasting", "Buoy Sensors", "Huber SVR", "Oceanography"],,
+    bibtex: `@article{anand2023huber,
+  title={Huber SVR-Based Hybrid Models for Significant Wave Height Forecasting Using Buoy Sensors},
+  author={P. Anand and S. Jain and R. Mishra},
+  journal={IEEE Sensors Letters},
+  year={2023},
+  volume={7},
+  number={12},
+  pages={1-4 (Art. no. 6010104)},
+  doi={10.1109/LSENS.2023.3333967}
+}`
     citationCount: 4,
   },
   {
@@ -292,7 +430,16 @@ export const publications: readonly Publication[] = [
     impact: "Stabilizes signal reliability in massive high-ceiling industrial smart warehouse setups.",
     doi: "10.1109/ACCESS.2023.3309303",
     url: "https://doi.org/10.1109/ACCESS.2023.3309303",
-    tags: ["Interference Mitigation", "LoRaWAN", "Smart Buildings", "Machine Learning"],
+    tags: ["Interference Mitigation", "LoRaWAN", "Smart Buildings", "Machine Learning"],,
+    bibtex: `@article{kumar2023machine,
+  title={Machine Learning-Based Interference Mitigation in Long-Range Networks for High-Ceiling Smart Buildings},
+  author={R. Kumar and H. P. Gupta and R. Mishra and S. Pandey},
+  journal={IEEE Access},
+  year={2023},
+  volume={11},
+  pages={96103-96118},
+  doi={10.1109/ACCESS.2023.3309303}
+}`
     citationCount: 6,
   },
   {
@@ -311,7 +458,17 @@ export const publications: readonly Publication[] = [
     impact: "Preserves clinical privacy while delivering high-accuracy health prediction models.",
     doi: "10.1109/TCSS.2022.3228965",
     url: "https://doi.org/10.1109/TCSS.2022.3228965",
-    tags: ["Patient Monitoring", "IoMT", "Federated Learning", "Privacy"],
+    tags: ["Patient Monitoring", "IoMT", "Federated Learning", "Privacy"],,
+    bibtex: `@article{singh2023a,
+  title={A Federated Learning-Based Patient Monitoring System in Internet of Medical Things},
+  author={C. Singh and R. Mishra and H. P. Gupta and G. Banga},
+  journal={IEEE Transactions on Computational Social Systems},
+  year={2023},
+  volume={10},
+  number={4},
+  pages={1622-1628},
+  doi={10.1109/TCSS.2022.3228965}
+}`
     citationCount: 11,
   },
   {
@@ -330,7 +487,17 @@ export const publications: readonly Publication[] = [
     impact: "Ensures model convergence in large-scale logistics tracking networks.",
     doi: "10.1109/TITS.2023.3241765",
     url: "https://doi.org/10.1109/TITS.2023.3241765",
-    tags: ["Federated Learning", "Imperfect Labels", "LoRa", "Transportation Systems"],
+    tags: ["Federated Learning", "Imperfect Labels", "LoRa", "Transportation Systems"],,
+    bibtex: `@article{kumar2023a,
+  title={A Federated Learning Approach with Imperfect Labels in LoRa-Based Transportation Systems},
+  author={R. Kumar and R. Mishra and H. P. Gupta},
+  journal={IEEE Transactions on Intelligent Transportation Systems},
+  year={2023},
+  volume={24},
+  number={11},
+  pages={13099-13107},
+  doi={10.1109/TITS.2023.3241765}
+}`
     citationCount: 18,
   },
   {
@@ -346,7 +513,14 @@ export const publications: readonly Publication[] = [
     impact: "Improves global model equity and performance across all participant device types.",
     doi: "10.1007/s11042-024-20476-5",
     url: "https://doi.org/10.1007/s11042-024-20476-5",
-    tags: ["Federated Learning", "Fairness", "Client Selection", "Bias Mitigation"],
+    tags: ["Federated Learning", "Fairness", "Client Selection", "Bias Mitigation"],,
+    bibtex: `@article{soni2024fair,
+  title={Fair-select: A Federated Learning Approach to Ensure Fairness in Selection of Participants},
+  author={A. Soni and R. Mishra},
+  journal={Multimedia Tools and Applications},
+  year={2024},
+  doi={10.1007/s11042-024-20476-5}
+}`
     citationCount: 2,
   },
   {
@@ -365,7 +539,17 @@ export const publications: readonly Publication[] = [
     impact: "A widely-cited guide on digital transformations in modern farming networks.",
     doi: "10.1109/MCE.2021.3049623",
     url: "https://doi.org/10.1109/MCE.2021.3049623",
-    tags: ["Smart Agriculture", "IoT", "Sensors", "Drone Networks"],
+    tags: ["Smart Agriculture", "IoT", "Sensors", "Drone Networks"],,
+    bibtex: `@article{kumar2021smart,
+  title={Smart Sensing for Agriculture: Applications, Advancements, and Challenges},
+  author={R. Kumar and R. Mishra and H. P. Gupta and T. Dutta},
+  journal={IEEE Consumer Electronics Magazine},
+  year={2021},
+  volume={10},
+  number={4},
+  pages={51-56},
+  doi={10.1109/MCE.2021.3049623}
+}`
     citationCount: 20,
   },
   {
@@ -384,7 +568,17 @@ export const publications: readonly Publication[] = [
     impact: "Extends sensor network lifetime in hazardous, remote river installations.",
     doi: "10.1109/TGCN.2021.3062470",
     url: "https://doi.org/10.1109/TGCN.2021.3062470",
-    tags: ["Water Monitoring", "Green Computing", "IoT", "Energy Efficiency"],
+    tags: ["Water Monitoring", "Green Computing", "IoT", "Energy Efficiency"],,
+    bibtex: `@article{chopade2021an,
+  title={An Energy-Efficient River Water Pollution Monitoring System in Internet of Things},
+  author={S. Chopade and H. P. Gupta and R. Mishra and P. Kumari and T. Dutta},
+  journal={IEEE Transactions on Green Communications and Networking},
+  year={2021},
+  volume={5},
+  number={2},
+  pages={693-702},
+  doi={10.1109/TGCN.2021.3062470}
+}`
     citationCount: 21,
   },
   {
@@ -403,7 +597,17 @@ export const publications: readonly Publication[] = [
     impact: "Saves network bandwidth and device batteries in industrial smart metering environments.",
     doi: "10.1109/TSUSC.2021.3049705",
     url: "https://doi.org/10.1109/TSUSC.2021.3049705",
-    tags: ["Smart Meters", "Edge Computing", "LoRa", "Data Compression"],
+    tags: ["Smart Meters", "Edge Computing", "LoRa", "Data Compression"],,
+    bibtex: `@article{kumari2022an,
+  title={An Energy Efficient Smart Metering System Using Edge Computing in LoRa Network},
+  author={P. Kumari and R. Mishra and H. P. Gupta and T. Dutta and S. K. Das},
+  journal={IEEE Transactions on Sustainable Computing},
+  year={2022},
+  volume={7},
+  number={4},
+  pages={786-798},
+  doi={10.1109/TSUSC.2021.3049705}
+}`
     citationCount: 22,
   },
   {
@@ -422,7 +626,17 @@ export const publications: readonly Publication[] = [
     impact: "Minimizes security breaches and scheduling misses in time-critical manufacturing tasks.",
     doi: "10.1109/TII.2022.3156647",
     url: "https://doi.org/10.1109/TII.2022.3156647",
-    tags: ["Industrial IoT", "Container Security", "Stackelberg Game", "Deadlines"],
+    tags: ["Industrial IoT", "Container Security", "Stackelberg Game", "Deadlines"],,
+    bibtex: `@article{singh2022secure,
+  title={Secure Industrial IoT Task Containerization with Deadline Constraint: A Stackelberg Game Approach},
+  author={C. Singh and P. Kumari and R. Mishra and H. P. Gupta and T. Dutta},
+  journal={IEEE Transactions on Industrial Informatics},
+  year={2022},
+  volume={18},
+  number={12},
+  pages={8674-8681},
+  doi={10.1109/TII.2022.3156647}
+}`
     citationCount: 23,
   },
   {
@@ -441,7 +655,17 @@ export const publications: readonly Publication[] = [
     impact: "Automates real-time hazard identification in national river basins.",
     doi: "10.1109/JIOT.2021.3078892",
     url: "https://doi.org/10.1109/JIOT.2021.3078892",
-    tags: ["Water Quality", "Deep Learning", "IoT Sensors", "Environmental Tech"],
+    tags: ["Water Quality", "Deep Learning", "IoT Sensors", "Environmental Tech"],,
+    bibtex: `@article{chopade2022a,
+  title={A Sensors-Based River Water Quality Assessment System Using Deep Neural Network},
+  author={S. Chopade and H. P. Gupta and R. Mishra and A. Oswal and P. Kumari and T. Dutta},
+  journal={IEEE Internet of Things Journal},
+  year={2022},
+  volume={9},
+  number={16},
+  pages={14375-14384},
+  doi={10.1109/JIOT.2021.3078892}
+}`
     citationCount: 25,
   },
   {
@@ -460,7 +684,17 @@ export const publications: readonly Publication[] = [
     impact: "Enables proactive health hazard and fall detection alerts for independent seniors.",
     doi: "10.1109/JBHI.2021.3121296",
     url: "https://doi.org/10.1109/JBHI.2021.3121296",
-    tags: ["Elderly Care", "Multi-Task Learning", "Smart Homes", "Activity Prediction"],
+    tags: ["Elderly Care", "Multi-Task Learning", "Smart Homes", "Activity Prediction"],,
+    bibtex: `@article{chaudhary2023jointly,
+  title={Jointly Prediction of Activities, Locations, and Starting Times for Isolated Elderly People},
+  author={A. Chaudhary and R. Mishra and H. P. Gupta and K. K. Shukla},
+  journal={IEEE Journal of Biomedical and Health Informatics},
+  year={2023},
+  volume={27},
+  number={5},
+  pages={2288-2295},
+  doi={10.1109/JBHI.2021.3121296}
+}`
     citationCount: 26,
   },
   {
@@ -479,7 +713,17 @@ export const publications: readonly Publication[] = [
     impact: "Allows high-accuracy telemetric tracking using very low-power LoRa bands.",
     doi: "10.1109/JSEN.2020.3025835",
     url: "https://doi.org/10.1109/JSEN.2020.3025835",
-    tags: ["Knowledge Distillation", "LoRa", "Vehicle Tracking", "Sensors"],
+    tags: ["Knowledge Distillation", "LoRa", "Vehicle Tracking", "Sensors"],,
+    bibtex: `@article{kumari2021a,
+  title={A Knowledge Distillation-Based Transportation System for Sensory Data Sharing Using LoRa},
+  author={P. Kumari and R. Mishra and H. P. Gupta},
+  journal={IEEE Sensors Journal},
+  year={2021},
+  volume={21},
+  number={22},
+  pages={25315-25322},
+  doi={10.1109/JSEN.2020.3025835}
+}`
     citationCount: 26,
   },
   {
@@ -498,7 +742,17 @@ export const publications: readonly Publication[] = [
     impact: "Identifies research opportunities in drone-aided smart agriculture grids.",
     doi: "10.1109/IOTM.006.2100100",
     url: "https://doi.org/10.1109/IOTM.006.2100100",
-    tags: ["Internet of Drones", "Precision Agriculture", "UAV", "Wireless Networks"],
+    tags: ["Internet of Drones", "Precision Agriculture", "UAV", "Wireless Networks"],,
+    bibtex: `@article{singh2022the,
+  title={The Internet of Drones in Precision Agriculture: Challenges, Solutions, and Research Opportunities},
+  author={C. Singh and R. Mishra and H. P. Gupta and P. Kumari},
+  journal={IEEE Internet of Things Magazine},
+  year={2022},
+  volume={5},
+  number={1},
+  pages={180-184},
+  doi={10.1109/IOTM.006.2100100}
+}`
     citationCount: 27,
   },
   {
@@ -514,9 +768,16 @@ export const publications: readonly Publication[] = [
     abstract: "Provides a thorough survey of challenges in software-defined networking, covering scalability, performance, security, and controller placement.",
     researchSummary: "Reviews SDN controller architectures and routing scheduling solutions.",
     impact: "A key reference for next-generation SDN deployment and protocol design.",
-    doi: "10.1016/j.jnca.2019.04.015",
-    url: "https://doi.org/10.1016/j.jnca.2019.04.015",
-    tags: ["SDN", "Software-Defined Networks", "Routing Controllers", "Survey"],
+    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
+    tags: ["SDN", "Software-Defined Networks", "Routing Controllers", "Survey"],,
+    bibtex: `@article{saraswat2019challenges,
+  title={Challenges and Solutions in Software-Defined Networking: A Survey},
+  author={S. Saraswat and V. Agarwal and H. P. Gupta and R. Mishra and A. Gupta and T. Dutta},
+  journal={Journal of Network and Computer Applications},
+  year={2019},
+  volume={141},
+  pages={23-58}
+}`
     citationCount: 29,
   },
   {
@@ -532,9 +793,16 @@ export const publications: readonly Publication[] = [
     abstract: "Evaluates coverage optimization and link connectivity algorithms in Wireless Sensor Networks, outlining current research issues.",
     researchSummary: "Details topological math models used to maintain complete WSN network coverage.",
     impact: "A foundational text for wireless sensor placement and energy configurations.",
-    doi: "10.1109/ACCESS.2018.2838328",
-    url: "https://doi.org/10.1109/ACCESS.2018.2838328",
-    tags: ["WSN", "Network Coverage", "Connectivity", "Wireless Sensors", "Survey"],
+    url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
+    tags: ["WSN", "Network Coverage", "Connectivity", "Wireless Sensors", "Survey"],,
+    bibtex: `@article{tripathi2018coverage,
+  title={Coverage and Connectivity in WSNs: A Survey, Research Issues and Challenges},
+  author={A. Tripathi and H. P. Gupta and T. Dutta and R. Mishra and K. K. Shukla and S. Jit},
+  journal={IEEE Access},
+  year={2018},
+  volume={6},
+  pages={26971-26992}
+}`
     citationCount: 45,
   },
   {
@@ -551,7 +819,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Fuses acoustic signals and visual tracking algorithms on edge devices to identify distress patterns.",
     impact: "Provides low-latency, privacy-preserving infant care surveillance for smart homes.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Infant Care", "Multi-Modal", "Surveillance"],
+    tags: ["Infant Care", "Multi-Modal", "Surveillance"],,
+    bibtex: `@inproceedings{mishra2024i,
+  title={i-Care: A Multi-Modal Data Integration Approach for Real-time Surveillance and Voice Assistance to Improve Infant Care},
+  author={R. Mishra and H. P. Gupta},
+  journal={11th ACM International Conference on Systems for Energy-Efficient Buildings, Cities, and Transportation (BuildSys)},
+  year={2024}
+}`
   },
   {
     id: "pub-031",
@@ -567,7 +841,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Allocates network resources dynamically to ensure mission-critical IoT packets are delivered without failure.",
     impact: "Reduces overhead while guaranteeing 99.9% uptime for critical sensor telemetry.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["IoT", "Sensor Networks", "Reliability"],
+    tags: ["IoT", "Sensor Networks", "Reliability"],,
+    bibtex: `@inproceedings{mishra2024on,
+  title={On Demand Reliability in the Internet of Things Enabled Sensors Networks},
+  author={R. Mishra and P. Anand},
+  journal={20th International Wireless Communications & Mobile Computing Conference (IWCMC)},
+  year={2024}
+}`
   },
   {
     id: "pub-032",
@@ -583,7 +863,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Filters out corrupted local data to prevent global model degradation during aggregation.",
     impact: "Drastically lowers the bandwidth required to train decentralized AI models.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Federated Learning", "Noise Rectification", "Communication"],
+    tags: ["Federated Learning", "Noise Rectification", "Communication"],,
+    bibtex: `@inproceedings{mishra2024a,
+  title={A Federated Learning Approach to Minimize Communication Rounds Using Noise Rectification},
+  author={R. Mishra and H. P. Gupta},
+  journal={IEEE Wireless Communications and Networking Conference (WCNC)},
+  year={2024}
+}`
   },
   {
     id: "pub-033",
@@ -597,7 +883,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Deploys edge-fog architectures at transit hubs to provide instant route optimization and assistance.",
     impact: "Improves commuter flow and decreases server congestion in high-traffic urban areas.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Fog Computing", "Transportation", "Game Theory"],
+    tags: ["Fog Computing", "Transportation", "Game Theory"],,
+    bibtex: `@inproceedings{mishra2021a,
+  title={A Game Theory-based Transportation System using Fog Computing for Passenger Assistance},
+  author={R. Mishra and P. Kumari and H. P. Gupta and Diksha and T. Dutta and D. Y. Suh and M. J. Piran},
+  journal={Proceedings of IEEE WoWMoM},
+  year={2021}
+}`
   },
   {
     id: "pub-034",
@@ -611,7 +903,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Implements adaptive channel hopping algorithms to segregate traffic from overlapping gateways.",
     impact: "Enables massive scaling of IoT devices in smart cities without signal degradation.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["LoRaWAN", "Interference", "Ubiquitous Networking"],
+    tags: ["LoRaWAN", "Interference", "Ubiquitous Networking"],,
+    bibtex: `@inproceedings{mishra2024minimizing,
+  title={Minimizing Intra-Interference in LoRaWAN for Seamless Connectivity in Ubiquitous Networking},
+  author={R. Mishra and S. Godhaneeya and A. Soni},
+  journal={COMSNETS MINDS Workshop},
+  year={2024}
+}`
   },
   {
     id: "pub-035",
@@ -627,7 +925,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Runs lightweight computer vision models on laptops to detect privacy-critical user gestures.",
     impact: "Enhances user privacy and UX in remote conferencing environments.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Gestures", "Online Meetings"],
+    tags: ["Gestures", "Online Meetings"],,
+    bibtex: `@inproceedings{shina2024your,
+  title={Your Gesture Can Prevent Oops Moments in Online Meetings},
+  author={A. K. Shina and R. Mishra and H. P. Gupta},
+  journal={International Conference on Embedded Wireless Systems and Networks (EWSN)},
+  year={2024}
+}`
   },
   {
     id: "pub-036",
@@ -641,7 +945,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Prevents poisoned or accidentally mislabeled edge data from corrupting the global neural network.",
     impact: "Secures distributed learning architectures against real-world data imperfections.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Federated Learning", "Noisy Labels"],
+    tags: ["Federated Learning", "Noisy Labels"],,
+    bibtex: `@inproceedings{mishra2022noise,
+  title={Noise-Resilient Federated Learning: Suppressing Noisy Labels in the Local Datasets of Participants},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={Proceedings of IEEE INFOCOM},
+  year={2022}
+}`
   },
   {
     id: "pub-037",
@@ -655,7 +965,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Balances encryption overhead with transmission speed to ensure critical sensor alerts arrive on time.",
     impact: "Enables secure, real-time automation in energy-constrained smart building setups.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["LoRa", "Smart Space", "Energy-Efficient"],
+    tags: ["LoRa", "Smart Space", "Energy-Efficient"],,
+    bibtex: `@inproceedings{kumari2021an,
+  title={An Energy-Efficient Smart Space System using LoRa Network with Deadline and Security Constraints},
+  author={P. Kumari and H. P. Gupta and R. Mishra and S. K. Das},
+  journal={Proceedings of ACM MSWIM},
+  year={2021}
+}`
   },
   {
     id: "pub-038",
@@ -669,7 +985,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Transfers knowledge from a massive teacher model to tiny edge-student models distributed across IoT nodes.",
     impact: "Saves massive bandwidth in globally distributed learning tasks.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Federated Learning", "Knowledge Distillation", "Resource Aware"],
+    tags: ["Federated Learning", "Knowledge Distillation", "Resource Aware"],,
+    bibtex: `@inproceedings{mishra2021a,
+  title={A Network Resource Aware Federated Learning Approach using Knowledge Distillation},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={Proceedings of IEEE INFOCOM},
+  year={2021}
+}`
   },
   {
     id: "pub-039",
@@ -682,7 +1004,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Introduces an intermediate 'Trainee' network layer to smooth the distillation gradient toward edge devices.",
     impact: "Achieves near-cloud accuracy on devices with less than 2MB of RAM.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Knowledge Distillation", "Activity Monitoring"],
+    tags: ["Knowledge Distillation", "Activity Monitoring"],,
+    bibtex: `@inproceedings{mishra2020teacher,
+  title={Teacher, Trainee, and Student based Knowledge Distillation Technique for Monitoring Indoor Activities},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={Proceedings of ACM SenSys},
+  year={2020}
+}`
   },
   {
     id: "pub-040",
@@ -696,7 +1024,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Maps known kinetic attributes to unknown movements using semantic association vectors.",
     impact: "Removes the need for exhaustive dataset collection in wearable health tech.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Locomotion", "Inertial Sensors"],
+    tags: ["Locomotion", "Inertial Sensors"],,
+    bibtex: `@inproceedings{mishra2021unseen,
+  title={Unseen Locomotion Mode Detection Problems using Inertial Sensors},
+  author={R. Mishra and H. P. Gupta and T. Dutta},
+  journal={Proceedings of IEEE COMSNETS},
+  year={2021}
+}`
   },
   {
     id: "pub-041",
@@ -710,7 +1044,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Classifies river pollution spikes early by treating sensor activation as a cooperative game.",
     impact: "Drastically lowers battery usage in remote hydrology deployments.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Game Theory", "River Classification", "Time Series"],
+    tags: ["Game Theory", "River Classification", "Time Series"],,
+    bibtex: `@inproceedings{gupta2019game,
+  title={Game theory based early classification of rivers using time series data},
+  author={A. Gupta and R. Pal and R. Mishra and H. P. Gupta and T. Dutta and P. Hirani},
+  journal={Proceedings of IEEE WF-IoT},
+  year={2019}
+}`
   },
   {
     id: "pub-042",
@@ -724,7 +1064,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Uses automated drone pathways to pull data from localized wireless sensor clusters.",
     impact: "Solves the range and power limitations of agricultural IoT networks.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Precision Agriculture", "WSN", "Mobile Sink"],
+    tags: ["Precision Agriculture", "WSN", "Mobile Sink"],,
+    bibtex: `@inproceedings{gupta2018a,
+  title={A real-time precision agriculture monitoring system using mobile sink in WSNs},
+  author={A. Gupta and H. P. Gupta and P. Kumari and R. Mishra and S. Saraswat and T. Dutta},
+  journal={Proceedings of IEEE ANTS},
+  year={2018}
+}`
   },
   {
     id: "pub-043",
@@ -738,7 +1084,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Evaluates soft-computing heuristics for maintaining connectivity in highly mobile drone or vehicle swarms.",
     impact: "Provides a foundational comparison of autonomous network recovery protocols.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["MANET", "Gateway Discovery", "Machine Learning"],
+    tags: ["MANET", "Gateway Discovery", "Machine Learning"],,
+    bibtex: `@inproceedings{mishra2017gateway,
+  title={Gateway Discovery in MANET using Machine Learning and Soft Computing: A Survey},
+  author={R. Mishra and P. Verma and R. Kumar},
+  journal={Proceedings of International Conference on Innovations in Information Embedded and Communication Systems (ICIIECS)},
+  year={2017}
+}`
   },
   {
     id: "pub-044",
@@ -752,7 +1104,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Implements redundancy algorithms to deduce occupancy and regulate HVAC/lighting accurately.",
     impact: "Creates robust, energy-saving smart architectures for commercial spaces.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["Fault-Tolerant", "Power Management", "Smart Room"],
+    tags: ["Fault-Tolerant", "Power Management", "Smart Room"],,
+    bibtex: `@inproceedings{mishra2018fault,
+  title={Fault-Tolerant Energy Efficient Power Management System for Smart Room},
+  author={R. Mishra and D. Singh},
+  journal={Proceedings of International Conference on Advanced Computing and Software Engineering (ICACSE)},
+  year={2018}
+}`
   },
   {
     id: "pub-045",
@@ -765,7 +1123,13 @@ export const publications: readonly Publication[] = [
     researchSummary: "Analyzes signal multi-path fading signatures without requiring the user to wear any devices.",
     impact: "Enables completely passive, device-free health and activity monitoring.",
     url: "https://scholar.google.com/citations?user=Iv8gjG8AAAAJ&hl=en",
-    tags: ["RSSI", "Tracking", "Ubiquitous Systems"],
+    tags: ["RSSI", "Tracking", "Ubiquitous Systems"],,
+    bibtex: `@inproceedings{sahu2024when,
+  title={When You Come In, You Sit, Stand, or Walk: Leveraging RSSI for Tracking and Control in Ubiquitous Systems},
+  author={S. Sahu and A. K. Sinha and R. Mishra},
+  journal={Proceedings of IEEE India Council International Conference (INDICON)},
+  year={2024}
+}`
   }
 ];
 

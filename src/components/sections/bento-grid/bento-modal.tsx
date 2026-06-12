@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { motion } from "framer-motion";
 import type { BentoCardData } from "@/types/bento";
 import { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ type BentoModalProps = {
 
 export function BentoModal({ card, onClose }: BentoModalProps) {
   const [mounted, setMounted] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     setMounted(true);
@@ -44,7 +46,7 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10 custom-scrollbar"
+        className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-white/70 dark:bg-background/80 backdrop-blur-xl border border-white/80 dark:border-accent/40 rounded-sm shadow-2xl shadow-black/5 dark:shadow-accent/10 flex flex-col z-10"
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
@@ -133,7 +135,19 @@ export function BentoModal({ card, onClose }: BentoModalProps) {
                 if (href) {
                   return (
                     <li key={idx} className="flex">
-                      <a href={href} onClick={onClose} className={`w-full ${baseClasses}`}>
+                      <a 
+                        href={href} 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onClose();
+                          if (href.startsWith("http")) {
+                            window.open(href, "_blank", "noopener,noreferrer");
+                          } else if (lenis) {
+                            setTimeout(() => lenis.scrollTo(href, { offset: -40 }), 10);
+                          }
+                        }} 
+                        className={`w-full ${baseClasses}`}
+                      >
                         {inner}
                       </a>
                     </li>

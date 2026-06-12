@@ -3,14 +3,27 @@ import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { conferences } from "@/data/conferences";
 import { cn } from "@/lib/utils";
 
+import { SectionLabel } from "@/components/shared/typography/section-label";
+
 export function ConferencesSection() {
   const displayedConferences = conferences.slice(0, 3);
 
   return (
-    <section id="conferences" className="py-section relative border-t border-white/5">
-      <SectionHeading>Global Conferences</SectionHeading>
+    <section id="conferences" aria-labelledby="conferences-heading" className="flex flex-col gap-8 sm:gap-10">
+      <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
+        <div className="flex items-center justify-between">
+          <SectionLabel>Global Presence</SectionLabel>
+          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">04 // CONFERENCES</span>
+        </div>
+        <SectionHeading as="h2" id="conferences-heading" className="uppercase font-bold">
+          Global Conferences
+        </SectionHeading>
+        <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+          Presentations and keynotes at leading international academic venues.
+        </p>
+      </div>
       
-      <div className="mt-12 md:mt-16 flex flex-col gap-[1px] bg-transparent dark:bg-white/10 border border-border dark:border-white/5 rounded-sm overflow-hidden">
+      <div className="mt-4 flex flex-col gap-[1px] bg-transparent dark:bg-white/10 border border-border dark:border-white/5 rounded-sm overflow-hidden">
         {displayedConferences.map((conf, i) => (
           <article 
             key={conf.id} 

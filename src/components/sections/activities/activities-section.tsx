@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { SectionHeading } from "@/components/shared/typography/section-heading";
 import { SectionLabel } from "@/components/shared/typography/section-label";
-import { patents, books, memberships, awards } from "@/data/activities";
+import { books, memberships, awards } from "@/data/activities";
 import { cn } from "@/lib/utils";
 import { ActivityDetailSheet, type ActivityItem } from "./activity-detail-sheet";
 
@@ -31,47 +31,21 @@ export function ActivitiesSection({ className }: ActivitiesSectionProps) {
       <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
         <div className="flex items-center justify-between">
           <SectionLabel>Service & Recognition</SectionLabel>
-          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">06 // IMPACT</span>
+          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">07 // IMPACT</span>
         </div>
         <SectionHeading as="h2" id="activities-heading" className="uppercase font-bold">
           Professional Activities
         </SectionHeading>
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
-          Patents, authored textbooks, awards, and active memberships in international professional bodies.
+          Authored textbooks, awards, and active memberships in international professional bodies.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 border-t border-border/40 pt-4">
         
-        {/* Left Column: Patents & Books */}
+        {/* Left Column: Books */}
         <div className="md:col-span-7 flex flex-col gap-8">
           
-          <div className="flex flex-col gap-4">
-            <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
-              // Intellectual Property
-            </h3>
-            {patents.map((patent, i) => (
-              <button
-                key={i}
-                onClick={() => handleOpenSheet({ type: "patent", ...patent })}
-                className="group flex flex-col gap-2 p-4 rounded-sm bg-surface/10 border border-border/20 hover:border-accent/30 hover:bg-surface/20 transition-all text-left cursor-pointer w-full"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <h4 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">{patent.title}</h4>
-                  <span className="font-mono text-[9px] uppercase tracking-widest bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm shrink-0">
-                    {patent.status}
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{patent.description}</p>
-                <div className="mt-2 text-xs font-mono text-muted-foreground/60 flex items-center gap-2">
-                  <span className="text-accent/60">ID: {patent.number}</span>
-                  <span className="hidden sm:inline">|</span>
-                  <span className="truncate">Inventors: {patent.inventors.join(", ")}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-
           <div className="flex flex-col gap-4">
             <h3 className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase border-b border-border/20 pb-2">
               // Authored Books

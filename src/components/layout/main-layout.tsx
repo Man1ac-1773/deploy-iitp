@@ -29,7 +29,7 @@ export function MainLayout({
           {profilePanel}
         </aside>
 
-        <main className="flex min-w-0 flex-1 flex-col lg:w-[75%]">
+        <main id="main-content" className="flex min-w-0 flex-1 flex-col lg:w-[75%]">
           {children}
         </main>
       </div>

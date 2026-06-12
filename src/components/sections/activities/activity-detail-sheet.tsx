@@ -9,7 +9,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import type { Patent, BookItem } from "@/data/activities";
+import type { BookItem } from "@/data/activities";
+import type { Patent } from "@/data/patents";
 
 export type ActivityItem = 
   | ({ type: "patent" } & Patent)

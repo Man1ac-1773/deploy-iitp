@@ -18,46 +18,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
   const imageY = useTransform(scrollY, [0, 800], [0, 200]);
   const lenis = useLenis();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!nameRef.current) return;
-      const scrollY = window.scrollY;
-      const maxScroll = Math.min(window.innerHeight * 0.8, 600); // 80% of screen height
-      const ratio = Math.min(scrollY / maxScroll, 1);
-      
-      // As scroll ratio goes 0 -> 1
-      // Fill opacity goes 1 -> 0
-      // Stroke width goes 0 -> 1.5px
-      const fillOpacity = Math.max(0, 1 - ratio * 1.5); // fades out a bit faster
-      const strokeWidth = ratio * 1.5;
-      
-      const isDark = document.documentElement.classList.contains('dark');
-      const rgb = isDark ? '255, 255, 255' : '30, 41, 59';
-      
-      nameRef.current.style.webkitTextFillColor = `rgba(${rgb}, ${fillOpacity})`;
-      nameRef.current.style.webkitTextStroke = `${strokeWidth}px rgba(${rgb}, ${ratio * 0.8})`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initialize once
-    handleScroll();
-    
-    
-    // Create an observer to re-run handleScroll when the dark class changes on HTML
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          handleScroll();
-        }
-      });
-    });
-    observer.observe(document.documentElement, { attributes: true });
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
-    };
-  }, []);
+  const fillOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const strokeOpacity = useTransform(scrollY, [0, 500], [0, 0.8]);
 
   return (
     <section
@@ -85,12 +47,12 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               {professor.affiliation}
             </p>
           </div>
-          <div className="text-right" aria-hidden="true">
+          <div className="text-right">
             <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-accent uppercase">
-              H-INDEX: 12 // i10-INDEX: 15
+              H-INDEX: 12 <span aria-hidden="true">//</span> i10-INDEX: 15
             </p>
             <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground mt-1">
-              CITATIONS: 450+ // PUBLICATIONS: 45
+              CITATIONS: 450+ <span aria-hidden="true">//</span> PUBLICATIONS: 45
             </p>
           </div>
         </div>
@@ -109,7 +71,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
               </span>
               <h1
                 id="hero-heading"
-                className="hero-name w-full max-w-full font-semibold text-foreground uppercase"
+                className="hero-name w-full max-w-full font-semibold text-foreground uppercase relative"
                 style={{ 
                   fontSize: "var(--hero-name-size, clamp(3.5rem, 8vw, 8rem))", 
                   lineHeight: "0.9", 
@@ -117,17 +79,23 @@ export function EditorialHero({ className }: EditorialHeroProps) {
                   marginLeft: "-0.04em" // optically align the text
                 }}
               >
-                <span 
-                  ref={nameRef}
+                <motion.span 
                   data-transition-target="professor-name" 
-                  className="block transition-colors duration-100 ease-out"
-                  style={{
-                    WebkitTextFillColor: "rgba(255, 255, 255, 1)",
-                    WebkitTextStroke: "0px rgba(255, 255, 255, 0)"
-                  }}
+                  className="block text-foreground"
+                  style={{ opacity: fillOpacity }}
                 >
                   {professor.name}
-                </span>
+                </motion.span>
+                <motion.span 
+                  className="absolute top-0 left-0 block text-transparent pointer-events-none"
+                  style={{ 
+                    WebkitTextStroke: "1.5px var(--foreground)",
+                    opacity: strokeOpacity 
+                  }}
+                  aria-hidden="true"
+                >
+                  {professor.name}
+                </motion.span>
               </h1>
             </div>
 
@@ -137,8 +105,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
                 <p className="text-lg sm:text-xl text-foreground/80 font-medium tracking-tight">
                   {professor.role}
                 </p>
-                <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block" aria-hidden="true">
-                  // {professor.affiliation}
+                <p className="font-mono text-[11px] tracking-widest text-muted-foreground/60 uppercase hidden sm:block">
+                  <span aria-hidden="true">//</span> {professor.affiliation}
                 </p>
               </div>
               
@@ -170,8 +138,8 @@ export function EditorialHero({ className }: EditorialHeroProps) {
 
         {/* Bottom Scroll Anchor */}
         <div className="flex w-full items-end justify-between" style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0.4s forwards" }}>
-          <span className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase" aria-hidden="true">
-            ACADEMIC.PORTFOLIO // {new Date().getFullYear()}
+          <span className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">
+            ACADEMIC.PORTFOLIO <span aria-hidden="true">//</span> {new Date().getFullYear()}
           </span>
           <a
             href="#research"

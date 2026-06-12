@@ -37,7 +37,7 @@ export function ContactSection({ className }: ContactSectionProps) {
       <div className="flex flex-col gap-3 border-b border-border/40 pb-6">
         <div className="flex items-center justify-between">
           <SectionLabel>Inquiries</SectionLabel>
-          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">06 // TERMINAL</span>
+          <span className="font-mono text-xs tracking-wider text-accent/70 font-semibold">08 // TERMINAL</span>
         </div>
         <SectionHeading as="h2" id="contact-heading" className="uppercase font-bold">
           Get in touch

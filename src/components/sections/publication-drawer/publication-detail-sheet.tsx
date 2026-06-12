@@ -11,6 +11,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import type { Publication } from "@/types/publication";
+import { Copy, Check } from "lucide-react";
 
 const TYPE_LABELS: Record<Publication["type"], string> = {
   journal: "Journal",
@@ -31,12 +32,24 @@ export function PublicationDetailSheet({
   onOpenChange,
 }: PublicationDetailSheetProps) {
   const [activePublication, setActivePublication] = useState<Publication | null>(null);
+  const [copiedBibtex, setCopiedBibtex] = useState(false);
 
   useEffect(() => {
     if (publication) {
       setActivePublication(publication);
+      setCopiedBibtex(false);
     }
   }, [publication]);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedBibtex(true);
+      setTimeout(() => setCopiedBibtex(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy", err);
+    }
+  };
 
   const displayPub = activePublication || publication;
 
@@ -168,6 +181,30 @@ export function PublicationDetailSheet({
                       </a>
                     ) : null}
                   </div>
+                </div>
+              </>
+            ) : null}
+
+            {displayPub.bibtex ? (
+              <>
+                <Separator />
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                      Citation (BibTeX)
+                    </h3>
+                    <button
+                      onClick={() => copyToClipboard(displayPub.bibtex!)}
+                      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors"
+                      title="Copy to clipboard"
+                    >
+                      {copiedBibtex ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+                      <span className="font-mono tracking-widest uppercase">{copiedBibtex ? "Copied" : "Copy"}</span>
+                    </button>
+                  </div>
+                  <pre className="p-4 rounded-sm bg-surface/10 border border-border/40 overflow-x-auto text-[10px] font-mono text-muted-foreground/90 whitespace-pre-wrap break-all">
+                    <code>{displayPub.bibtex}</code>
+                  </pre>
                 </div>
               </>
             ) : null}

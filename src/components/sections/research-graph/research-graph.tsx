@@ -482,14 +482,16 @@ export function ResearchGraph({ className }: { className?: string }) {
                   <span className="font-semibold text-accent font-mono text-[9px] uppercase block mb-0.5">Core Impact:</span>
                   {displayPub.impact}
                 </div>
-                <a 
-                  href={`https://doi.org/${displayPub.doi}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 text-center py-1.5 bg-accent hover:bg-accent/90 text-primary-foreground font-mono text-[9px] tracking-wider uppercase font-semibold rounded-sm transition-colors duration-300"
-                >
-                  View full paper (DOI)
-                </a>
+                {displayPub.url || displayPub.doi ? (
+                  <a 
+                    href={displayPub.url || (displayPub.doi ? `https://doi.org/${displayPub.doi}` : "#")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 text-center py-1.5 bg-accent hover:bg-accent/90 text-primary-foreground font-mono text-[9px] tracking-wider uppercase font-semibold rounded-sm transition-colors duration-300"
+                  >
+                    View Publication
+                  </a>
+                ) : null}
               </div>
             </div>
           </div>
