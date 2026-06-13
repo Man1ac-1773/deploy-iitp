@@ -16,6 +16,10 @@
   --ease-elite: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
+@utility text-micro { font-size: 9px; }
+@utility text-mini { font-size: 10px; }
+@utility text-tiny { font-size: 11px; }
+
 :root {
   --hero-name-size: clamp(3.5rem, 10vw, 30rem);
   --section-title-size: clamp(2.5rem, 8vw, 6rem);
@@ -241,10 +245,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-
-  --text-micro: 9px;
-  --text-mini: 10px;
-  --text-tiny: 11px;
 }
 
 @utility hide-scrollbar {
