@@ -51,7 +51,7 @@ Open `http://localhost:3000` and scroll away.
 ## Deep Dives
 
 If you want to look at the specific reasoning behind individual features, I've left detailed markdown notes directly next to the code. Check out:
-- [[ARCHITECTURE]] : Main design decisions for the page
-- [[UX_DESIGN]] : Design notes
-- [[README]] : Bento Grid 
-- [[README]] : Data organization
+- [Architecture notes](src/components/layout/ARCHITECTURE.md) 
+- [UX Design decisions](src/components/sections/hero/UX_DESIGN.md) 
+- [Bento Grid Notes](src/components/sections/bento-grid/README.md)
+- [Data Organization](src/data/README.md)
