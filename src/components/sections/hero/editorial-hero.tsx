@@ -28,7 +28,7 @@ export function EditorialHero({ className }: EditorialHeroProps) {
       data-transition-phase="hero"
       aria-labelledby="hero-heading"
       className={cn(
-        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col overflow-x-hidden",
+        "hero-stage relative flex h-dvh min-h-dvh w-full flex-col overflow-clip",
         className,
       )}
     >
