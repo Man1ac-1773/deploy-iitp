@@ -58,7 +58,7 @@ export default function RootLayout({
       <head>
       </head>
       <body className="min-h-dvh antialiased">
-        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4 focus:text-foreground">
             Skip to content
           </a>
