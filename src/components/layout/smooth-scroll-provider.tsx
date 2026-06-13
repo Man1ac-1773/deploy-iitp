@@ -21,11 +21,12 @@ function HashScroller() {
 
 /**
  * @architecture
- * intentionally hijacking native scrolling using lenis here.
- * yes it adds to the bundle size but the premium kinetic feel it gives to the scroll 
- * with the custom expo easing (1.2s duration) is totally worth the tradeoff. 
- * makes the whole single-page flow feel like butter on a trackpad
- * (pls dont dock points for bundle size i promise the ux tradeoff is worth it)
+ * I am intentionally hijacking native scrolling using Lenis here.
+ * It adds a bit to the bundle size, but the premium kinetic feel it gives to the scroll with the custom expo easing is totally worth the tradeoff.
+ * It makes the whole single-page flow feel like butter on a trackpad.
+ * I am prioritizing the human UX tradeoff here over a tiny bundle size optimization.
+ * Looks cool no? 
+ * I'd be surprised if someone actually reads my mountain dew fueled comments lmao
  */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   return (

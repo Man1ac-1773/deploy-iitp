@@ -22,16 +22,16 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Spatial Lab",
+  title: "Dr. Rahul Mishra",
   description: "Academic research portfolio",
   openGraph: {
-    title: "Spatial Lab",
+    title: "Dr. Rahul Mishra",
     description: "Academic research portfolio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spatial Lab",
+    title: "Dr. Rahul Mishra",
     description: "Academic research portfolio",
   },
   icons: {
